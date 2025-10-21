@@ -40,7 +40,7 @@ export default function RegisterPage() {
 
         <form>
           <div className="mb-2">
-            <label htmlFor="username" className="form-label">
+            <label htmlFor="username" className="form-label text-start d-block">
               User Name
             </label>
             <input
@@ -53,7 +53,7 @@ export default function RegisterPage() {
           </div>
 
           <div className="mb-2">
-            <label htmlFor="name" className="form-label">
+            <label htmlFor="name" className="form-label text-start d-block">
               Name
             </label>
             <input
@@ -66,7 +66,7 @@ export default function RegisterPage() {
           </div>
 
           <div className="mb-2">
-            <label htmlFor="email" className="form-label">
+            <label htmlFor="email" className="form-label text-start d-block">
               Email
             </label>
             <input
@@ -79,7 +79,7 @@ export default function RegisterPage() {
           </div>
 
           <div className="mb-3">
-            <label htmlFor="password" className="form-label">
+            <label htmlFor="password" className="form-label text-start d-block">
               Password
             </label>
             <input

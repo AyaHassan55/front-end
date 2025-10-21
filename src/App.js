@@ -3,6 +3,7 @@ import "./App.css";
 import Home from "./Pages/Website/Home";
 import LoginPage from "./Pages/Auth/Login";
 import RegisterPage from "./Pages/Auth/Register";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 function App() {
   return (
