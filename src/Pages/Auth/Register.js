@@ -3,7 +3,7 @@ import { baseUrl, REGISTER } from "../../Api/Api";
 import axios from "axios";
 // import LoadingSubmit from "../../Components/Loading/Loading";
 import LoadingSubmit from "../../Components/Loading/Loading";
-
+import Cookie from "cookie-universal";
 export default function RegisterPage() {
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
@@ -20,17 +20,20 @@ export default function RegisterPage() {
       [e.target.id]: e.target.value,
     });
   };
-
+  // cookie
+  const cookie = new Cookie();
   async function handleRegister(e) {
     console.log("Register clicked", formData);
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post(`${baseUrl}/${REGISTER}`, formData);
+      const res = await axios.post(`${baseUrl}/${REGISTER}`, formData);
       setLoading(false);
-      console.log("success");
+      const token = res.data.token;
+      cookie.set("e-commerce", token);
       window.location.pathname = "/";
     } catch (err) {
+      setLoading(false);
       if (err.response && err.response.status === 422) {
         setErr("Email is already taken");
       } else if (err.response) {
@@ -86,6 +89,7 @@ export default function RegisterPage() {
                 className="form-control form-control-sm"
                 value={formData.email}
                 onChange={handleChange}
+                required
               />
             </div>
 
@@ -102,6 +106,7 @@ export default function RegisterPage() {
                 className="form-control form-control-sm"
                 value={formData.password}
                 onChange={handleChange}
+                required
               />
             </div>
 
