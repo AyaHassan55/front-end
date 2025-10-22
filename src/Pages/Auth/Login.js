@@ -1,6 +1,23 @@
+import axios from "axios";
+import { useState } from "react";
+import { baseUrl, LOGIN } from "../../Api/Api";
+
 export default function LoginPage() {
-  function loginBtnClicked() {
-    alert("Login clicked!");
+  const [formData, setFormData] = useState({
+    email: "",
+
+    password: "",
+  });
+
+  async function loginBtnClicked(e) {
+    console.log("Register clicked", formData);
+    e.preventDefault();
+    try {
+      await axios.post(`${baseUrl}/${LOGIN}`, formData);
+      console.log("success");
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
@@ -17,16 +34,16 @@ export default function LoginPage() {
             <form>
               <div className="mb-3">
                 <label
-                  htmlFor="username-input"
+                  htmlFor="email-input"
                   className="form-label text-start d-block"
                 >
-                  User Name
+                  Email
                 </label>
                 <input
-                  type="text"
+                  type="email"
                   className="form-control"
                   id="username-input"
-                  placeholder="Enter your username"
+                  placeholder="Enter your Email"
                 />
               </div>
 
