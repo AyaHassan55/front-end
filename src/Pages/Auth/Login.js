@@ -30,7 +30,7 @@ export default function LoginPage() {
       setLoading(false);
       const token = res.data.token;
       cookie.set("e-commerce", token);
-      window.location.pathname = "/";
+      window.location.pathname = "/users";
     } catch (err) {
       setLoading(false);
       if (err.response?.status === 401) {
