@@ -8,7 +8,6 @@ export default function RegisterPage() {
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    username: "",
     name: "",
     email: "",
     password: "",
@@ -31,6 +30,7 @@ export default function RegisterPage() {
       setLoading(false);
       const token = res.data.token;
       cookie.set("e-commerce", token);
+      alert('regester success')
       window.location.pathname = "/users";
     } catch (err) {
       setLoading(false);
