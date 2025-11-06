@@ -20,7 +20,9 @@ export default function LoginPage() {
       [e.target.id]: e.target.value,
     });
   };
-
+const handleGoogleLogin = () => {
+    console.log("Google login clicked");
+  };
   async function loginBtnClicked(e) {
     e.preventDefault();
     setLoading(true);
@@ -103,6 +105,22 @@ export default function LoginPage() {
                 {err && (
                   <span className="error text-danger mt-2 d-block">{err}</span>
                 )}
+
+                <div className="text-center">
+            <p className="mb-2" style={{ fontSize: "14px" }}>
+              Or
+            </p>
+            <button
+              type="button"
+              className="btn btn-outline-danger btn-sm d-flex align-items-center justify-content-center w-100"
+              onClick={handleGoogleLogin}
+            >
+              <a href={`http://127.0.0.1:8000/login-google` } className="d-flex align-items-center text-decoration-none text-dark">
+              <i className="fa-brands fa-google me-2"></i> Login with Google
+              </a>
+            </button>
+            {err !== "" && <span className="error">{err}</span>}
+          </div>
               </form>
             </div>
           </div>
