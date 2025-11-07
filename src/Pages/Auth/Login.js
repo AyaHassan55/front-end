@@ -112,10 +112,10 @@ const handleGoogleLogin = () => {
             </p>
             <button
               type="button"
-              className="btn btn-outline-danger btn-sm d-flex align-items-center justify-content-center w-100"
-              onClick={handleGoogleLogin}
+              className="google-btn-container btn btn-outline-danger btn-sm d-flex align-items-center justify-content-center w-100"
+             
             >
-              <a href={`http://127.0.0.1:8000/login-google` } className="d-flex align-items-center text-decoration-none text-dark">
+              <a href={`http://127.0.0.1:8000/login-google` } className="google-btn d-flex align-items-center text-decoration-none ">
               <i className="fa-brands fa-google me-2"></i> Login with Google
               </a>
             </button>

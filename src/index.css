@@ -11,3 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+/* google register & sign */
+.google-btn-container .google-btn {
+  color: #dc3545 !important;
+  transition: 0.2s;
+}
+
+.google-btn-container:hover .google-btn {
+  color: white !important; /* danger */
+}

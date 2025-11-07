@@ -123,15 +123,20 @@ export default function RegisterPage() {
 
           <div className="text-center">
             <p className="mb-2" style={{ fontSize: "14px" }}>
-              Or sign up with
+              Or 
             </p>
+            
+
             <button
               type="button"
-              className="btn btn-outline-danger btn-sm d-flex align-items-center justify-content-center w-100"
-              onClick={handleGoogleSignUp}
+              className="google-btn-container btn btn-outline-danger btn-sm d-flex align-items-center justify-content-center w-100"
+             
             >
-              <i className="fa-brands fa-google me-2"></i> Sign up with Google
+              <a href={`http://127.0.0.1:8000/login-google`} className="google-btn d-flex align-items-center text-decoration-none">
+              <i className="fa-brands fa-google me-2"></i> Sign Up with Google
+              </a>
             </button>
+
             {err !== "" && <span className="error">{err}</span>}
           </div>
         </div>
