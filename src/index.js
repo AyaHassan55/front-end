@@ -9,15 +9,19 @@ import "./Css/components/loading.css";
 
 import { BrowserRouter as Router } from "react-router-dom";
 import MenuContext from "./Context/MenuContext";
+import WindowContext from "./Context/WindowContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <MenuContext>
-      <Router>
-        <App />
-      </Router>
-    </MenuContext>
+    <WindowContext>
+      <MenuContext>
+        <Router>
+          <App />
+        </Router>
+      </MenuContext>
+    </WindowContext>
+
 
   </React.StrictMode>
 );
