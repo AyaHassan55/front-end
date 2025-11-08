@@ -12,13 +12,13 @@
 
 /* SideBar  */
 .side-bar {
-    position: fixed;
+    position: sticky;
     background-color: white;
     top: 70px;
     left: 0;
     z-index: 1;
 
-    height: calc(100% - 70px);
+    height: 100vh;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
 
 
