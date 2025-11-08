@@ -10,40 +10,44 @@
     padding: 0 20px;
 }
 
+/* SideBar  */
 .side-bar {
     position: fixed;
     background-color: white;
     top: 70px;
     left: 0;
     z-index: 1;
-    width: 250px;
+
     height: calc(100% - 70px);
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
-   
+
 
 }
 
-.side-bar-link{
-    color:#495057;
-    font-size:18px;
+.side-bar-link {
+    color: #495057;
+    font-size: 18px;
     transition: 0.3s;
-    padding:10px 8px 10px 15px;
+
     margin: 0 8px;
     border-radius: 6px;
 }
-.side-bar .active{
-    background-color: #f2f3fe ;
-    color:#038edc ;
-}
-.side-bar .active:hover{
 
-    color:#038edc ;
+.side-bar .active {
+    background-color: #f2f3fe;
+    color: #038edc;
 }
 
-.side-bar-link:hover{
-    color:black ;
+.side-bar .active:hover {
+
+    color: #038edc;
 }
-a{
-    text-decoration:none !important;
+
+.side-bar-link:hover {
+    color: black;
+}
+
+a {
+    text-decoration: none !important;
 
 }

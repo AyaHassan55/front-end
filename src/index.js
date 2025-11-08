@@ -6,14 +6,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./Css/components/alert.css";
 import "./Css/components/loading.css";
-// import reportWebVitals from "./reportWebVitals";
+
 import { BrowserRouter as Router } from "react-router-dom";
+import MenuContext from "./Context/MenuContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
+    <MenuContext>
+      <Router>
+        <App />
+      </Router>
+    </MenuContext>
+
   </React.StrictMode>
 );
