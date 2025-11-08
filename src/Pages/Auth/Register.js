@@ -35,7 +35,7 @@ export default function RegisterPage() {
       cookie.set("e-commerce", token);
       alert('regester success')
       navigate('/', { replace: true });
-      window.location.pathname = "/users";
+      
     } catch (err) {
       setLoading(false);
       if (err.response && err.response.status === 422) {

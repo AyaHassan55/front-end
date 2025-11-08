@@ -36,7 +36,7 @@ export default function LoginPage() {
       setLoading(false);
       const token = res.data.token;
       cookie.set("e-commerce", token);
-      navigate('/', { replace: true });  // replace to prevent going back to login page
+      navigate('/dashboard/users', { replace: true });  // replace to prevent going back to login page
     } catch (err) {
       setLoading(false);
       if (err.response?.status === 401) {
@@ -106,9 +106,7 @@ export default function LoginPage() {
                 >
                   Login
                 </button>
-                {err && (
-                  <span className="error text-danger mt-2 d-block">{err}</span>
-                )}
+               
 
                 <div className="text-center">
                   <p className="mb-2" style={{ fontSize: "14px" }}>
