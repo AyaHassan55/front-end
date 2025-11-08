@@ -1,10 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { baseUrl, USERS } from "../../Api/Api";
 import axios from "axios";
 import Cookie from "cookie-universal";
-import Logout from "../Auth/Logout";
+import { Table } from 'react-bootstrap';
+
 
 export default function Users() {
+  const [users, setUsers] = useState([]);
   const cookie = new Cookie();
   useEffect(() => {
     axios
@@ -14,11 +16,32 @@ export default function Users() {
         },
       })
 
-      .then((data) => console.log(data))
+      .then((data) => setUsers(data.data))
       .catch((err) => console.log(err));
   }, []);
-  return (<>
-  <h1>Users</h1>
-  <Logout />
-  </>);
+
+  const usersShow = users.map((user,key) => (<tr key={key}>
+    <td>{key+1}</td>
+    <td>{user.name}</td>
+    <td>{user.email}</td>
+  </tr>))
+  return (<div className="bg-white p-2 w-100 rounded-3">
+    <h4>Users</h4>
+    <Table striped bordered hover>
+      <thead>
+        <tr>
+          <th style={{}}>id</th>
+
+          <th>Username</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {usersShow }
+
+      </tbody>
+    </Table>
+
+  </div>);
 }
