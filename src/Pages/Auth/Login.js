@@ -5,6 +5,7 @@ import LoadingSubmit from "../../Components/Loading/Loading";
 import Cookie from "cookie-universal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
   const [err, setErr] = useState("");
@@ -13,6 +14,7 @@ export default function LoginPage() {
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
 
   const cookie = new Cookie();
 
@@ -34,7 +36,7 @@ export default function LoginPage() {
       setLoading(false);
       const token = res.data.token;
       cookie.set("e-commerce", token);
-      window.location.pathname = "/users";
+      navigate('/', { replace: true });  // replace to prevent going back to login page
     } catch (err) {
       setLoading(false);
       if (err.response?.status === 401) {
@@ -122,7 +124,7 @@ export default function LoginPage() {
 
 
                       <div>
-                        <FontAwesomeIcon style={{marginRight:'4px'}} icon={faGoogle} />
+                        <FontAwesomeIcon style={{ marginRight: '4px' }} icon={faGoogle} />
                         Login with Google
                       </div>
                     </a>

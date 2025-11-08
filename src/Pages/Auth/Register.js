@@ -6,6 +6,7 @@ import LoadingSubmit from "../../Components/Loading/Loading";
 import Cookie from "cookie-universal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { useNavigate } from "react-router-dom";
 export default function RegisterPage() {
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
@@ -14,7 +15,7 @@ export default function RegisterPage() {
     email: "",
     password: "",
   });
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -33,6 +34,7 @@ export default function RegisterPage() {
       const token = res.data.token;
       cookie.set("e-commerce", token);
       alert('regester success')
+      navigate('/', { replace: true });
       window.location.pathname = "/users";
     } catch (err) {
       setLoading(false);
@@ -60,7 +62,7 @@ export default function RegisterPage() {
         <div
           className="card p-4 shadow-sm"
           style={{
-            maxWidth: "380px", // 👈 أصغر من قبل (كان 500px)
+            maxWidth: "380px",
             width: "100%",
             borderRadius: "12px",
           }}
@@ -136,7 +138,7 @@ export default function RegisterPage() {
             >
               <a href={`http://127.0.0.1:8000/login-google`} className="google-btn d-flex align-items-center text-decoration-none">
                 <div>
-                  <FontAwesomeIcon style={{marginRight:'4px'}} icon={faGoogle} />
+                  <FontAwesomeIcon style={{ marginRight: '4px' }} icon={faGoogle} />
                   Sign up with Google
                 </div>
               </a>
