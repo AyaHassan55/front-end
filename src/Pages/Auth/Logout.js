@@ -1,18 +1,17 @@
-import axios from "axios"
-import { baseUrl, LOGOUT } from "../../Api/Api"
-import Cookie from "cookie-universal"
 
-export default function Logout(){
-    const cookie = Cookie();
+import {  LOGOUT } from "../../Api/Api"
+
+import { Axios } from "../../Api/Axios";
+
+export default function Logout() {
+    
     async function handleLogout() {
-        try{
-           const res=await axios.get(`${baseUrl}/${LOGOUT}`,{
-            headers:{
-                Authorization:"Bearer "+cookie.get('e-commerce')
-            }
-           });
-           console.log(res)
-        }catch(err){
+        try {
+            const res = await Axios.get(`/${LOGOUT}`
+
+            );
+            console.log(res)
+        } catch (err) {
             console.log(err)
         }
     }
