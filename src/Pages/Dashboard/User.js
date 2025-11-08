@@ -1,12 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
+import { Axios } from "../../Api/Axios";
+import { USER } from "../../Api/Api";
 
 export default function User(){
     const [name,setName] = useState('');
     const [email,setEmail] = useState('');
+    // id user
+    const id =window.location.pathname.replace("/dashboard/users/","");
+    // get user data by id
+    useEffect(()=>{
+        Axios.get(`${USER}/${id}`).then((data)=>{
+            setName(data.data.name);
+            setEmail(data.data.email);
+        });
+    },[])
     // handle form submit
-    function handleSubmit(e){
+    async function handleSubmit(e){
        e.preventDefault();
+       try{
+        const res= await Axios.post(`${USER}/edit/${id}`,{
+            name:name, 
+            email:email
+        });
+        window.location.pathname='/dashboard/users/'
+       }catch(err){
+        console.log(err);
+       }
     }
     return (
         <Form className="bg-white w-100  p-3" onSubmit={handleSubmit}>
