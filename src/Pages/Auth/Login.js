@@ -3,6 +3,8 @@ import { useState } from "react";
 import { baseUrl, LOGIN } from "../../Api/Api";
 import LoadingSubmit from "../../Components/Loading/Loading";
 import Cookie from "cookie-universal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 
 export default function LoginPage() {
   const [err, setErr] = useState("");
@@ -20,7 +22,7 @@ export default function LoginPage() {
       [e.target.id]: e.target.value,
     });
   };
-const handleGoogleLogin = () => {
+  const handleGoogleLogin = () => {
     console.log("Google login clicked");
   };
   async function loginBtnClicked(e) {
@@ -107,20 +109,26 @@ const handleGoogleLogin = () => {
                 )}
 
                 <div className="text-center">
-            <p className="mb-2" style={{ fontSize: "14px" }}>
-              Or
-            </p>
-            <button
-              type="button"
-              className="google-btn-container btn btn-outline-danger btn-sm d-flex align-items-center justify-content-center w-100"
-             
-            >
-              <a href={`http://127.0.0.1:8000/login-google` } className="google-btn d-flex align-items-center text-decoration-none ">
-              <i className="fa-brands fa-google me-2"></i> Login with Google
-              </a>
-            </button>
-            {err !== "" && <span className="error">{err}</span>}
-          </div>
+                  <p className="mb-2" style={{ fontSize: "14px" }}>
+                    Or
+                  </p>
+                  <button
+                    type="button"
+                    className="google-btn-container btn btn-outline-danger btn-sm d-flex align-items-center justify-content-center w-100"
+
+                  >
+                    <a href={`http://127.0.0.1:8000/login-google`} className="google-btn d-flex align-items-center text-decoration-none ">
+
+
+
+                      <div>
+                        <FontAwesomeIcon style={{marginRight:'4px'}} icon={faGoogle} />
+                        Login with Google
+                      </div>
+                    </a>
+                  </button>
+                  {err !== "" && <span className="error">{err}</span>}
+                </div>
               </form>
             </div>
           </div>

@@ -4,6 +4,8 @@ import axios from "axios";
 // import LoadingSubmit from "../../Components/Loading/Loading";
 import LoadingSubmit from "../../Components/Loading/Loading";
 import Cookie from "cookie-universal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 export default function RegisterPage() {
   const [err, setErr] = useState("");
   const [loading, setLoading] = useState(false);
@@ -123,17 +125,20 @@ export default function RegisterPage() {
 
           <div className="text-center">
             <p className="mb-2" style={{ fontSize: "14px" }}>
-              Or 
+              Or
             </p>
-            
+
 
             <button
               type="button"
               className="google-btn-container btn btn-outline-danger btn-sm d-flex align-items-center justify-content-center w-100"
-             
+
             >
               <a href={`http://127.0.0.1:8000/login-google`} className="google-btn d-flex align-items-center text-decoration-none">
-              <i className="fa-brands fa-google me-2"></i> Sign Up with Google
+                <div>
+                  <FontAwesomeIcon style={{marginRight:'4px'}} icon={faGoogle} />
+                  Sign up with Google
+                </div>
               </a>
             </button>
 
