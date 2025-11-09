@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 import {  USER } from "../../Api/Api";
 import LoadingSubmit from "../../Components/Loading/Loading";
 import { Axios } from "../../Api/Axios";
-export default function RequireAuth() {
+import Error403 from "./403";
+export default function RequireAuth({allowedRole}) {
     const Navigate= useNavigate(); 
     // user
     const [user, setUser] = useState("");
@@ -21,6 +22,6 @@ export default function RequireAuth() {
     const token = cookie.get('e-commerce');
     //  : 
     return (
-        token ? (user === "" ? (<LoadingSubmit />) : <Outlet />) : (<Navigate to={'/login'} replace={true} />)
+        token ? (user === "" ? (<LoadingSubmit />) : user.role === allowedRole? (<Outlet />) : <Error403/>) : (<Navigate to={'/login'} replace={true} />)
     );
 }
