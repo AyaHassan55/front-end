@@ -1,4 +1,5 @@
-import { faPlus, faUsers } from '@fortawesome/free-solid-svg-icons';
+
+import { faLayerGroup, faPlus, faUsers } from '@fortawesome/free-solid-svg-icons';
 
 export const links =[
     {
@@ -14,6 +15,14 @@ export const links =[
         icon:faPlus,
         path:"/dashboard/user/add",
          role:'1995'
+        
+
+    },
+    {
+        name:"Categories",
+        icon:faLayerGroup,
+        path:"/dashboard/products",
+        role:['1995','1999']
         
 
     },

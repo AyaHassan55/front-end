@@ -4,6 +4,9 @@ export const LOGIN = "login";
 export const LOGOUT = "logout";
 export const GOOGLE_CALL_BACK = "auth/google/callback";
 
-
+// user routes
 export const USER = "user";
 export const USERS = "users";
+// product routes
+export const CATEGORY = "category";
+export const CATEGORIES = "categories";
