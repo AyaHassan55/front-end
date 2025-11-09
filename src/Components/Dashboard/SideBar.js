@@ -1,12 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Bars.css';
-import { faPlus, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { Menu } from '../../Context/MenuContext';
 import { WindowSize } from '../../Context/WindowContext';
 import { USER } from '../../Api/Api';
 import { Axios } from '../../Api/Axios';
+import { links } from './NavLink';
 export default function SideBar() {
   const menu = useContext(Menu);
   const WindowContext = useContext(WindowSize);
@@ -36,29 +36,20 @@ export default function SideBar() {
           width: isOpen ? '250px' : 'fit-content',
           position: windowSize < '768' ? 'fixed' : 'sticky',
         }}>
-        {user.role === '1995' ? <>
-          <NavLink to={"users"} className="d-flex align-items-center gap-2 side-bar-link">
-            <FontAwesomeIcon style={{ padding: isOpen ? "10px 8px 10px 15px" : "10px 4px" }} icon={faUsers} />
-            <p className='m-0' style={{ display: isOpen ? "block" : "none" }}>Users</p>
+       
+        {links.map((link, key) => 
+        link.role.includes(user.role) && (
+          <NavLink key={key} to={link.path} className="d-flex align-items-center gap-2 side-bar-link">
+            <FontAwesomeIcon style={{ padding: isOpen ? "10px 8px 10px 15px" : "10px 4px" }} icon={link.icon} />
+            <p className='m-0' style={{ display: isOpen ? "block" : "none" }}>{link.name}</p>
           </NavLink>
+        ))}
+        
+          
 
-          <NavLink to={"/dashboard/user/add"} className="d-flex align-items-center gap-2 side-bar-link">
-            <FontAwesomeIcon style={{ padding: isOpen ? "10px 8px 10px 15px" : "10px 4px" }} icon={faPlus} />
-            <p className='m-0' style={{ display: isOpen ? "block" : "none" }}>Add user</p>
-          </NavLink>
-
-           <NavLink to={"/dashboard/writer"} className="d-flex align-items-center gap-2 side-bar-link">
-            <FontAwesomeIcon style={{ padding: isOpen ? "10px 8px 10px 15px" : "10px 4px" }} icon={faPlus} />
-            <p className='m-0' style={{ display: isOpen ? "block" : "none" }}>Writer</p>
-          </NavLink>
-        </> 
-        : user.role === '1996'&& (
-          <NavLink to={"/dashboard/writer"} className="d-flex align-items-center gap-2 side-bar-link">
-            <FontAwesomeIcon style={{ padding: isOpen ? "10px 8px 10px 15px" : "10px 4px" }} icon={faPlus} />
-            <p className='m-0' style={{ display: isOpen ? "block" : "none" }}>Writer</p>
-          </NavLink>
-        )  }
-
+          
+       
+        
 
       </div>
     </>
