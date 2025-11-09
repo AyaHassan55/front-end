@@ -40,10 +40,12 @@ export default function Users() {
   }, [userDelete]);
 
   const filterdUsers = users.filter((user)=> user.id !== currentUser.id);
+  console.log(currentUser)
   const usersShow = filterdUsers.map((user, key) => (<tr key={key}>
     <td>{key + 1}</td>
     <td>{user.name}</td>
     <td>{user.email}</td>
+    <td>{user.role === '1995' ?'Admin' : user.role === '2001' ? 'User' :'Writer'}</td>
     <td >
       <div className="d-flex align-items-center justify-content-center gap-2">
         <Link to={`${user.id}`}>
@@ -110,6 +112,7 @@ export default function Users() {
 
           <th>Username</th>
           <th>Email</th>
+          <th>Role</th>
           <th>Actions</th>
         </tr>
       </thead>
