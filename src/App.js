@@ -12,6 +12,8 @@ import User from "./Pages/Dashboard/User";
 import AddUser from "./Pages/Dashboard/AddUser";
 import Error403 from "./Pages/Auth/403";
 import Writer from "./Pages/Dashboard/Writer";
+import Error404 from "./Pages/Auth/404";
+import RequireBack from "./Pages/Auth/RequireBack";
 // import './Components/Loading/loading.css'
 function App() {
   return (
@@ -19,11 +21,14 @@ function App() {
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+        <Route element={<RequireBack />}>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+        </Route>
         <Route path="/auth/google/callback" element={<GoogleCallBack />} />
+        <Route path="/*" element={<Error404 />} />
         {/* Protected Routes */}
-        {/* <Route element={<RequireAuth />}> */}
+        <Route element={<RequireAuth allowedRole={['1996','1995']} />}>
           <Route path="/dashboard" element={<Dashboard />} >
             <Route element={<RequireAuth allowedRole={'1995'} />} >
               <Route path="users" element={<Users />} />
@@ -34,7 +39,7 @@ function App() {
            
 
           </Route>
-        {/* </Route> */}
+        </Route>
 
       </Routes>
     </div>

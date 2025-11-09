@@ -22,6 +22,7 @@ export default function RequireAuth({allowedRole}) {
     const token = cookie.get('e-commerce');
     //  : 
     return (
-        token ? (user === "" ? (<LoadingSubmit />) : allowedRole.includes(user.role)? (<Outlet />) : <Error403/>) : (<Navigate to={'/login'} replace={true} />)
+        token ? (user === "" ? (<LoadingSubmit />) : allowedRole.includes(user.role)? (<Outlet />) :
+         <Error403 role={user.role}/>) : (<Navigate to={'/login'} replace={true} />)
     );
 }
