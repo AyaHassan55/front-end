@@ -2,7 +2,8 @@
   box-sizing: border-box;
 }
 body{
-  font-family: ":Lato", sans-serif !important;
+  /* font-family: ":Lato", sans-serif !important; */
+  font-family: monospace !important;
 }
 /* google register & sign */
 .google-btn-container .google-btn {
@@ -12,4 +13,15 @@ body{
 
 .google-btn-container:hover .google-btn {
   color: white !important; /* danger */
+}
+
+/* toast */
+.toast {
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+}
+
+.toast.hide {
+  opacity: 0;
+  visibility: hidden;
 }

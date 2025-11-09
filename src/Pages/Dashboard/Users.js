@@ -12,6 +12,8 @@ import { Link } from "react-router-dom";
 export default function Users() {
   const [users, setUsers] = useState([]);
   const [userDelete, setUserDelete] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+  const [showToast, setShowToast] = useState(false);
  
   useEffect(() => {
     Axios
@@ -41,6 +43,12 @@ export default function Users() {
     try {
       const res = await Axios.delete(`${USER}/${id}`);
       setUserDelete((prev) => !prev);
+      setToastMessage('User deleted successfully');
+      setShowToast(true);
+      setTimeout(() =>{
+        setShowToast(false);
+        setToastMessage("");
+      },5000)
       
     } catch (err) {
       console.log(err);
@@ -48,6 +56,20 @@ export default function Users() {
   }
   return (<div className="bg-white p-2 w-100 rounded-3">
     <h4>Users</h4>
+    <div
+  className="toast-container position-fixed top-0 end-0 p-3"
+  style={{ zIndex: 9999 }}
+>
+  <div className={`toast align-items-center text-white bg-success border-0 show ${showToast ? "show" : "hide"}`} role="alert">
+    <div className="d-flex">
+      <div className="toast-body">
+        {toastMessage}
+      </div>
+      <button type="button" className="btn-close btn-close-white me-2 m-auto" onClick={()=>setShowToast(false)}></button>
+    </div>
+  </div>
+</div>
+
     <Table striped bordered hover>
       <thead>
         <tr>
