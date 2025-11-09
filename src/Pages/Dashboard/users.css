@@ -1,3 +1,8 @@
+th,td{
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
 /* No users design */
 .empty-state {
   padding: 50px 0;

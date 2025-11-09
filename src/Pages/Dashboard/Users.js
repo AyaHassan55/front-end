@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { USER, USERS } from "../../Api/Api";
 
 
-import { Table } from 'react-bootstrap';
+import { Spinner, Table } from 'react-bootstrap';
 import { Axios } from "../../Api/Axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrash, faUsersSlash } from "@fortawesome/free-solid-svg-icons";
@@ -11,20 +11,36 @@ import { Link } from "react-router-dom";
 
 export default function Users() {
   const [users, setUsers] = useState([]);
+  const [currentUser, setCurrentUser] = useState([]);
   const [userDelete, setUserDelete] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [showToast, setShowToast] = useState(false);
+  const [loading, setLoading] = useState(false);
  
+
+  // get current user 
+  useEffect(()=>{
+    Axios.get(`${USER}`).then((data)=>setCurrentUser(data.data)).catch((err)=>console.log(err))
+      
+  },[]);
+  // display Users
   useEffect(() => {
+    setLoading(true);
     Axios
       .get(`/${USERS}`)
 
-      .then((data) => setUsers(data.data))
-      .catch((err) => console.log(err));
+      .then((data) => {
+        setUsers(data.data);
+        setLoading(false)})
+      
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
   }, [userDelete]);
 
-
-  const usersShow = users.map((user, key) => (<tr key={key}>
+  const filterdUsers = users.filter((user)=> user.id !== currentUser.id);
+  const usersShow = filterdUsers.map((user, key) => (<tr key={key}>
     <td>{key + 1}</td>
     <td>{user.name}</td>
     <td>{user.email}</td>
@@ -71,7 +87,15 @@ export default function Users() {
 </div>
 
     {/* Empty state design */}
-      {users.length === 0 ? (
+      {loading ? (
+         (
+        <div className="text-center py-5">
+          <Spinner animation="border" variant="primary" role="status" />
+          <p className="mt-3 text-secondary fw-semibold">Loading users...</p>
+        </div>
+      )
+      ):
+      users.length === 0 ? (
         <div className="empty-state text-center">
           <FontAwesomeIcon icon={faUsersSlash} size="3x" color="#ddd" />
           <h5>No Users Found</h5>
