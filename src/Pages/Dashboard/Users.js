@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import {  USERS } from "../../Api/Api";
+import { USER, USERS } from "../../Api/Api";
 
 
 import { Table } from 'react-bootstrap';
@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 
 export default function Users() {
   const [users, setUsers] = useState([]);
+  const [userDelete, setUserDelete] = useState(false);
  
   useEffect(() => {
     Axios
@@ -18,26 +19,32 @@ export default function Users() {
 
       .then((data) => setUsers(data.data))
       .catch((err) => console.log(err));
-  }, []);
+  }, [userDelete]);
 
- 
+
   const usersShow = users.map((user, key) => (<tr key={key}>
     <td>{key + 1}</td>
     <td>{user.name}</td>
     <td>{user.email}</td>
     <td >
       <div className="d-flex align-items-center justify-content-center gap-2">
-        <Link to ={`${user.id}`}>
+        <Link to={`${user.id}`}>
           <FontAwesomeIcon icon={faPenToSquare} />
         </Link>
-        <FontAwesomeIcon onClick={handleDelete} color="#bb0f0f" icon={faTrash} />
+        <FontAwesomeIcon onClick={() => handleDelete(user.id)} cursor={'pointer'} color="#bb0f0f" icon={faTrash} />
       </div>
     </td>
   </tr>))
 
-   // delete User
-  function handleDelete(){
-    
+  // delete User
+  async function handleDelete(id) {
+    try {
+      const res = await Axios.delete(`${USER}/${id}`);
+      setUserDelete((prev) => !prev);
+      
+    } catch (err) {
+      console.log(err);
+    }
   }
   return (<div className="bg-white p-2 w-100 rounded-3">
     <h4>Users</h4>
@@ -56,6 +63,7 @@ export default function Users() {
 
       </tbody>
     </Table>
+    
 
   </div>);
 }
