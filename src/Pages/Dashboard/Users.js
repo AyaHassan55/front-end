@@ -95,7 +95,7 @@ export default function Users() {
         </div>
       )
       ):
-      users.length === 0 ? (
+      filterdUsers.length === 0 ? (
         <div className="empty-state text-center">
           <FontAwesomeIcon icon={faUsersSlash} size="3x" color="#ddd" />
           <h5>No Users Found</h5>
