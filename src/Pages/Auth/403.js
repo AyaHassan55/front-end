@@ -1,7 +1,7 @@
 import './403.css';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-export default function Error403() {
+export default function Error403({role}) {
     const navigate = useNavigate();
 
     return (
@@ -11,9 +11,9 @@ export default function Error403() {
             <div className="error-submessage">
                 Sorry, you don't have permission to access this page.
             </div>
-            <button className="back-btn" onClick={() => navigate(-1)}>
-                Go Back
-            </button>
+            <Link className="back-btn" to={role === '1996' ? '/dashboard/writer' : '/'} >
+                {role === '1996' ? 'Go to Writer Dashboard' : 'Go to Home'}
+            </Link>
         </div>
     );
 }
