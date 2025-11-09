@@ -72,8 +72,12 @@ export default function Users() {
       console.log(err);
     }
   }
-  return (<div className="bg-white p-2 w-100 rounded-3">
-    <h4>Users</h4>
+  return (
+  <div className="bg-white p-2 w-100 rounded-3">
+    <div className="d-flex align-items-center justify-content-between">
+          <h3>Users</h3>
+          <Link to={"/dashboard/user/add"} className="btn btn-primary mb-3">Add User</Link>
+    </div>
     <div
   className="toast-container position-fixed top-0 end-0 p-3"
   style={{ zIndex: 9999 }}
