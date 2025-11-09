@@ -8,6 +8,7 @@ import { Alert } from "bootstrap/dist/js/bootstrap.bundle.min";
 export default function User() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [role, setRole] = useState('');
     const [disable, setDisable] = useState(true);
     const [loading, setLoading] = useState(false);
 
@@ -18,6 +19,7 @@ export default function User() {
         Axios.get(`${USER}/${id}`).then((data) => {
             setName(data.data.name);
             setEmail(data.data.email);
+            setRole(data.data.role);
         }).then(() => setDisable(false));
     }, [])
     // handle form submit
@@ -29,7 +31,8 @@ export default function User() {
         try {
             const res = await Axios.post(`${USER}/edit/${id}`, {
                 name: name,
-                email: email
+                email: email,
+                role: role
             });
             window.location.pathname = '/dashboard/users/'
         } catch (err) {
@@ -51,7 +54,15 @@ export default function User() {
                     <Form.Label>Email</Form.Label>
                     <Form.Control value={email} required onChange={(e) => setEmail(e.target.value)} type="email" placeholder="name@example.com" />
                 </Form.Group>
-                <button disabled={disable} className="btn btn-primary">Save</button>
+                <Form.Label>Role</Form.Label>
+                <Form.Select value={role}  onChange={(e) => setRole(e.target.value)}>
+                    
+                    <option disabled value=''>Select Role</option>
+                    <option value='2001'>User</option>
+                    <option value='1995'>Admin</option>        
+                    <option value='1996'>Writer</option>
+                </Form.Select>
+                <button disabled={disable} className="btn btn-primary mt-3">Save</button>
             </Form>
         </>
     );
