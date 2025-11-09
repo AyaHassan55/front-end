@@ -5,7 +5,7 @@ import { USER, USERS } from "../../Api/Api";
 import { Table } from 'react-bootstrap';
 import { Axios } from "../../Api/Axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPenToSquare, faTrash, faUsersSlash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 
@@ -70,7 +70,16 @@ export default function Users() {
   </div>
 </div>
 
-    <Table striped bordered hover>
+    {/* Empty state design */}
+      {users.length === 0 ? (
+        <div className="empty-state text-center">
+          <FontAwesomeIcon icon={faUsersSlash} size="3x" color="#ddd" />
+          <h5>No Users Found</h5>
+          <p>It looks like there are no users in the system. Please add some users.</p>
+        </div>
+       ) :
+
+    (<Table striped bordered hover>
       <thead>
         <tr>
           <th style={{}}>id</th>
@@ -84,7 +93,7 @@ export default function Users() {
         {usersShow}
 
       </tbody>
-    </Table>
+    </Table>)} 
     
 
   </div>);

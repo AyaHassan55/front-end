@@ -15,13 +15,4 @@ body{
   color: white !important; /* danger */
 }
 
-/* toast */
-.toast {
-  opacity: 1;
-  transition: opacity 0.5s ease-out;
-}
 
-.toast.hide {
-  opacity: 0;
-  visibility: hidden;
-}
