@@ -30,7 +30,7 @@ function App() {
               <Route path="users/:id" element={<User />} />
               <Route path="user/add" element={<AddUser />} />
             </Route>
-             <Route element={<RequireAuth allowedRole={'1996'} />} > <Route path="writer" element={<Writer />} /></Route>
+             <Route element={<RequireAuth allowedRole={['1995','1996']} />} > <Route path="writer" element={<Writer />} /></Route>
            
 
           </Route>
