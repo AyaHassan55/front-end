@@ -36,7 +36,8 @@ export default function LoginPage() {
       setLoading(false);
       const token = res.data.token;
       cookie.set("e-commerce", token);
-      navigate('/dashboard/users', { replace: true });  // replace to prevent going back to login page
+      window.location.pathname = '/dashboard/users';
+      // navigate('/dashboard/users', { replace: true });  // replace to prevent going back to login page
     } catch (err) {
       setLoading(false);
       if (err.response?.status === 401) {
@@ -106,7 +107,7 @@ export default function LoginPage() {
                 >
                   Login
                 </button>
-               
+
 
                 <div className="text-center">
                   <p className="mb-2" style={{ fontSize: "14px" }}>
@@ -129,6 +130,19 @@ export default function LoginPage() {
                   </button>
                   {err !== "" && <span className="error">{err}</span>}
                 </div>
+                {/* if don't have account */}
+                <div className="text-center mt-3">
+                  <p style={{ fontSize: "14px" }}>
+                    Don't have an account?{" "}
+                    <span
+                      onClick={() => navigate("/register")}
+                      style={{ color: "#007BFF", cursor: "pointer" ,textDecoration:'underline'}}
+                    >
+                      Sign Up
+                    </span>
+                  </p>
+                </div>
+
               </form>
             </div>
           </div>

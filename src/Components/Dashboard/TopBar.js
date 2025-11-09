@@ -8,21 +8,24 @@ import { LOGOUT, USER } from '../../Api/Api';
 import { Navigate } from 'react-router-dom';
 import { DropdownButton,Dropdown } from 'react-bootstrap';
 // import { Dropdown } from 'bootstrap/dist/js/bootstrap.bundle.min';
-
+import Cookie from 'cookie-universal'
 export default function TopBar() {
   const menu = useContext(Menu);
   const setIsOpen = menu.setIsOpen;
   const [name, setName] = useState('');
-
+  const cookies = Cookie();
+  const token = cookies.get('token');
+// fetch user data
   useEffect(()=>{
     Axios.get(`${USER}`)
     .then((data)=> setName(data.data.name))
     .catch((err)=>Navigate('/login',{ replace: true}))
   },[])
-
+// logout function
   async function handleLogOut() {
     try{
       const res = await Axios.get(`/${LOGOUT}`);
+      cookies.remove('e-commerce');
       window.location.pathname = '/login';
     }catch(err){
       console.log(err);

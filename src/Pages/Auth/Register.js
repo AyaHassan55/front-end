@@ -34,8 +34,8 @@ export default function RegisterPage() {
       const token = res.data.token;
       cookie.set("e-commerce", token);
       alert('regester success')
-      navigate('/', { replace: true });
-      
+      navigate('/dashboard', { replace: true });
+
     } catch (err) {
       setLoading(false);
       if (err.response && err.response.status === 422) {
@@ -145,6 +145,19 @@ export default function RegisterPage() {
             </button>
 
             {err !== "" && <span className="error">{err}</span>}
+            {/* do you have account? */}
+            <div className="text-center mt-3">
+              <p style={{ fontSize: "14px" }}>
+                Do You have an account?{" "}
+                <span
+                  onClick={() => navigate("/login")}
+                  style={{ color: "#007BFF", cursor: "pointer",textDecoration:'underline' }}
+                >
+                  Login
+                </span>
+              </p>
+            </div>
+
           </div>
         </div>
       </div>
