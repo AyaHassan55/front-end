@@ -35,8 +35,11 @@ export default function LoginPage() {
       const res = await axios.post(`${baseUrl}/${LOGIN}`, formData);
       setLoading(false);
       const token = res.data.token;
+      const role = res.data.user.role;
+      console.log("Role:", role);
+      const go = role === '1995' ? 'users' : 'writer';
       cookie.set("e-commerce", token);
-      window.location.pathname = '/dashboard/users';
+      window.location.pathname = `/dashboard/${go}`;
       // navigate('/dashboard/users', { replace: true });  // replace to prevent going back to login page
     } catch (err) {
       setLoading(false);

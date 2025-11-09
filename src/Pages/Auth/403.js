@@ -6,8 +6,8 @@ export default function Error403({role}) {
 
     return (
         <div className="error-container">
-            <div className="error-code">403</div>
-            <div className="error-message">Access Denied</div>
+            <div className="error-codee">403</div>
+            <div className="error-messagee">Access Denied</div>
             <div className="error-submessage">
                 Sorry, you don't have permission to access this page.
             </div>
