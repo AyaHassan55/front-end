@@ -7,6 +7,7 @@ import { Axios } from "../../Api/Axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrash, faUsersSlash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import TableShow from "../../Components/Dashboard/Table";
 
 
 export default function Users() {
@@ -40,10 +41,18 @@ export default function Users() {
       });
   }, [userDelete]);
 
-
+  const header=[
+    {
+      key:'id',
+      name:'id'},
+    {key:'name',name:'Username'},
+    {key:'email',name:'Email'},
+    {key:'role',name:'Role'},
+    
+  ];
   const usersShow = users.map((user, key) => (<tr key={key}>
     <td>{key + 1}</td>
-    <td>{user.name === currentUser.name ? user.name + ' (You)' : user.name}</td>
+    <td>{user.name === currentUser.name ? user.name + '(You)' : user.name}</td>
     <td>{user.email}</td>
     <td>{user.role === '1995' ? 'Admin' : user.role === '2001' ? 'User' : 'Writer'}</td>
     <td >
@@ -112,22 +121,9 @@ export default function Users() {
           </div>
         ) :
 
-          (<Table striped bordered hover>
-            <thead>
-              <tr>
-                <th style={{}}>id</th>
-
-                <th>Username</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {usersShow}
-
-            </tbody>
-          </Table>)}
+          (
+            <TableShow header={header} data={users} />
+           )} 
 
 
     </div>);
