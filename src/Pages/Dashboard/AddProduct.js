@@ -74,7 +74,8 @@ export default function AddProduct() {
             <img key={key} src={URL.createObjectURL(img)} width={'100px'}/>
             <div>
                 <p className="mb-1">{img.name}</p>
-                <p>{img.size}</p>
+                <p>{(img.size / 1024 < 900 ?(img.size /1024).toFixed(2)+'KB' 
+                :(img.size /(1024*1024)).toFixed(2)+'MB' )}</p>
             </div>
         </div>
     )
