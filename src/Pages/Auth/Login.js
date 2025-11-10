@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { baseUrl, LOGIN } from "../../Api/Api";
 import LoadingSubmit from "../../Components/Loading/Loading";
 import Cookie from "cookie-universal";
@@ -15,18 +15,24 @@ export default function LoginPage() {
     password: "",
   });
   const navigate = useNavigate();
-
   const cookie = new Cookie();
+  // useRef---------------------------------------
+    const focus = useRef();
+    console.log(focus.current);
 
+  //Handle focus
+  useEffect(()=>{
+    focus.current.focus();
+  },[]) 
+  // Handle form change------------------------------------------
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.id]: e.target.value,
     });
   };
-  const handleGoogleLogin = () => {
-    console.log("Google login clicked");
-  };
+  
+  // login submit
   async function loginBtnClicked(e) {
     e.preventDefault();
     setLoading(true);
@@ -82,6 +88,7 @@ export default function LoginPage() {
                     value={formData.email}
                     onChange={handleChange}
                     required
+                    ref={focus}   // focus 1st input
                   />
                 </div>
 
