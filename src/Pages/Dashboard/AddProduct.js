@@ -16,7 +16,7 @@ export default function AddProduct() {
         discount: '',
         About: '',
     })
-    const [images, setImages] = useState('');
+    const [images, setImages] = useState([]);
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(false);
     const nav = useNavigate();
@@ -44,15 +44,15 @@ export default function AddProduct() {
 
 
         try {
-            const dataForm =new FormData();
-            dataForm.append('category',form.category);
-            dataForm.append('description',form.description);
-            dataForm.append('About',form.About);
-            dataForm.append('discount',form.discount);
-            dataForm.append('price',form.price);
-            dataForm.append('title',form.title);
-            for(let i=0; i<images.length; i++){
-                dataForm.append('images[]',images[i])
+            const dataForm = new FormData();
+            dataForm.append('category', form.category);
+            dataForm.append('description', form.description);
+            dataForm.append('About', form.About);
+            dataForm.append('discount', form.discount);
+            dataForm.append('price', form.price);
+            dataForm.append('title', form.title);
+            for (let i = 0; i < images.length; i++) {
+                dataForm.append('images[]', images[i])
             }
 
             const res = await Axios.post(`${PRODUCT}/add`, dataForm);
@@ -68,6 +68,16 @@ export default function AddProduct() {
     const categoriesShow = categories.map((item, key) => (
         <option key={key} value={item.id}>{item.title}</option>
     ))
+    // mapping imgs
+    const imgShow = images.map((img, key) =>
+        <div className="d-flex align-items-center justify-content-start gap-2 p-2 border w-100">
+            <img key={key} src={URL.createObjectURL(img)} width={'100px'}/>
+            <div>
+                <p className="mb-1">{img.name}</p>
+                <p>{img.size}</p>
+            </div>
+        </div>
+    )
     return (
         <>
             {loading && <LoadingSubmit />}
@@ -113,10 +123,10 @@ export default function AddProduct() {
                     <Form.Label style={{ fontWeight: 'bold' }}>Images</Form.Label>
                     <Form.Control
                         multiple  //to can add more than image
-                        onChange={(e) => setImages(e.target.files)} type="file" />
+                        onChange={(e) => setImages([...e.target.files])} type="file" />
                 </Form.Group>
                 {/* ---------------------------------------- */}
-
+                <div className="d-flex flex-column align-items-start gap-2">{imgShow}</div>
 
 
                 <button
