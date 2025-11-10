@@ -22,6 +22,8 @@ export default function AddProduct() {
     const nav = useNavigate();
 
     // useRef-----------------------
+     const openImg = useRef(null);
+    // -----
     const focus = useRef("");
     useEffect(() => {
         focus.current.focus();
@@ -123,13 +125,22 @@ export default function AddProduct() {
                 <Form.Group className="mb-3" controlId="images">
                     <Form.Label style={{ fontWeight: 'bold' }}>Images</Form.Label>
                     <Form.Control
+                        ref={openImg}
+                        hidden
                         multiple  //to can add more than image
                         onChange={(e) => setImages([...e.target.files])} type="file" />
                 </Form.Group>
                 {/* ---------------------------------------- */}
+               
+                {/* ----------------------------------------- */}
+                <div className="d-flex align-items-center justify-content-center gap-2 py-2 w-100 flex-column rounded mb-2 "
+                style={{border:'2px dashed #0036fe',cursor:'pointer'}} onClick={()=>openImg.current.click() }>
+                    <img width={'100px'} src={require("../../Assets/images/upload.png")} alt="upload.png"></img>
+                    <p className="fw-bold mb-0">upload image</p>
+                </div>
+                {/* ---------------------------------------------------------------------- */}
                 <div className="d-flex flex-column align-items-start gap-2">{imgShow}</div>
-
-
+               
                 <button
                     // disabled={title.length > 1  ? false:true}
                     className="btn btn-primary mt-3">Save
