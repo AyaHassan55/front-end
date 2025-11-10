@@ -3,7 +3,7 @@ import { Axios } from "../../Api/Axios";
 import { Form } from "react-bootstrap";
 import { CATEGORY, USER } from "../../Api/Api";
 import LoadingSubmit from "../../Components/Loading/Loading";
-import { replace, useNavigate } from "react-router-dom";
+import { replace, useNavigate, useParams } from "react-router-dom";
 
 export default function Category() {
     const [title, setTitle] = useState('');
@@ -12,9 +12,11 @@ export default function Category() {
     const [disable, setDisable] = useState(true);
     const [loading, setLoading] = useState(false);
     const nav = useNavigate();
-    // id user
-    const id =Number( window.location.pathname.replace("/dashboard/categories/", ""));
-    console.log(id)
+    // 
+    // --------id user-------------------------
+    // const id =Number( window.location.pathname.replace("/dashboard/categories/", "")); =
+      const {id} = useParams();
+    // ------------------------------------
     // get categories data by id
     useEffect(() => {
         setLoading(true);

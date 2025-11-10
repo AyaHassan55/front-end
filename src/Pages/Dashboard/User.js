@@ -3,7 +3,7 @@ import { Form } from "react-bootstrap";
 import { Axios } from "../../Api/Axios";
 import { USER } from "../../Api/Api";
 import LoadingSubmit from "../../Components/Loading/Loading";
-import { replace, useNavigate } from "react-router-dom";
+import { replace, useNavigate, useParams } from "react-router-dom";
 
 export default function User() {
     const [name, setName] = useState('');
@@ -13,7 +13,8 @@ export default function User() {
     const [loading, setLoading] = useState(false);
     const nav = useNavigate();
     // id user
-    const id = Number(window.location.pathname.replace("/dashboard/users/", ""));
+    // const id = Number(window.location.pathname.replace("/dashboard/users/", ""));
+    const {id} = useParams();
     // get user data by id
     useEffect(() => {
         setLoading(true);
