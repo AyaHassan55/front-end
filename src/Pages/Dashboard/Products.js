@@ -52,7 +52,7 @@ export default function Products() {
     }
 
   }
-
+console.log(products)
  
 const header = [
     {key:'title',name:'Title'},

@@ -44,7 +44,18 @@ export default function AddProduct() {
 
 
         try {
-            const res = await Axios.post(`${PRODUCT}/add`, form);
+            const dataForm =new FormData();
+            dataForm.append('category',form.category);
+            dataForm.append('description',form.description);
+            dataForm.append('About',form.About);
+            dataForm.append('discount',form.discount);
+            dataForm.append('price',form.price);
+            dataForm.append('title',form.title);
+            for(let i=0; i<images.length; i++){
+                dataForm.append('images[]',images[i])
+            }
+
+            const res = await Axios.post(`${PRODUCT}/add`, dataForm);
 
             nav('/dashboard/products/');
         } catch (err) {
