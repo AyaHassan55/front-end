@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { baseUrl, REGISTER } from "../../Api/Api";
 import axios from "axios";
 // import LoadingSubmit from "../../Components/Loading/Loading";
@@ -48,9 +48,12 @@ export default function RegisterPage() {
     }
   }
 
-  const handleGoogleSignUp = () => {
-    console.log("Google Sign-Up clicked");
-  };
+  // useRef------------------------------
+  const focus = useRef("");
+  // handle focus--------------------------
+  useEffect(()=>{
+    focus.current.focus();
+  },[])
 
   return (
     <div>
@@ -80,6 +83,8 @@ export default function RegisterPage() {
                 className="form-control form-control-sm"
                 value={formData.name}
                 onChange={handleChange}
+                placeholder="Name ...."
+                ref={focus}    // focus in 1st input
               />
             </div>
 
@@ -93,6 +98,8 @@ export default function RegisterPage() {
                 className="form-control form-control-sm"
                 value={formData.email}
                 onChange={handleChange}
+                placeholder="Email ...."
+
                 required
               />
             </div>
@@ -110,6 +117,8 @@ export default function RegisterPage() {
                 className="form-control form-control-sm"
                 value={formData.password}
                 onChange={handleChange}
+                placeholder="Password ...."
+
                 required
               />
             </div>
