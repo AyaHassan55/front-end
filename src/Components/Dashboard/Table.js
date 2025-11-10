@@ -6,7 +6,7 @@ import EmptyState from "./EmptyState";
 
 
 export default function TableShow(props) {
-    const currentUser = props.currentUser || false;  // Because it's only for the user schedule
+    const currentUser = props.currentUser || {name:''};  // Because it's only for the user schedule
     // لو loading true
     if (props.loading) {
         return (
@@ -37,6 +37,7 @@ export default function TableShow(props) {
             <td>{key + 1}</td>
             {props.header.map((item2, key2) => (
                 <td key={key2}>{
+                    item2.key==='image' ?<img width={'50px'} src={item[item2.key]} />:
                     item[item2.key] === '1995' ? 'Admin' :
                         item[item2.key] === '2001' ? 'User' :
                             item[item2.key] === '1996' ? 'Writer' :
