@@ -18,6 +18,7 @@ import RequireBack from "./Pages/Auth/RequireBack";
 import Categories from "./Pages/Dashboard/Categories";
 import AddCategory from "./Pages/Dashboard/AddCategory";
 import Category from "./Pages/Dashboard/Category";
+import Products from "./Pages/Dashboard/Products";
 // import './Components/Loading/loading.css'
 function App() {
   return (
@@ -40,9 +41,14 @@ function App() {
               <Route path="user/add" element={<AddUser />} />
             </Route>
               <Route element={<RequireAuth allowedRole={['1995','1999']} />} > 
+                  {/* categories */}
                   <Route path="categories" element={<Categories />} />
                   <Route path="categories/:id" element={<Category />} />
                   <Route path="category/add" element={<AddCategory />} />
+                  {/* prodcuts */}
+                  <Route path="products" element={<Products />} />
+                  <Route path="products/:id" element={<Category />} />
+                  <Route path="product/add" element={<AddCategory />} />
                 </Route>
 
              <Route element={<RequireAuth allowedRole={['1995','1996']} />} > 

@@ -7,6 +7,9 @@ export const GOOGLE_CALL_BACK = "auth/google/callback";
 // user routes
 export const USER = "user";
 export const USERS = "users";
-// product routes
+// category routes
 export const CATEGORY = "category";
 export const CATEGORIES = "categories";
+// product routes
+export const PRODUCTS ="products";
+export const PRODUCT ="product";
