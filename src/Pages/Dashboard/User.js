@@ -13,7 +13,7 @@ export default function User() {
     const [loading, setLoading] = useState(false);
     const nav = useNavigate();
     // id user
-    const id = window.location.pathname.replace("/dashboard/users/page/404", "");
+    const id = Number(window.location.pathname.replace("/dashboard/users/", ""));
     // get user data by id
     useEffect(() => {
         setLoading(true);
