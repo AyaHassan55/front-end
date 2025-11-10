@@ -19,6 +19,7 @@ import Categories from "./Pages/Dashboard/Categories";
 import AddCategory from "./Pages/Dashboard/AddCategory";
 import Category from "./Pages/Dashboard/Category";
 import Products from "./Pages/Dashboard/Products";
+import AddProduct from "./Pages/Dashboard/AddProduct";
 // import './Components/Loading/loading.css'
 function App() {
   return (
@@ -48,7 +49,7 @@ function App() {
                   {/* prodcuts */}
                   <Route path="products" element={<Products />} />
                   <Route path="products/:id" element={<Category />} />
-                  <Route path="product/add" element={<AddCategory />} />
+                  <Route path="product/add" element={<AddProduct />} />
                 </Route>
 
              <Route element={<RequireAuth allowedRole={['1995','1996']} />} > 
