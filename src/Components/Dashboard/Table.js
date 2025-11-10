@@ -1,15 +1,32 @@
 import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Table } from "react-bootstrap"
+import { Spinner, Table } from "react-bootstrap"
 import { Link } from "react-router-dom";
-import { Axios } from "../../Api/Axios";
-import { USER } from "../../Api/Api";
+import EmptyState from "./EmptyState";
 
 
 export default function TableShow(props) {
     const currentUser = props.currentUser || false;  // Because it's only for the user schedule
+    // لو loading true
+    if (props.loading) {
+        return (
+            <div className="text-center py-5">
+                <Spinner animation="border" variant="primary" role="status" />
+                <p className="mt-3 text-secondary fw-semibold">{props.loadingMessage}</p>
+            </div>
+        );
+    }
+    // لو مفيش داتا رجع empty state
+    if (props.data.length === 0) {
+        return (
+            <EmptyState
+                icon={props.emptyIcon}
+                title={props.emptyTitle}
+                subTitle={props.emptySubTitle}
+            />
+        );
+    }
 
-    
     // header show
     const headerShow = props.header.map((item, i) => <th key={i}>{item.name}</th>);
     // body show
@@ -21,12 +38,12 @@ export default function TableShow(props) {
             {props.header.map((item2, key2) => (
                 <td key={key2}>{
                     item[item2.key] === '1995' ? 'Admin' :
-                    item[item2.key] === '2001' ?'User' : 
-                    item[item2.key] === '1996' ? 'Writer' : 
-                    item[item2.key] === '1999' ? "Product Manager" : 
-                    item[item2.key]
-                    }
-                    {currentUser&& item[item2.key]=== currentUser.name && "(You)"}
+                        item[item2.key] === '2001' ? 'User' :
+                            item[item2.key] === '1996' ? 'Writer' :
+                                item[item2.key] === '1999' ? "Product Manager" :
+                                    item[item2.key]
+                }
+                    {currentUser && item[item2.key] === currentUser.name && "(You)"}
                 </td>
             ))}
             {/* Actions */}
@@ -35,10 +52,10 @@ export default function TableShow(props) {
                     <Link to={`${item.id}`}>
                         <FontAwesomeIcon icon={faPenToSquare} />
                     </Link>
-                    {currentUser && currentUser.name !== item.name&&
-                    <FontAwesomeIcon
-                        onClick={() => props.delete(item.id)}
-                        cursor={'pointer'} color="#bb0f0f" icon={faTrash} />}
+                    {currentUser && currentUser.name !== item.name &&
+                        <FontAwesomeIcon
+                            onClick={() => props.delete(item.id)}
+                            cursor={'pointer'} color="#bb0f0f" icon={faTrash} />}
                 </div>
             </td>
 

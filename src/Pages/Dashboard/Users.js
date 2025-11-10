@@ -1,21 +1,16 @@
 import { useEffect, useState } from "react";
 import { USER, USERS } from "../../Api/Api";
-import { Spinner } from 'react-bootstrap';
 import { Axios } from "../../Api/Axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import TableShow from "../../Components/Dashboard/Table";
 import ToastMessage from "../../Components/Dashboard/Toast";
 import { faUsersSlash } from "@fortawesome/free-solid-svg-icons";
-import EmptyState from "../../Components/Dashboard/EmptyState";
-
-
 export default function Users() {
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState([]);
   const [toastMessage, setToastMessage] = useState("");
   const [showToast, setShowToast] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading,setLoading] = useState(false);
 
 
   const header = [
@@ -76,28 +71,18 @@ export default function Users() {
       </div>
       <ToastMessage show={showToast} message={toastMessage} onClose={() => setShowToast(false)} />
 
-      {/* Empty state design */}
-      {loading ? (
-        (
-          <div className="text-center py-5">
-            <Spinner animation="border" variant="primary" role="status" />
-            <p className="mt-3 text-secondary fw-semibold">Loading users...</p>
-          </div>
-        )
-      ) :
-        users.length === 0 ? (
-          <EmptyState>
-            icon={faUsersSlash}
-            title="No Users Found"
-            subTitle="It looks like there are no users in the system. Please add some users."
-          </EmptyState>
-        ) :
-
-          (
-            <TableShow header={header} data={users} delete={handleDelete}
-              currentUser={currentUser}
-            />
-          )}
+      <TableShow
+        header={header}
+        data={users}
+        delete={handleDelete}
+        loading={loading}
+        loadingMessage="Loading users..."
+        currentUser={currentUser}
+        emptyIcon={faUsersSlash}
+        emptyTitle="No Users Found"
+        emptySubTitle="It looks like there are no users in the system. Please add some users."
+      />
+        
 
 
     </div>);
