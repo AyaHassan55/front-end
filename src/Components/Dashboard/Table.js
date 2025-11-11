@@ -28,7 +28,7 @@ export default function TableShow(props) {
     }
 
     // header show
-    const headerShow = props.header.map((item, i) => <th key={i}>{item.name}</th>);
+    const headerShow = props.header.map((item, i) => < th key={i}>{item.name}</th>);
     // body show
 
     const dataShow = props.data.map((item, key) =>
@@ -37,7 +37,14 @@ export default function TableShow(props) {
             <td>{key + 1}</td>
             {props.header.map((item2, key2) => (
                 <td key={key2}>{
-                    item2.key==='image' ?<img width={'50px'} src={item[item2.key]} />:
+                    item2.key==='image' ?<img width={'50px'} src={item[item2.key]} alt="" />:
+                    item2.key === 'images'? <div className="d-flex align-items-center justify-content-center gap-3 flex-wrap">
+                        {
+                            item[item2.key].map((img)=><img width={"50px"}  src={img.image} />)
+                        }
+                    </div>
+
+                    :
                     item[item2.key] === '1995' ? 'Admin' :
                         item[item2.key] === '2001' ? 'User' :
                             item[item2.key] === '1996' ? 'Writer' :

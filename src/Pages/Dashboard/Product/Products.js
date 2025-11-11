@@ -55,6 +55,7 @@ export default function Products() {
 console.log(products)
  
 const header = [
+     {key:'images',name:'images'},
     {key:'title',name:'Title'},
     {key:'description',name:'Description'},
     {key:'price',name:'Price'},
