@@ -31,9 +31,10 @@ export default function AddProduct() {
     const [id,setId] = useState();
     const [uploading,setUploading] = useState(0);
     const nav = useNavigate();
-console.log(id);
+
     // useRef-----------------------
-     const openImg = useRef(null);
+    const openImg = useRef(null);
+    const progress = useRef([]);
     // -----
     const focus = useRef("");
     useEffect(() => {
@@ -98,22 +99,28 @@ console.log(id);
     const categoriesShow = categories.map((item, key) => (
         <option key={key} value={item.id}>{item.title}</option>
     ))
-    // handle imgs change
+    // handle imgs 
+    const j=useRef(-1);
     async function handelImagesChange(e) {
 
         setImages((prev) =>[...prev,...e.target.files]);
         const imagesAsFiles = e.target.files;
         const data = new FormData();
         for(let i=0 ; i < imagesAsFiles.length; i++){
+            j.current++;
             data.append('image',imagesAsFiles[i]);
             data.append('product_id', id);
-            
-        }
-        try{
-           const res =  Axios.post("/product-img/add",data,{
+
+            try{
+           const res =await  Axios.post("/product-img/add",data,{
             onUploadProgress:(ProgressEvent)=>{
-                const loaded = Math.floor((ProgressEvent.loaded *100)/ ProgressEvent.total);
-                setUploading(loaded);
+                const {loaded, total} = ProgressEvent;
+               const percent = Math.floor((loaded *100)/total );
+                
+                if(percent % 10 === 0){
+                    progress.current[j.current].style.width =`${percent}%`
+                    progress.current[j.current].setAttribute('percent',`${percent}%`);
+                }
 
             }
            });
@@ -122,6 +129,9 @@ console.log(id);
             console.log(err);
         }
 
+            
+        }
+        
     }
     // mapping imgs
     const imgShow = images.map((img, key) =>
@@ -135,7 +145,9 @@ console.log(id);
                 </div>
             </div>
             <div className="custom-progress mt-3">
-                <span percent={`${uploading}%`} style={{width:`${uploading}%`,position:'relative'}} className="inner-progress"></span>
+                <span
+                ref={(e)=> progress.current[key] = e} 
+                 style={{position:'relative'}} className="inner-progress"></span>
             </div>
         </div>
     )
