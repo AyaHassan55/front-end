@@ -15,12 +15,22 @@ export default function AddProduct() {
         price: '',
         discount: '',
         About: '',
-    })
+    });
+    const dummyForm= {
+        category: null, 
+        title: 'dummy',
+        description: 'dummy',
+        price: 222,
+        discount: 0,
+        About: 'About',
+    }
     const [images, setImages] = useState([]);
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [send, setSend] =useState(false);
+    const [id,setId] = useState();
     const nav = useNavigate();
-
+console.log(id);
     // useRef-----------------------
      const openImg = useRef(null);
     // -----
@@ -30,7 +40,11 @@ export default function AddProduct() {
     }, [])
     //  handel change -----------------------------
     function handleChange(e) {
-        setForm({ ...form, [e.target.name]: e.target.value })
+        setForm({ ...form, [e.target.name]: e.target.value });
+        setSend(1);
+        if(send !== 1){
+            handleSubmitForm()
+        }
     }
     // get all categories
     useEffect(() => {
@@ -39,25 +53,25 @@ export default function AddProduct() {
     }, [])
     // console.log(images)
 
-    // handle form submit
-    async function handleSubmit(e) {
+    // handle form edit
+    async function handleEdit(e) {
         setLoading(true);
         e.preventDefault();
 
 
         try {
-            const dataForm = new FormData();
-            dataForm.append('category', form.category);
-            dataForm.append('description', form.description);
-            dataForm.append('About', form.About);
-            dataForm.append('discount', form.discount);
-            dataForm.append('price', form.price);
-            dataForm.append('title', form.title);
-            for (let i = 0; i < images.length; i++) {
-                dataForm.append('images[]', images[i])
-            }
+            // const dataForm = new FormData();
+            // dataForm.append('category', form.category);
+            // dataForm.append('description', form.description);
+            // dataForm.append('About', form.About);
+            // dataForm.append('discount', form.discount);
+            // dataForm.append('price', form.price);
+            // dataForm.append('title', form.title);
+            // for (let i = 0; i < images.length; i++) {
+            //     dataForm.append('images[]', images[i])
+            // }
 
-            const res = await Axios.post(`${PRODUCT}/add`, dataForm);
+            const res = await Axios.post(`${PRODUCT}/edit/${id}`, form);
 
             nav('/dashboard/products/');
         } catch (err) {
@@ -65,19 +79,56 @@ export default function AddProduct() {
             console.log(err);
         }
     }
+    // handle submit formdummy
+    async function handleSubmitForm(e) {
+      
 
+        try {
+            
+            const res = await Axios.post(`${PRODUCT}/add`, dummyForm);
+
+            setId(res.data.id);
+        } catch (err) {
+            
+            console.log(err);
+        }
+    }
     // categories show
     const categoriesShow = categories.map((item, key) => (
         <option key={key} value={item.id}>{item.title}</option>
     ))
+    // handle imgs change
+    async function handelImagesChange(e) {
+
+        setImages((prev) =>[...prev,...e.target.files]);
+        const imagesAsFiles = e.target.files;
+        const data = new FormData();
+        for(let i=0 ; i < imagesAsFiles.length; i++){
+            data.append('image',imagesAsFiles[i]);
+            data.append('product_id', id);
+            
+        }
+        try{
+           const res =  Axios.post("/product-img/add",data);
+           console.log(`result : ${res}`);
+        }catch(err){
+            console.log(err);
+        }
+
+    }
     // mapping imgs
     const imgShow = images.map((img, key) =>
-        <div className="d-flex align-items-center justify-content-start gap-2 p-2 border w-100">
-            <img key={key} src={URL.createObjectURL(img)} width={'100px'}/>
-            <div>
-                <p className="mb-1">{img.name}</p>
-                <p>{(img.size / 1024 < 900 ?(img.size /1024).toFixed(2)+'KB' 
-                :(img.size /(1024*1024)).toFixed(2)+'MB' )}</p>
+        <div key={key} className="uploaded-image border p-2 w-100">
+            <div className="image-info d-flex align-items-center justify-content-start gap-2 ">
+                <img key={key} src={URL.createObjectURL(img)} width={'100px'} />
+                <div className="image-details">
+                    <p className="mb-1">{img.name}</p>
+                    <p>{(img.size / 1024 < 900 ? (img.size / 1024).toFixed(2) + 'KB'
+                        : (img.size / (1024 * 1024)).toFixed(2) + 'MB')}</p>
+                </div>
+            </div>
+            <div className="custom-progress mt-3">
+                <span percent={"50"} className="inner-progress"></span>
             </div>
         </div>
     )
@@ -86,7 +137,7 @@ export default function AddProduct() {
             {loading && <LoadingSubmit />}
 
             <Form className="bg-white w-100  p-3"
-                onSubmit={handleSubmit}
+                onSubmit={handleEdit}
             >
                 <Form.Group className="mb-3" controlId="category">
                     <Form.Label style={{ fontWeight: 'bold' }}>Category</Form.Label>
@@ -99,27 +150,28 @@ export default function AddProduct() {
                 {/* ---------------------------------------- */}
                 <Form.Group className="mb-3" controlId="title">
                     <Form.Label style={{ fontWeight: 'bold' }}>Title</Form.Label>
-                    <Form.Control name="title" value={form.title} required onChange={handleChange} type="text" placeholder="Title..." />
+                    <Form.Control name="title" value={form.title} 
+                        disabled={!send} required onChange={handleChange} type="text" placeholder="Title..." />
                 </Form.Group>
                 {/* ---------------------------------------- */}
                 <Form.Group className="mb-3" controlId="description">
                     <Form.Label style={{ fontWeight: 'bold' }}>Description</Form.Label>
-                    <Form.Control name="description" value={form.description} required onChange={handleChange} type="text" placeholder="Description..." />
+                    <Form.Control name="description" value={form.description} disabled={!send} required onChange={handleChange} type="text" placeholder="Description..." />
                 </Form.Group>
                 {/* ---------------------------------------- */}
                 <Form.Group className="mb-3" controlId="price">
                     <Form.Label style={{ fontWeight: 'bold' }}>Price</Form.Label>
-                    <Form.Control name="price" value={form.price} required onChange={handleChange} type="text" placeholder="Price..." />
+                    <Form.Control name="price" value={form.price} disabled={!send} required onChange={handleChange} type="text" placeholder="Price..." />
                 </Form.Group>
                 {/* ---------------------------------------- */}
                 <Form.Group className="mb-3" controlId="discount">
                     <Form.Label style={{ fontWeight: 'bold' }}>Discount</Form.Label>
-                    <Form.Control name="discount" value={form.discount} required onChange={handleChange} type="text" placeholder="Discount..." />
+                    <Form.Control name="discount" value={form.discount} disabled={!send} required onChange={handleChange} type="text" placeholder="Discount..." />
                 </Form.Group>
                 {/* ---------------------------------------- */}
                 <Form.Group className="mb-3" controlId="About">
                     <Form.Label style={{ fontWeight: 'bold' }}>About</Form.Label>
-                    <Form.Control name="About" value={form.About} required onChange={handleChange} type="text" placeholder="About..." />
+                    <Form.Control name="About" value={form.About} disabled={!send} required onChange={handleChange} type="text" placeholder="About..." />
                 </Form.Group>
                 {/* ---------------------------------------- */}
                 <Form.Group className="mb-3" controlId="images">
@@ -128,15 +180,15 @@ export default function AddProduct() {
                         ref={openImg}
                         hidden
                         multiple  //to can add more than image
-                        onChange={(e) => setImages([...e.target.files])} type="file" />
+                        onChange={handelImagesChange} type="file" />
                 </Form.Group>
                 {/* ---------------------------------------- */}
                
                 {/* ----------------------------------------- */}
                 <div className="d-flex align-items-center justify-content-center gap-2 py-2 w-100 flex-column rounded mb-2 "
-                style={{border:'2px dashed #0036fe',cursor:'pointer'}} onClick={()=>openImg.current.click() }>
-                    <img width={'100px'} src={require("../../Assets/images/upload.png")} alt="upload.png"></img>
-                    <p className="fw-bold mb-0">upload image</p>
+                style={{border:!send ?"2px dashed gray" :'2px dashed #0036fe',cursor:send &&'pointer'}} onClick={()=>openImg.current.click() }>
+                    <img width={'100px'} src={require("../../Assets/images/upload.png")} alt="upload.png" style={{filter:!send && 'grayscale(1)' }}></img>
+                    <p className="fw-bold mb-0" style={{color:!send ? 'grey':'#0036fe' }}>upload image</p>
                 </div>
                 {/* ---------------------------------------------------------------------- */}
                 <div className="d-flex flex-column align-items-start gap-2">{imgShow}</div>
