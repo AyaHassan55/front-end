@@ -29,6 +29,7 @@ export default function AddProduct() {
     const [loading, setLoading] = useState(false);
     const [send, setSend] =useState(false);
     const [id,setId] = useState();
+    const [uploading,setUploading] = useState(0);
     const nav = useNavigate();
 console.log(id);
     // useRef-----------------------
@@ -109,7 +110,13 @@ console.log(id);
             
         }
         try{
-           const res =  Axios.post("/product-img/add",data);
+           const res =  Axios.post("/product-img/add",data,{
+            onUploadProgress:(ProgressEvent)=>{
+                const loaded = Math.floor((ProgressEvent.loaded *100)/ ProgressEvent.total);
+                setUploading(loaded);
+
+            }
+           });
            console.log(`result : ${res}`);
         }catch(err){
             console.log(err);
@@ -128,7 +135,7 @@ console.log(id);
                 </div>
             </div>
             <div className="custom-progress mt-3">
-                <span percent={"50"} className="inner-progress"></span>
+                <span percent={`${uploading}%`} style={{width:`${uploading}%`,position:'relative'}} className="inner-progress"></span>
             </div>
         </div>
     )

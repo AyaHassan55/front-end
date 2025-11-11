@@ -47,7 +47,7 @@
   height: 8px;
   background-color: #e0e0e0;
   border-radius: 5px;
-  overflow: hidden;
+  /* overflow: hidden; */
   margin-top: 12px;
 }
 
@@ -55,8 +55,35 @@
 .custom-progress .inner-progress {
   display: block;
   height: 100%;
-  width: 60%; /* يمكن تغييرها ديناميكياً */
-  background: linear-gradient(90deg, #4facfe, #00f2fe);
+  
+  background: linear-gradient(90deg, #4facfe,rgb(109, 153, 170), #269fa5be);
   border-radius: 5px;
   transition: width 0.4s ease;
+}
+
+
+
+.inner-progress::after {
+  content: attr(percent);
+  position: absolute;
+  top: -30px;
+  right: 0;
+  background-color: #22639b;
+  color: #fff;
+  padding: 3px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  white-space: nowrap;
+}
+/* المثلث اللي بيشاور */
+.inner-progress::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  right: 1px; 
+  border-width: 6px;
+  border-style: solid;
+  border-color: #22639b transparent transparent transparent;
 }
