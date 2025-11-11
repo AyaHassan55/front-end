@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Form } from "react-bootstrap";
-import { Axios } from "../../Api/Axios";
-import { CATEGORY, USER } from "../../Api/Api";
-import LoadingSubmit from "../../Components/Loading/Loading";
+
+
+import LoadingSubmit from "../../../Components/Loading/Loading";
+import { Axios } from "../../../Api/Axios";
+import { CATEGORY } from "../../../Api/Api";
 
 
 export default function AddCategory() {

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-import { baseUrl, LOGIN } from "../../Api/Api";
-import LoadingSubmit from "../../Components/Loading/Loading";
+import { baseUrl, LOGIN } from "../../../Api/Api";
+import LoadingSubmit from "../../../Components/Loading/Loading";
 import Cookie from "cookie-universal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";

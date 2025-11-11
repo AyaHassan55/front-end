@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { PRODUCT, PRODUCTS } from "../../Api/Api";
-import { Axios } from "../../Api/Axios";
+import { PRODUCT, PRODUCTS } from "../../../Api/Api";
+import { Axios } from "../../../Api/Axios";
 import { faBoxOpen, faFolderOpen, faPenToSquare, faTrash, faUsersSlash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import TableShow from "../../Components/Dashboard/Table";
-import ToastMessage from "../../Components/Dashboard/Toast";
+import TableShow from "../../../Components/Dashboard/Table";
+import ToastMessage from "../../../Components/Dashboard/Toast";
 
 
 export default function Products() {

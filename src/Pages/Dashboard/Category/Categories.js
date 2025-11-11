@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { CATEGORIES, CATEGORY } from "../../Api/Api";
+import { CATEGORIES, CATEGORY } from "../../../Api/Api";
 
-import { Axios } from "../../Api/Axios";
+import { Axios } from "../../../Api/Axios";
 
 import { faFolderOpen, faPenToSquare, faTrash, faUsersSlash } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import TableShow from "../../Components/Dashboard/Table";
-import ToastMessage from "../../Components/Dashboard/Toast";
+import TableShow from "../../../Components/Dashboard/Table";
+import ToastMessage from "../../../Components/Dashboard/Toast";
 
 
 export default function Categories() {

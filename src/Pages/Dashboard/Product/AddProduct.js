@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { Axios } from "../../Api/Axios";
-import { CATEGORIES, CATEGORY, PRODUCT, PRODUCTS, USER } from "../../Api/Api";
-import LoadingSubmit from "../../Components/Loading/Loading";
+import { Axios } from "../../../Api/Axios";
+import { CATEGORIES, CATEGORY, PRODUCT, PRODUCTS, USER } from "../../../Api/Api";
+import LoadingSubmit from "../../../Components/Loading/Loading";
 import { useNavigate } from "react-router-dom";
 
 
@@ -226,7 +226,7 @@ export default function AddProduct() {
                 {/* ----------------------------------------- */}
                 <div className="d-flex align-items-center justify-content-center gap-2 py-2 w-100 flex-column rounded mb-2 "
                     style={{ border: !send ? "2px dashed gray" : '2px dashed #0036fe', cursor: send && 'pointer' }} onClick={() => openImg.current.click()}>
-                    <img width={'100px'} src={require("../../Assets/images/upload.png")} alt="upload.png" style={{ filter: !send && 'grayscale(1)' }}></img>
+                    <img width={'100px'} src={require("../../../Assets/images/upload.png")} alt="upload.png" style={{ filter: !send && 'grayscale(1)' }}></img>
                     <p className="fw-bold mb-0" style={{ color: !send ? 'grey' : '#0036fe' }}>upload image</p>
                 </div>
                 {/* ---------------------------------------------------------------------- */}

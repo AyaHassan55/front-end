@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { USER, USERS } from "../../Api/Api";
-import { Axios } from "../../Api/Axios";
+import { USER, USERS } from "../../../Api/Api";
+import { Axios } from "../../../Api/Axios";
 import { Link } from "react-router-dom";
-import TableShow from "../../Components/Dashboard/Table";
-import ToastMessage from "../../Components/Dashboard/Toast";
+import TableShow from "../../../Components/Dashboard/Table";
+import ToastMessage from "../../../Components/Dashboard/Toast";
 import { faUsersSlash } from "@fortawesome/free-solid-svg-icons";
 export default function Users() {
   const [users, setUsers] = useState([]);

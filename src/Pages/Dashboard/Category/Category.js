@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
-import { Axios } from "../../Api/Axios";
+
 import { Form } from "react-bootstrap";
-import { CATEGORY, USER } from "../../Api/Api";
-import LoadingSubmit from "../../Components/Loading/Loading";
-import { replace, useNavigate, useParams } from "react-router-dom";
+
+
+import { useNavigate, useParams } from "react-router-dom";
+
+import { Axios } from "../../../Api/Axios";
+import { CATEGORY } from "../../../Api/Api";
+import LoadingSubmit from "../../../Components/Loading/Loading";
 
 export default function Category() {
     const [title, setTitle] = useState('');
     const [image, setImage] = useState('');
-    const [role, setRole] = useState('');
+    
     const [disable, setDisable] = useState(true);
     const [loading, setLoading] = useState(false);
     const nav = useNavigate();
