@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import { Axios } from "../../Api/Axios";
 import { CATEGORIES, CATEGORY, PRODUCT, PRODUCTS, USER } from "../../Api/Api";
 import LoadingSubmit from "../../Components/Loading/Loading";
@@ -16,8 +16,8 @@ export default function AddProduct() {
         discount: '',
         About: '',
     });
-    const dummyForm= {
-        category: null, 
+    const dummyForm = {
+        category: null,
         title: 'dummy',
         description: 'dummy',
         price: 222,
@@ -27,14 +27,16 @@ export default function AddProduct() {
     const [images, setImages] = useState([]);
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [send, setSend] =useState(false);
-    const [id,setId] = useState();
-    const [uploading,setUploading] = useState(0);
+    const [send, setSend] = useState(false);
+    const [id, setId] = useState();
+    const [uploading, setUploading] = useState(0);
     const nav = useNavigate();
 
     // useRef-----------------------
     const openImg = useRef(null);
     const progress = useRef([]);
+    const ids = useRef([]); // use in delete img
+    console.log(`ids======== ${ids}`);
     // -----
     const focus = useRef("");
     useEffect(() => {
@@ -44,7 +46,7 @@ export default function AddProduct() {
     function handleChange(e) {
         setForm({ ...form, [e.target.name]: e.target.value });
         setSend(1);
-        if(send !== 1){
+        if (send !== 1) {
             handleSubmitForm()
         }
     }
@@ -83,15 +85,15 @@ export default function AddProduct() {
     }
     // handle submit formdummy
     async function handleSubmitForm(e) {
-      
+
 
         try {
-            
+
             const res = await Axios.post(`${PRODUCT}/add`, dummyForm);
 
             setId(res.data.id);
         } catch (err) {
-            
+
             console.log(err);
         }
     }
@@ -99,55 +101,65 @@ export default function AddProduct() {
     const categoriesShow = categories.map((item, key) => (
         <option key={key} value={item.id}>{item.title}</option>
     ))
+    // delete img
+    async function handleDeleteImage(id,img) {
+        console.log(ids.current[id])
+    }
     // handle imgs 
-    const j=useRef(-1);
+    const j = useRef(-1);
     async function handelImagesChange(e) {
 
-        setImages((prev) =>[...prev,...e.target.files]);
+        setImages((prev) => [...prev, ...e.target.files]);
         const imagesAsFiles = e.target.files;
         const data = new FormData();
-        for(let i=0 ; i < imagesAsFiles.length; i++){
+        for (let i = 0; i < imagesAsFiles.length; i++) {
             j.current++;
-            data.append('image',imagesAsFiles[i]);
+            data.append('image', imagesAsFiles[i]);
             data.append('product_id', id);
 
-            try{
-           const res =await  Axios.post("/product-img/add",data,{
-            onUploadProgress:(ProgressEvent)=>{
-                const {loaded, total} = ProgressEvent;
-               const percent = Math.floor((loaded *100)/total );
-                
-                if(percent % 10 === 0){
-                    progress.current[j.current].style.width =`${percent}%`
-                    progress.current[j.current].setAttribute('percent',`${percent}%`);
-                }
+            try {
+                const res = await Axios.post("/product-img/add", data, {
+                    onUploadProgress: (ProgressEvent) => {
+                        const { loaded, total } = ProgressEvent;
+                        const percent = Math.floor((loaded * 100) / total);
 
+                        if (percent % 10 === 0) {
+                            progress.current[j.current].style.width = `${percent}%`
+                            progress.current[j.current].setAttribute('percent', `${percent}%`);
+                        }
+
+                    }
+                });
+                console.log(`result : ${res}`);
+                ids.current[j.current] = res.data.id;
+            } catch (err) {
+                console.log(err);
             }
-           });
-           console.log(`result : ${res}`);
-        }catch(err){
-            console.log(err);
+
+
         }
 
-            
-        }
-        
     }
     // mapping imgs
     const imgShow = images.map((img, key) =>
         <div key={key} className="uploaded-image border p-2 w-100">
-            <div className="image-info d-flex align-items-center justify-content-start gap-2 ">
-                <img key={key} src={URL.createObjectURL(img)} width={'100px'} />
-                <div className="image-details">
-                    <p className="mb-1">{img.name}</p>
-                    <p>{(img.size / 1024 < 900 ? (img.size / 1024).toFixed(2) + 'KB'
-                        : (img.size / (1024 * 1024)).toFixed(2) + 'MB')}</p>
+            <div className="d-flex align-items-center justify-content-between">
+                <div className="image-info d-flex align-items-center justify-content-start gap-2 ">
+                    <img key={key} src={URL.createObjectURL(img)} width={'100px'} />
+                    <div className="image-details">
+                        <p className="mb-1">{img.name}</p>
+                        <p>{(img.size / 1024 < 900 ? (img.size / 1024).toFixed(2) + 'KB'
+                            : (img.size / (1024 * 1024)).toFixed(2) + 'MB')}</p>
+                    </div>
+                    
                 </div>
+                <Button onClick={()=> handleDeleteImage(key,img)}  variant='danger'>Delete</Button>
+                
             </div>
             <div className="custom-progress mt-3">
                 <span
-                ref={(e)=> progress.current[key] = e} 
-                 style={{position:'relative'}} className="inner-progress"></span>
+                    ref={(e) => progress.current[key] = e}
+                    style={{ position: 'relative' }} className="inner-progress"></span>
             </div>
         </div>
     )
@@ -169,7 +181,7 @@ export default function AddProduct() {
                 {/* ---------------------------------------- */}
                 <Form.Group className="mb-3" controlId="title">
                     <Form.Label style={{ fontWeight: 'bold' }}>Title</Form.Label>
-                    <Form.Control name="title" value={form.title} 
+                    <Form.Control name="title" value={form.title}
                         disabled={!send} required onChange={handleChange} type="text" placeholder="Title..." />
                 </Form.Group>
                 {/* ---------------------------------------- */}
@@ -202,16 +214,16 @@ export default function AddProduct() {
                         onChange={handelImagesChange} type="file" />
                 </Form.Group>
                 {/* ---------------------------------------- */}
-               
+
                 {/* ----------------------------------------- */}
                 <div className="d-flex align-items-center justify-content-center gap-2 py-2 w-100 flex-column rounded mb-2 "
-                style={{border:!send ?"2px dashed gray" :'2px dashed #0036fe',cursor:send &&'pointer'}} onClick={()=>openImg.current.click() }>
-                    <img width={'100px'} src={require("../../Assets/images/upload.png")} alt="upload.png" style={{filter:!send && 'grayscale(1)' }}></img>
-                    <p className="fw-bold mb-0" style={{color:!send ? 'grey':'#0036fe' }}>upload image</p>
+                    style={{ border: !send ? "2px dashed gray" : '2px dashed #0036fe', cursor: send && 'pointer' }} onClick={() => openImg.current.click()}>
+                    <img width={'100px'} src={require("../../Assets/images/upload.png")} alt="upload.png" style={{ filter: !send && 'grayscale(1)' }}></img>
+                    <p className="fw-bold mb-0" style={{ color: !send ? 'grey' : '#0036fe' }}>upload image</p>
                 </div>
                 {/* ---------------------------------------------------------------------- */}
                 <div className="d-flex flex-column align-items-start gap-2">{imgShow}</div>
-               
+
                 <button
                     // disabled={title.length > 1  ? false:true}
                     className="btn btn-primary mt-3">Save
