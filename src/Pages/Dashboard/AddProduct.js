@@ -103,7 +103,15 @@ export default function AddProduct() {
     ))
     // delete img
     async function handleDeleteImage(id,img) {
-        console.log(ids.current[id])
+        const findId = ids.current[id];
+        try{
+            const res = await Axios.delete(`product-img/${findId}`);
+            setImages((prev) => prev.filter((image)=> image != img));
+            ids.current=ids.current.filter((i)=> i != id); 
+            --j.current; // it solves issue adding img after delete after delete another
+        }catch(err){
+            console.log(err)
+        }
     }
     // handle imgs 
     const j = useRef(-1);
