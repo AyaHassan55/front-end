@@ -7,6 +7,7 @@ import { faFolderOpen, faPenToSquare, faTrash, faUsersSlash } from "@fortawesome
 import { Link } from "react-router-dom";
 import TableShow from "../../../Components/Dashboard/Table";
 import ToastMessage from "../../../Components/Dashboard/Toast";
+import PaginatedItems from "../../../Components/Dashboard/Pagination/Pagination";
 
 
 export default function Categories() {
@@ -16,7 +17,8 @@ export default function Categories() {
   const [loading, setLoading] = useState(false);
 
    // limit of pagination
-      const [limit,setLimit] =useState(8);
+      const [limit,setLimit] =useState(11);
+      const [page,setPage] = useState(2);
 
 
   
@@ -79,8 +81,10 @@ const header = [
             emptyIcon={faFolderOpen}
             emptyTitle="No Categories Found"
             limit={limit}
+            page={page}
             emptySubTitle="It looks like there are no categories in the system. Please add some categories."
           />
+          <PaginatedItems itemsPerPage={5} />
             
     
     

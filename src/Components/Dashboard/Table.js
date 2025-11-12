@@ -9,8 +9,9 @@ export default function TableShow(props) {
     const currentUser = props.currentUser || { name: '' };  // Because it's only for the user schedule
 
     let paginationData=[];
+    // let x= Math.ceil(props.limit / props.page);
     if(props.data.length > 0){
-        for(let i=0; i< props.limit; i++){
+        for(let i=(props.page - 1)*props.limit ; i< (props.page * props.limit); i++){
         paginationData.push(props.data[i]);
     }
     }
@@ -42,7 +43,7 @@ export default function TableShow(props) {
     const dataShow = paginationData.map((item, key) =>
     (
         <tr key={key}>
-            <td>{key + 1}</td>
+            <td>{item.id}</td>
             {props.header.map((item2, key2) => (
                 <td key={key2}>{
                     item2.key === 'image' ? <img width={'50px'} src={item[item2.key]} alt="" /> :
