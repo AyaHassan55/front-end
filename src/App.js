@@ -19,6 +19,7 @@ import AddCategory from "./Pages/Dashboard/Category/AddCategory";
 import Category from "./Pages/Dashboard/Category/Category";
 import Products from "./Pages/Dashboard/Product/Products";
 import AddProduct from "./Pages/Dashboard/Product/AddProduct";
+import Product from "./Pages/Dashboard/Product/Product";
 // import './Components/Loading/loading.css'
 function App() {
   return (
@@ -47,7 +48,7 @@ function App() {
                   <Route path="category/add" element={<AddCategory />} />
                   {/* prodcuts */}
                   <Route path="products" element={<Products />} />
-                  <Route path="products/:id" element={<Category />} />
+                  <Route path="products/:id" element={<Product />} />
                   <Route path="product/add" element={<AddProduct />} />
                 </Route>
 
