@@ -15,6 +15,9 @@ export default function Categories() {
   const [showToast, setShowToast] = useState(false);
   const [loading, setLoading] = useState(false);
 
+   // limit of pagination
+      const [limit,setLimit] =useState(8);
+
 
   
   // display categories
@@ -75,6 +78,7 @@ const header = [
             loadingMessage="Loading Categories..."
             emptyIcon={faFolderOpen}
             emptyTitle="No Categories Found"
+            limit={limit}
             emptySubTitle="It looks like there are no categories in the system. Please add some categories."
           />
             

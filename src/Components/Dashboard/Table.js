@@ -7,6 +7,14 @@ import EmptyState from "./EmptyState";
 
 export default function TableShow(props) {
     const currentUser = props.currentUser || { name: '' };  // Because it's only for the user schedule
+
+    let paginationData=[];
+    if(props.data.length > 0){
+        for(let i=0; i< props.limit; i++){
+        paginationData.push(props.data[i]);
+    }
+    }
+
     // لو loading true
     if (props.loading) {
         return (
@@ -31,7 +39,7 @@ export default function TableShow(props) {
     const headerShow = props.header.map((item, i) => < th key={i}>{item.name}</th>);
     // body show
 
-    const dataShow = props.data.map((item, key) =>
+    const dataShow = paginationData.map((item, key) =>
     (
         <tr key={key}>
             <td>{key + 1}</td>
