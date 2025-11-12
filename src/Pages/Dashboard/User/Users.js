@@ -5,14 +5,19 @@ import { Link } from "react-router-dom";
 import TableShow from "../../../Components/Dashboard/Table";
 import ToastMessage from "../../../Components/Dashboard/Toast";
 import { faUsersSlash } from "@fortawesome/free-solid-svg-icons";
+import PaginatedItems from "../../../Components/Dashboard/Pagination/Pagination";
 export default function Users() {
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState([]);
   const [toastMessage, setToastMessage] = useState("");
   const [showToast, setShowToast] = useState(false);
   const [loading,setLoading] = useState(false);
+  // pagination
+  const limit=5;
+  const [page,setPage] = useState(1);
 
 
+  // header of table
   const header = [
 
     { key: 'name', name: 'Username' },
@@ -81,6 +86,10 @@ export default function Users() {
         emptyIcon={faUsersSlash}
         emptyTitle="No Users Found"
         emptySubTitle="It looks like there are no users in the system. Please add some users."
+        //pass pagination to table
+        limit={limit}
+        page = {page}
+        setPage={setPage}
       />
         
 
