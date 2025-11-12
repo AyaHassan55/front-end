@@ -3,19 +3,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Spinner, Table } from "react-bootstrap"
 import { Link } from "react-router-dom";
 import EmptyState from "./EmptyState";
+import PaginatedItems from "./Pagination/Pagination";
 
 
 export default function TableShow(props) {
     const currentUser = props.currentUser || { name: '' };  // Because it's only for the user schedule
 
-    let paginationData=[];
-    // let x= Math.ceil(props.limit / props.page);
-    if(props.data.length > 0){
-        for(let i=(props.page - 1)*props.limit ; i< (props.page * props.limit); i++){
-        paginationData.push(props.data[i]);
-    }
-    }
+ 
+   
+    // ------------------------------------------------
+    const start= (props.page-1) * props.limit;  //1 * 5 = 5
+    const end =  start + props.limit;       // 5 + 5 =10
+    const final = props.data.slice(start,end);
+    console.log('start =', start);
+console.log('end =', end);
+console.log('final =', final);
 
+    // ------------------------------------------------
     // لو loading true
     if (props.loading) {
         return (
@@ -40,7 +44,7 @@ export default function TableShow(props) {
     const headerShow = props.header.map((item, i) => < th key={i}>{item.name}</th>);
     // body show
 
-    const dataShow = paginationData.map((item, key) =>
+    const dataShow = final.map((item, key) =>
     (
         <tr key={key}>
             <td>{item.id}</td>
@@ -81,7 +85,7 @@ export default function TableShow(props) {
     )
 
     return (
-
+<>
         <Table striped bordered hover responsive>
             <thead>
                 <tr>
@@ -95,5 +99,7 @@ export default function TableShow(props) {
 
             </tbody>
         </Table>
+        < PaginatedItems itemsPerPage={props.limit} total={props.data} setPage={props.setPage} />
+        </>
     );
 }

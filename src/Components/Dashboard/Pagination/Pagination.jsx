@@ -1,50 +1,27 @@
-import React, { useEffect, useState } from 'react';
+
+
 
 import ReactPaginate from 'react-paginate';
 import './pagination.css'
 
-const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 
- function Items({ currentItems }) {
-  return (
-    <>
-      {currentItems &&
-        currentItems.map((item) => (
-          <div>
-            <h3>Item #{item}</h3>
-          </div>
-        ))}
-    </>
-  );
-}
 
-export default function PaginatedItems({ itemsPerPage }) {
- 
-  const [itemOffset, setItemOffset] = useState(0);
-  const endOffset = itemOffset + itemsPerPage;
-  console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-  const currentItems = items.slice(itemOffset, endOffset);
-  const pageCount = Math.ceil(items.length / itemsPerPage);
+export default function PaginatedItems({ itemsPerPage,total,setPage }) {
+     const pageCount = total.length/itemsPerPage;
+  
 
-  // Invoke when user click to request another page.
-  const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % items.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
-    setItemOffset(newOffset);
-  };
+  
 
   return (
     <>
-      <Items currentItems={currentItems} />
+      
       <ReactPaginate
         breakLabel="..."
-        nextLabel=" >"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
+        nextLabel=" >>"
+        onPageChange={(e)=>setPage(e.selected+1)}
+        pageRangeDisplayed={2}
         pageCount={pageCount}
-        previousLabel="< "
+        previousLabel="<< "
         renderOnZeroPageCount={null}
         containerClassName='custom-pagination d-flex align-items-center justify-content-end'
         pageLinkClassName='pagination-tag-anchor mx-2 rounded-circle text-secondary'
@@ -53,4 +30,5 @@ export default function PaginatedItems({ itemsPerPage }) {
     </>
   );
 }
+
 

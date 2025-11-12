@@ -7,7 +7,7 @@ import { faFolderOpen, faPenToSquare, faTrash, faUsersSlash } from "@fortawesome
 import { Link } from "react-router-dom";
 import TableShow from "../../../Components/Dashboard/Table";
 import ToastMessage from "../../../Components/Dashboard/Toast";
-import PaginatedItems from "../../../Components/Dashboard/Pagination/Pagination";
+
 
 
 export default function Categories() {
@@ -16,12 +16,13 @@ export default function Categories() {
   const [showToast, setShowToast] = useState(false);
   const [loading, setLoading] = useState(false);
 
-   // limit of pagination
-      const [limit,setLimit] =useState(11);
-      const [page,setPage] = useState(2);
+  // limit of pagination
+
+  const limit = 4;
+  const [page, setPage] = useState(1);
 
 
-  
+
   // display categories
   useEffect(() => {
     setLoading(true);
@@ -31,7 +32,7 @@ export default function Categories() {
       .then((data) => {
         setCategories(data.data);
         setLoading(false);
-        
+
       })
 
       .catch((err) => {
@@ -39,7 +40,7 @@ export default function Categories() {
         setLoading(false);
       });
   }, []);
-// delete Category
+  // delete Category
   async function handleDelete(id) {
 
     try {
@@ -59,36 +60,41 @@ export default function Categories() {
 
   }
 
- 
-const header = [
-    {key:'title',name:'title'},
-    {key:'image',name:'image'},
-];
+
+  const header = [
+    { key: 'title', name: 'title' },
+    { key: 'image', name: 'image' },
+  ];
   return (
     <div className="bg-white p-2 w-100 rounded-3">
-          <div className="d-flex align-items-center justify-content-between">
-            <h3>Categories</h3>
-            <Link to={"/dashboard/category/add"} className="btn btn-primary mb-3">Add Category</Link>
-          </div>
-          <ToastMessage show={showToast} message={toastMessage} onClose={() => setShowToast(false)} />
-    
-          <TableShow
-            header={header}
-            data={categories}
-            delete={handleDelete}
-            loading={loading}
-            loadingMessage="Loading Categories..."
-            emptyIcon={faFolderOpen}
-            emptyTitle="No Categories Found"
-            limit={limit}
-            page={page}
-            emptySubTitle="It looks like there are no categories in the system. Please add some categories."
-          />
-          <PaginatedItems itemsPerPage={5} />
-            
-    
-    
-        </div>
-    
-);
+      <div className="d-flex align-items-center justify-content-between">
+        <h3>Categories</h3>
+        <Link to={"/dashboard/category/add"} className="btn btn-primary mb-3">Add Category</Link>
+      </div>
+      <ToastMessage show={showToast} message={toastMessage} onClose={() => setShowToast(false)} />
+
+      <TableShow
+        header={header}
+        data={categories}
+        delete={handleDelete}
+        loading={loading}
+        loadingMessage="Loading Categories..."
+        emptyIcon={faFolderOpen}
+        emptyTitle="No Categories Found"
+
+        emptySubTitle="It looks like there are no categories in the system. Please add some categories."
+        // pagination
+        limit={limit}
+        page={page}
+
+
+        setPage={setPage}
+      />
+
+
+
+
+    </div>
+
+  );
 }
