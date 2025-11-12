@@ -50,12 +50,6 @@ export const links =[
         
 
     },
-    {
-        name:"Writer",
-        icon:faPlus,
-        path:"/dashboard/writer",
-        role:[ '1995','1996']
-       
-    }
+ 
 
 ]
