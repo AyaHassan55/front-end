@@ -13,7 +13,9 @@ export default function Products() {
   const [showToast, setShowToast] = useState(false);
   const [loading, setLoading] = useState(false);
 
-
+  // pagination
+  const limit=5;
+  const [page,setPage] = useState(1);
   
   // display products
   useEffect(() => {
@@ -69,16 +71,21 @@ const header = [
           </div>
           <ToastMessage show={showToast} message={toastMessage} onClose={() => setShowToast(false)} />
     
-          <TableShow
-            header={header}
-            data={products}
-            delete={handleDelete}
-            loading={loading}
-            loadingMessage="Loading Products..."
-            emptyIcon={faBoxOpen}
-            emptyTitle="No Products Found"
-            emptySubTitle="It looks like there are no products in the system. Please add some products."
-          />
+      <TableShow
+        header={header}
+        data={products}
+        delete={handleDelete}
+        loading={loading}
+        loadingMessage="Loading Products..."
+        emptyIcon={faBoxOpen}
+        emptyTitle="No Products Found"
+        emptySubTitle="It looks like there are no products in the system. Please add some products."
+
+        //pass pagination to table
+        limit={limit}
+        page={page}
+        setPage={setPage}
+      />
             
     
     
