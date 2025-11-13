@@ -6,21 +6,19 @@ import Form from 'react-bootstrap/Form';
 
 import EmptyState from "./EmptyState";
 import PaginatedItems from "./Pagination/Pagination";
+import { useState } from "react";
 
 
 export default function TableShow(props) {
     const currentUser = props.currentUser || { name: '' };  // Because it's only for the user schedule
 
+    const [search,setSearch] =useState("");
+    const filterData = props.data.filter((item)=>item.title.toLowerCase().includes(search.toLowerCase()));
 
 
-    // ------------------------------------------------
-    // const start = (props.page - 1) * Number(props.limit);  //1 * 5 = 5
-    // const end = Number(start) + Number(props.limit);       // 5 + 5 =10
-    // const final = props.data.slice(start, end);
-    // console.log('start =', start);
-    // console.log('end =', end);
-    // console.log('final =', final);
-
+    function handleSearch(e){
+       setSearch(e.target.value);
+    }
     // ------------------------------------------------
     // لو loading true
     if (props.loading) {
@@ -46,7 +44,7 @@ export default function TableShow(props) {
     const headerShow = props.header.map((item, i) => < th key={i}>{item.name}</th>);
     // body show
 
-    const dataShow = props.data.map((item, key) =>
+    const dataShow = filterData.map((item, key) =>
     (
         <tr key={key}>
             <td>{item.id}</td>
@@ -88,7 +86,10 @@ export default function TableShow(props) {
 
     return (
         <>
-            <Table striped bordered hover responsive>
+           <div className="col-3">
+               <Form.Control className="my-2" onChange={handleSearch} type="search" aria-label="input-example" placeholder="search" />
+           </div>
+            <Table striped bordered hover responsive className="table-shadow rounded overflow-hidden text-white mt-4">
                 <thead>
                     <tr>
                         <th>Id</th>
