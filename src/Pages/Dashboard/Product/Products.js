@@ -14,7 +14,8 @@ export default function Products() {
   const [loading, setLoading] = useState(false);
 
   // pagination
-  const limit=5;
+  // const limit=5;
+  const [limit,setLimit] = useState(3)
   const [page,setPage] = useState(1);
   
   // display products
@@ -83,6 +84,7 @@ const header = [
 
         //pass pagination to table
         limit={limit}
+        setLimit={setLimit}
         page={page}
         setPage={setPage}
       />

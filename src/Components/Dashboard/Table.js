@@ -2,6 +2,8 @@ import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Spinner, Table } from "react-bootstrap"
 import { Link } from "react-router-dom";
+import Form from 'react-bootstrap/Form';
+
 import EmptyState from "./EmptyState";
 import PaginatedItems from "./Pagination/Pagination";
 
@@ -9,15 +11,15 @@ import PaginatedItems from "./Pagination/Pagination";
 export default function TableShow(props) {
     const currentUser = props.currentUser || { name: '' };  // Because it's only for the user schedule
 
- 
-   
+
+
     // ------------------------------------------------
-    const start= (props.page-1) * props.limit;  //1 * 5 = 5
-    const end =  start + props.limit;       // 5 + 5 =10
-    const final = props.data.slice(start,end);
+    const start = (props.page - 1) * Number(props.limit);  //1 * 5 = 5
+    const end = Number(start) + Number(props.limit);       // 5 + 5 =10
+    const final = props.data.slice(start, end);
     console.log('start =', start);
-console.log('end =', end);
-console.log('final =', final);
+    console.log('end =', end);
+    console.log('final =', final);
 
     // ------------------------------------------------
     // لو loading true
@@ -85,21 +87,32 @@ console.log('final =', final);
     )
 
     return (
-<>
-        <Table striped bordered hover responsive>
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    {headerShow}
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {dataShow}
+        <>
+            <Table striped bordered hover responsive>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        {headerShow}
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {dataShow}
 
-            </tbody>
-        </Table>
-        < PaginatedItems itemsPerPage={props.limit} total={props.data} setPage={props.setPage} />
+                </tbody>
+            </Table>
+            <div className="d-flex align-items-center justify-content-end flex-wrap"> 
+                <div className="col-1">
+                    <Form.Select onChange={(e)=> {props.setLimit(e.target.value) ;console.log("vall=="+e.target.value)}} aria-label="Default select example">
+                        <option value={'3'}>{props.limit}</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+
+                    </Form.Select>
+                </div>
+                < PaginatedItems itemsPerPage={props.limit} total={props.data} setPage={props.setPage} />
+            </div>
         </>
     );
 }

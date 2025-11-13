@@ -18,7 +18,8 @@ export default function Categories() {
 
   // limit of pagination
 
-  const limit = 4;
+  // const limit = 4;
+  const [limit,setLimit]=useState(3);
   const [page, setPage] = useState(1);
 
 
@@ -85,9 +86,8 @@ export default function Categories() {
         emptySubTitle="It looks like there are no categories in the system. Please add some categories."
         // pagination
         limit={limit}
+        setLimit={setLimit}
         page={page}
-
-
         setPage={setPage}
       />
 

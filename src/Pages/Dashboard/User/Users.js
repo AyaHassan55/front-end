@@ -13,7 +13,8 @@ export default function Users() {
   const [showToast, setShowToast] = useState(false);
   const [loading,setLoading] = useState(false);
   // pagination
-  const limit=5;
+  // const limit=5;
+  const [limit,setLimit] = useState(3);
   const [page,setPage] = useState(1);
 
 
@@ -88,6 +89,7 @@ export default function Users() {
         emptySubTitle="It looks like there are no users in the system. Please add some users."
         //pass pagination to table
         limit={limit}
+        setLimit={setLimit}
         page = {page}
         setPage={setPage}
       />
