@@ -13,9 +13,9 @@ export default function Users() {
   const [showToast, setShowToast] = useState(false);
   const [loading,setLoading] = useState(false);
   // pagination
-  // const limit=5;
   const [limit,setLimit] = useState(3);
   const [page,setPage] = useState(1);
+  const [total,setTotal] = useState(0);
 
 
   // header of table
@@ -29,17 +29,20 @@ export default function Users() {
 
   // get current user 
   useEffect(() => {
-    Axios.get(`${USER}`).then((data) => setCurrentUser(data.data)).catch((err) => console.log(err))
+    Axios.get(`${USER}`).
+    then((data) => setCurrentUser(data.data)).catch((err) => console.log(err))
 
   }, []);
   // display Users
   useEffect(() => {
     setLoading(true);
     Axios
-      .get(`/${USERS}`)
-
+      .get(`/${USERS}?page=${page}&limit=${limit}`)
+ 
       .then((data) => {
-        setUsers(data.data);
+        setUsers(data.data.data);
+        console.log(data.data)
+        setTotal(data.data.total);
         setLoading(false)
       })
 
@@ -47,7 +50,7 @@ export default function Users() {
         console.log(err);
         setLoading(false);
       });
-  }, []);
+  }, [limit, page]);
 
   // delete User
   async function handleDelete(id) {
@@ -89,6 +92,7 @@ export default function Users() {
         emptySubTitle="It looks like there are no users in the system. Please add some users."
         //pass pagination to table
         limit={limit}
+        total={total}
         setLimit={setLimit}
         page = {page}
         setPage={setPage}

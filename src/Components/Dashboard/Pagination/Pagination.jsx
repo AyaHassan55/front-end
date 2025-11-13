@@ -6,8 +6,10 @@ import './pagination.css'
 
 
 
-export default function PaginatedItems({ itemsPerPage,total,setPage }) {
-     const pageCount = total.length/itemsPerPage;
+export default function PaginatedItems({ itemsPerPage,total,setPage ,page}) {
+     console.log('perpage = '+ itemsPerPage);
+     console.log('total = '+ total);
+     const pageCount = Math.ceil(total / itemsPerPage);
   
 
   
@@ -26,6 +28,7 @@ export default function PaginatedItems({ itemsPerPage,total,setPage }) {
         containerClassName='custom-pagination d-flex align-items-center justify-content-end'
         pageLinkClassName='pagination-tag-anchor mx-2 rounded-circle text-secondary'
         activeLinkClassName='bg-primary text-white'
+        forcePage={page - 1}
       />
     </>
   );

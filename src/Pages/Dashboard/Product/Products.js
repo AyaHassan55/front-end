@@ -15,17 +15,20 @@ export default function Products() {
 
   // pagination
   // const limit=5;
-  const [limit,setLimit] = useState(3)
-  const [page,setPage] = useState(1);
+  const [limit,setLimit] = useState(4)
+  const [page,setPage] = useState(4);
+  const [total,setTotal]=useState(0);
   
   // display products
   useEffect(() => {
     setLoading(true);
     Axios
-      .get(`/${PRODUCTS}`)
+      .get(`/${PRODUCTS}?limit=${limit}&page=${page}`)
 
       .then((data) => {
-        setProducts(data.data);
+        setProducts(data.data.data);
+        setTotal(data.data.total)
+        
         setLoading(false);
         
       })
@@ -34,7 +37,7 @@ export default function Products() {
         console.log(err);
         setLoading(false);
       });
-  }, []);
+  }, [limit,page]);
 
 // delete Category
   async function handleDelete(id) {
@@ -85,6 +88,7 @@ const header = [
         //pass pagination to table
         limit={limit}
         setLimit={setLimit}
+        total={total}
         page={page}
         setPage={setPage}
       />

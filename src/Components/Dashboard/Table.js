@@ -14,12 +14,12 @@ export default function TableShow(props) {
 
 
     // ------------------------------------------------
-    const start = (props.page - 1) * Number(props.limit);  //1 * 5 = 5
-    const end = Number(start) + Number(props.limit);       // 5 + 5 =10
-    const final = props.data.slice(start, end);
-    console.log('start =', start);
-    console.log('end =', end);
-    console.log('final =', final);
+    // const start = (props.page - 1) * Number(props.limit);  //1 * 5 = 5
+    // const end = Number(start) + Number(props.limit);       // 5 + 5 =10
+    // const final = props.data.slice(start, end);
+    // console.log('start =', start);
+    // console.log('end =', end);
+    // console.log('final =', final);
 
     // ------------------------------------------------
     // لو loading true
@@ -46,7 +46,7 @@ export default function TableShow(props) {
     const headerShow = props.header.map((item, i) => < th key={i}>{item.name}</th>);
     // body show
 
-    const dataShow = final.map((item, key) =>
+    const dataShow = props.data.map((item, key) =>
     (
         <tr key={key}>
             <td>{item.id}</td>
@@ -111,7 +111,7 @@ export default function TableShow(props) {
 
                     </Form.Select>
                 </div>
-                < PaginatedItems itemsPerPage={props.limit} total={props.data} setPage={props.setPage} />
+                < PaginatedItems itemsPerPage={props.limit} total={props.total} data={props.data} page={props.page} setPage={props.setPage}  />
             </div>
         </>
     );

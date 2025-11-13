@@ -19,8 +19,10 @@ export default function Categories() {
   // limit of pagination
 
   // const limit = 4;
-  const [limit,setLimit]=useState(3);
-  const [page, setPage] = useState(1);
+  const [limit,setLimit]=useState(4);
+  const [page, setPage] = useState(4);
+  const [total, setTotal] = useState(0);
+ 
 
 
 
@@ -28,11 +30,13 @@ export default function Categories() {
   useEffect(() => {
     setLoading(true);
     Axios
-      .get(`/${CATEGORIES}`)
+      .get(`/${CATEGORIES}?limit=${limit}&page=${page}`)
 
       .then((data) => {
-        setCategories(data.data);
-        setLoading(false);
+        setCategories(data.data.data);
+        setTotal(data.data.total);
+         setLoading(false);
+        
 
       })
 
@@ -40,7 +44,9 @@ export default function Categories() {
         console.log(err);
         setLoading(false);
       });
-  }, []);
+  }, [limit,page]);          // useEffect will open if limit , page change
+
+
   // delete Category
   async function handleDelete(id) {
 
@@ -86,6 +92,7 @@ export default function Categories() {
         emptySubTitle="It looks like there are no categories in the system. Please add some categories."
         // pagination
         limit={limit}
+        total={total}
         setLimit={setLimit}
         page={page}
         setPage={setPage}
