@@ -100,6 +100,7 @@ export default function Users() {
         setPage={setPage}
         // search
         pageName={pageName}
+         searchLink={USER}
       />
         
 

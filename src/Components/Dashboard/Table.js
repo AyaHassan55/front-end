@@ -1,4 +1,4 @@
-import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faPenToSquare, faSearch, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Spinner, Table } from "react-bootstrap"
 import { Link } from "react-router-dom";
@@ -6,30 +6,56 @@ import Form from 'react-bootstrap/Form';
 
 import EmptyState from "./EmptyState";
 import PaginatedItems from "./Pagination/Pagination";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Axios } from "../../Api/Axios";
 
 
 export default function TableShow(props) {
     const currentUser = props.currentUser || { name: '' };  // Because it's only for the user schedule
-    const [search,setSearch] =useState("");
-    
-    const filterData= props.pageName ==='users' ? props.data.filter((item)=>item.name.toLowerCase().includes(search.toLowerCase())) 
-    :props.data.filter((item)=>item.title.toLowerCase().includes(search.toLowerCase()))
+    // searcg from api
+    const [search, setSearch] = useState('');
+    const [filteredData, setFilteredData] = useState([]);
+    const [searchLoading, setSearchLoading] = useState(false);
+    const searchWhichData = search.length > 0 ? filteredData : props.data;
+
+    // const filterData = props.pageName === 'users' ? props.data.filter((item) => item.name.toLowerCase().includes(search.toLowerCase()))
+    //     : props.data.filter((item) => item.title.toLowerCase().includes(search.toLowerCase()))
 
 
-    function handleSearch(e){
-       setSearch(e.target.value);
+    // function handleSearch(e) {
+    //     setSearch(e.target.value);
+    // }
+    // search from api dirextly------------
+    async function getSearchData() {
+
+        try {
+            const res = await Axios.post(`${props.searchLink}/search?title=${search}`);
+            setFilteredData(res.data)
+        } catch (err) { 
+            console.log(err) 
+
+        }finally{
+            setSearchLoading(false);
+        }
     }
+    // ------------
+    useEffect(() => {
+        const debounce = setTimeout(() => {
+            search.length > 0 ? getSearchData() : setSearchLoading(false);
+        }, 500);
+        return () => clearTimeout(debounce);
+    }, [search])
+    // -----------------------------------------
     // ------------------------------------------------
     // لو loading true
-    if (props.loading) {
+    if (props.loading)
         return (
             <div className="text-center py-5">
                 <Spinner animation="border" variant="primary" role="status" />
                 <p className="mt-3 text-secondary fw-semibold">{props.loadingMessage}</p>
             </div>
         );
-    }
+    
     // لو مفيش داتا رجع empty state
     if (props.data.length === 0) {
         return (
@@ -45,7 +71,7 @@ export default function TableShow(props) {
     const headerShow = props.header.map((item, i) => < th key={i}>{item.name}</th>);
     // body show
 
-    const dataShow = filterData.map((item, key) =>
+    const dataShow = searchWhichData.map((item, key) =>
     (
         <tr key={key}>
             <td>{item.id}</td>
@@ -87,9 +113,10 @@ export default function TableShow(props) {
 
     return (
         <>
-           <div className="col-3">
-               <Form.Control className="my-2" onChange={handleSearch} type="search" aria-label="input-example" placeholder="search" />
-           </div>
+            <div className="col-3">
+                <Form.Control className="my-2" value={search}
+                    onChange={(e) => {setSearch(e.target.value);setSearchLoading(true);}} type="search" aria-label="input-example" placeholder="search" />
+            </div>
             <Table striped bordered hover responsive className="table-shadow rounded overflow-hidden text-white mt-4">
                 <thead>
                     <tr>
@@ -99,13 +126,18 @@ export default function TableShow(props) {
                     </tr>
                 </thead>
                 <tbody>
+                   
+                  
+                 
                     {dataShow}
+                    
+
 
                 </tbody>
             </Table>
-            <div className="d-flex align-items-center justify-content-end flex-wrap"> 
+            <div className="d-flex align-items-center justify-content-end flex-wrap">
                 <div className="col-1">
-                    <Form.Select onChange={(e)=> {props.setLimit(e.target.value) ;console.log("vall=="+e.target.value)}} aria-label="Default select example">
+                    <Form.Select onChange={(e) => { props.setLimit(e.target.value); console.log("vall==" + e.target.value) }} aria-label="Default select example">
                         <option value={'3'}>{props.limit}</option>
                         <option value="5">5</option>
                         <option value="10">10</option>
@@ -113,7 +145,7 @@ export default function TableShow(props) {
 
                     </Form.Select>
                 </div>
-                < PaginatedItems itemsPerPage={props.limit} total={props.total} data={props.data} page={props.page} setPage={props.setPage}  />
+                < PaginatedItems itemsPerPage={props.limit} total={props.total} data={props.data} page={props.page} setPage={props.setPage} />
             </div>
         </>
     );

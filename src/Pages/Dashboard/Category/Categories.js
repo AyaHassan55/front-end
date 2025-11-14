@@ -7,7 +7,7 @@ import { faFolderOpen, faPenToSquare, faTrash, faUsersSlash } from "@fortawesome
 import { Link } from "react-router-dom";
 import TableShow from "../../../Components/Dashboard/Table";
 import ToastMessage from "../../../Components/Dashboard/Toast";
-
+import Form from 'react-bootstrap/Form';
 
 
 export default function Categories() {
@@ -18,14 +18,18 @@ export default function Categories() {
 
   // limit of pagination
 
-  // const limit = 4;
-  const [limit,setLimit]=useState(4);
+  const [limit, setLimit] = useState(4);
   const [page, setPage] = useState(4);
   const [total, setTotal] = useState(0);
- 
-  // search filter
-  const pageName='categories';
 
+  // search filter
+  const pageName = 'categories';
+  
+
+  const header = [
+    { key: 'title', name: 'title' },
+    { key: 'image', name: 'image' },
+  ];
 
 
   // display categories
@@ -37,8 +41,8 @@ export default function Categories() {
       .then((data) => {
         setCategories(data.data.data);
         setTotal(data.data.total);
-         setLoading(false);
-        
+        setLoading(false);
+
 
       })
 
@@ -46,7 +50,7 @@ export default function Categories() {
         console.log(err);
         setLoading(false);
       });
-  }, [limit,page]);          // useEffect will open if limit , page change
+  }, [limit, page]);          // useEffect will open if limit , page change
 
 
   // delete Category
@@ -69,11 +73,7 @@ export default function Categories() {
 
   }
 
-
-  const header = [
-    { key: 'title', name: 'title' },
-    { key: 'image', name: 'image' },
-  ];
+  
   return (
     <div className="bg-white p-2 w-100 rounded-3">
       <div className="d-flex align-items-center justify-content-between">
@@ -81,6 +81,13 @@ export default function Categories() {
         <Link to={"/dashboard/category/add"} className="btn btn-primary mb-3">Add Category</Link>
       </div>
       <ToastMessage show={showToast} message={toastMessage} onClose={() => setShowToast(false)} />
+      {/* <Form.Control
+        className="my-2"
+        type='search'
+        value={search}
+        onChange={(e)=> setSearch(e.target.value)} /> */}
+
+
 
       <TableShow
         header={header}
@@ -100,6 +107,7 @@ export default function Categories() {
         setPage={setPage}
         // search
         pageName={pageName}
+        searchLink={CATEGORY}
       />
 
 

@@ -97,6 +97,7 @@ const header = [
         setPage={setPage}
 
         pageName={pageName}
+         searchLink={PRODUCT}
       />
             
     
