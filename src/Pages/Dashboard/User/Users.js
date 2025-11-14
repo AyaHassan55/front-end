@@ -16,6 +16,8 @@ export default function Users() {
   const [limit,setLimit] = useState(3);
   const [page,setPage] = useState(1);
   const [total,setTotal] = useState(0);
+  // search
+  const pageName='users';
 
 
   // header of table
@@ -96,6 +98,8 @@ export default function Users() {
         setLimit={setLimit}
         page = {page}
         setPage={setPage}
+        // search
+        pageName={pageName}
       />
         
 

@@ -11,9 +11,10 @@ import { useState } from "react";
 
 export default function TableShow(props) {
     const currentUser = props.currentUser || { name: '' };  // Because it's only for the user schedule
-
     const [search,setSearch] =useState("");
-    const filterData = props.data.filter((item)=>item.title.toLowerCase().includes(search.toLowerCase()));
+    
+    const filterData= props.pageName ==='users' ? props.data.filter((item)=>item.name.toLowerCase().includes(search.toLowerCase())) 
+    :props.data.filter((item)=>item.title.toLowerCase().includes(search.toLowerCase()))
 
 
     function handleSearch(e){

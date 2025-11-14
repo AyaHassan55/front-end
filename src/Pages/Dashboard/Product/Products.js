@@ -18,6 +18,10 @@ export default function Products() {
   const [limit,setLimit] = useState(4)
   const [page,setPage] = useState(4);
   const [total,setTotal]=useState(0);
+
+  // search
+  const pageName='products';
+
   
   // display products
   useEffect(() => {
@@ -91,6 +95,8 @@ const header = [
         total={total}
         page={page}
         setPage={setPage}
+
+        pageName={pageName}
       />
             
     

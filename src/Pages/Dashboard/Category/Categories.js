@@ -23,6 +23,8 @@ export default function Categories() {
   const [page, setPage] = useState(4);
   const [total, setTotal] = useState(0);
  
+  // search filter
+  const pageName='categories';
 
 
 
@@ -96,6 +98,8 @@ export default function Categories() {
         setLimit={setLimit}
         page={page}
         setPage={setPage}
+        // search
+        pageName={pageName}
       />
 
 
