@@ -20,15 +20,18 @@ export default function TableShow(props) {
    
     // date
     const [date,setDate] =useState('')
-    const filteredDataByDate =props.data.filter((item)=> TransformDate(item.created_at) === date);   
-    console.log(filteredDataByDate)
+
+    const filteredDataByDate =date.length > 0 ? 
+       props.data.filter((item)=> TransformDate(item.created_at) === date) :props.data;   
+    const filterSearchByDate =date.length>0? filteredData.filter((item)=> TransformDate(item.created_at) === date):filteredData;
+ 
 
 
-    const mainData = search.length > 0 ? filteredData : props.data;
-
-    const finalData = date.length > 0
-        ? mainData.filter(item => TransformDate(item.created_at).trim() === date.trim())
-        : mainData;
+    const showWhichData =
+     search.length > 0 
+           ? filterSearchByDate 
+           :filteredDataByDate 
+        
 
     // search from api dirextly------------
     async function getSearchData() {
@@ -77,7 +80,7 @@ export default function TableShow(props) {
     const headerShow = props.header.map((item, i) => < th key={i}>{item.name}</th>);
     // body show
 
-    const dataShow = finalData.map((item, key) =>
+    const dataShow = showWhichData.map((item, key) =>
     (
         <tr key={key}>
             <td>{item.id}</td>
