@@ -22,7 +22,16 @@ export default function Products() {
   // search
   const pageName='products';
 
-  
+
+  const header = [
+     {key:'images',name:'images'},
+    {key:'title',name:'Title'},
+    {key:'description',name:'Description'},
+    {key:'price',name:'Price'},
+    {key:'rating',name:'Rating'},
+    { key: 'created_at', name: 'Created' },
+    { key: 'updated_at', name: 'Updated' },
+];
   // display products
   useEffect(() => {
     setLoading(true);
@@ -64,13 +73,7 @@ export default function Products() {
   }
 console.log(products)
  
-const header = [
-     {key:'images',name:'images'},
-    {key:'title',name:'Title'},
-    {key:'description',name:'Description'},
-    {key:'price',name:'Price'},
-    {key:'rating',name:'Rating'},
-];
+
   return (
     <div className="bg-white p-2 w-100 rounded-3">
           <div className="d-flex align-items-center justify-content-between">

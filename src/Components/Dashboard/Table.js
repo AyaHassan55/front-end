@@ -8,6 +8,7 @@ import EmptyState from "./EmptyState";
 import PaginatedItems from "./Pagination/Pagination";
 import { useEffect, useState } from "react";
 import { Axios } from "../../Api/Axios";
+import TransformDate from "../../helpers/TransformDate";
 
 
 export default function TableShow(props) {
@@ -16,15 +17,19 @@ export default function TableShow(props) {
     const [search, setSearch] = useState('');
     const [filteredData, setFilteredData] = useState([]);
     const [searchLoading, setSearchLoading] = useState(false);
-    const searchWhichData = search.length > 0 ? filteredData : props.data;
+   
+    // date
+    const [date,setDate] =useState('')
+    const filteredDataByDate =props.data.filter((item)=> TransformDate(item.created_at) === date);   
+    console.log(filteredDataByDate)
 
-    // const filterData = props.pageName === 'users' ? props.data.filter((item) => item.name.toLowerCase().includes(search.toLowerCase()))
-    //     : props.data.filter((item) => item.title.toLowerCase().includes(search.toLowerCase()))
 
+    const mainData = search.length > 0 ? filteredData : props.data;
 
-    // function handleSearch(e) {
-    //     setSearch(e.target.value);
-    // }
+    const finalData = date.length > 0
+        ? mainData.filter(item => TransformDate(item.created_at).trim() === date.trim())
+        : mainData;
+
     // search from api dirextly------------
     async function getSearchData() {
 
@@ -38,6 +43,7 @@ export default function TableShow(props) {
             setSearchLoading(false);
         }
     }
+
     // ------------
     useEffect(() => {
         const debounce = setTimeout(() => {
@@ -71,7 +77,7 @@ export default function TableShow(props) {
     const headerShow = props.header.map((item, i) => < th key={i}>{item.name}</th>);
     // body show
 
-    const dataShow = searchWhichData.map((item, key) =>
+    const dataShow = finalData.map((item, key) =>
     (
         <tr key={key}>
             <td>{item.id}</td>
@@ -84,7 +90,7 @@ export default function TableShow(props) {
                             }
                         </div>
 
-                            :
+                            : item2.key === 'created_at' ||item2.key === 'updated_at' ? TransformDate(item[item2.key]):
                             item[item2.key] === '1995' ? 'Admin' :
                                 item[item2.key] === '2001' ? 'User' :
                                     item[item2.key] === '1996' ? 'Writer' :
@@ -115,7 +121,25 @@ export default function TableShow(props) {
         <>
             <div className="col-3">
                 <Form.Control className="my-2" value={search}
-                    onChange={(e) => {setSearch(e.target.value);setSearchLoading(true);}} type="search" aria-label="input-example" placeholder="search" />
+                    onChange={(e) => {
+                        setSearch(e.target.value);
+                        setSearchLoading(true);
+                        }} 
+                        type="search" 
+                        aria-label="input-example"
+                        placeholder="search"
+                 />
+            </div>
+             <div className="col-5">
+                <Form.Control className="my-2"
+                    onChange={(e) => {
+                        setDate(e.target.value);
+                        // setSearchLoading(true);
+                        }} 
+                        type="date" 
+                        aria-label="input-example"
+                        placeholder="date"
+                 />
             </div>
             <Table striped bordered hover responsive className="table-shadow rounded overflow-hidden text-white mt-4">
                 <thead>

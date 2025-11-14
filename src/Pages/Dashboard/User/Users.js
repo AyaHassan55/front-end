@@ -26,6 +26,8 @@ export default function Users() {
     { key: 'name', name: 'Username' },
     { key: 'email', name: 'Email' },
     { key: 'role', name: 'Role' },
+    { key: 'created_at', name: 'Created' },
+    { key: 'updated_at', name: 'Updated' },
 
   ];
 

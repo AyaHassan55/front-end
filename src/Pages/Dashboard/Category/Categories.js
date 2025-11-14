@@ -7,7 +7,6 @@ import { faFolderOpen, faPenToSquare, faTrash, faUsersSlash } from "@fortawesome
 import { Link } from "react-router-dom";
 import TableShow from "../../../Components/Dashboard/Table";
 import ToastMessage from "../../../Components/Dashboard/Toast";
-import Form from 'react-bootstrap/Form';
 
 
 export default function Categories() {
@@ -29,6 +28,8 @@ export default function Categories() {
   const header = [
     { key: 'title', name: 'title' },
     { key: 'image', name: 'image' },
+    { key: 'created_at', name: 'Created' },
+    { key: 'updated_at', name: 'Updated' },
   ];
 
 
@@ -81,14 +82,7 @@ export default function Categories() {
         <Link to={"/dashboard/category/add"} className="btn btn-primary mb-3">Add Category</Link>
       </div>
       <ToastMessage show={showToast} message={toastMessage} onClose={() => setShowToast(false)} />
-      {/* <Form.Control
-        className="my-2"
-        type='search'
-        value={search}
-        onChange={(e)=> setSearch(e.target.value)} /> */}
-
-
-
+    
       <TableShow
         header={header}
         data={categories}
