@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Home from "./Pages/Website/Home";
+
 import LoginPage from "./Pages/Auth/AuthOperation/Login";
 import RegisterPage from "./Pages/Auth/AuthOperation/Register";
 import Users from "./Pages/Dashboard/User/Users";
@@ -19,13 +19,14 @@ import Category from "./Pages/Dashboard/Category/Category";
 import Products from "./Pages/Dashboard/Product/Products";
 import AddProduct from "./Pages/Dashboard/Product/AddProduct";
 import Product from "./Pages/Dashboard/Product/Product";
+import HomePage from "./Pages/Website/HomePage/Home";
 // import './Components/Loading/loading.css'
 function App() {
   return (
     <div className="App">
       <Routes>
         {/* Public Routes */}
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<HomePage />} />
         <Route element={<RequireBack />}>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
@@ -50,10 +51,6 @@ function App() {
                   <Route path="products/:id" element={<Product />} />
                   <Route path="product/add" element={<AddProduct />} />
                 </Route>
-
-            
-           
-
           </Route>
         </Route>
 
