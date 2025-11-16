@@ -3,9 +3,9 @@
 // import Cookie from "cookie-universal";
 
 import { Container } from "react-bootstrap";
-import NavBar from "../../../Components/Website/Navbar/Navbar";
 import { Link } from "react-router-dom";
 import "./home.css"
+
 // const cookies = Cookie();
 
 export default function HomePage() {
@@ -19,9 +19,11 @@ export default function HomePage() {
   //     }
 
   //   }
+  
   return (
+    
     <div>
-      <NavBar />
+      
       <div className="d-flex align-items-center justify-content-center flex-wrap hand">
         <Container>
           <div className="col-lg-5 col-md-8 col-12 text-md-start text-center">

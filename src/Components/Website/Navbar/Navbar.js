@@ -1,7 +1,16 @@
 import { Container, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
+import { useEffect, useState } from "react";
+import { Axios } from "../../../Api/Axios";
+import { CATEGORIES } from "../../../Api/Api";
+import './navbar.css'
 export default function NavBar() {
+    const [categories, setCategories] = useState([]);
+    useEffect(()=>{
+    Axios.get(`${CATEGORIES}`).then((res)=>setCategories(res.data.slice(-8)))
+  },[])
+    const categoriesShow = categories.map((cat,key)=>
+    <p key={key} className="m-0">{cat.title.length > 15 ? cat.title.slice(1,15) + '...'  : cat.title}</p>)
     return (
         <nav className="py-3">
             <Container>
@@ -39,6 +48,12 @@ export default function NavBar() {
                                 alt="Cart"
                             />
                         </Link>
+                    </div>
+                </div>
+                <div className="mt-3">
+                    <div className="d-flex align-items-center justify-content-start gap-3 flex-wrap">
+                       {categoriesShow}
+                       <Link className="text-bloc category-title" to= "/categories">Show All</Link>
                     </div>
                 </div>
 

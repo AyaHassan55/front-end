@@ -20,13 +20,18 @@ import Products from "./Pages/Dashboard/Product/Products";
 import AddProduct from "./Pages/Dashboard/Product/AddProduct";
 import Product from "./Pages/Dashboard/Product/Product";
 import HomePage from "./Pages/Website/HomePage/Home";
+import WebsiteCategories from "./Pages/Website/Categories/Categories";
+import Website from "./Pages/Website/Website";
 // import './Components/Loading/loading.css'
 function App() {
   return (
     <div className="App">
       <Routes>
         {/* Public Routes */}
-        <Route path="/" element={<HomePage />} />
+        <Route element={<Website/>} >
+          <Route path="/" element={<HomePage />} />
+          <Route path="/categories" element={<WebsiteCategories />} />
+        </Route>
         <Route element={<RequireBack />}>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
@@ -34,23 +39,23 @@ function App() {
         <Route path="/auth/google/callback" element={<GoogleCallBack />} />
         <Route path="/*" element={<Error404 />} />
         {/* Protected Routes */}
-        <Route element={<RequireAuth allowedRole={['1996','1995','1999']} />}>
+        <Route element={<RequireAuth allowedRole={['1996', '1995', '1999']} />}>
           <Route path="/dashboard" element={<Dashboard />} >
             <Route element={<RequireAuth allowedRole={['1995']} />} >
               <Route path="users" element={<Users />} />
               <Route path="users/:id" element={<User />} />
               <Route path="user/add" element={<AddUser />} />
             </Route>
-              <Route element={<RequireAuth allowedRole={['1995','1999']} />} > 
-                  {/* categories */}
-                  <Route path="categories" element={<Categories />} />
-                  <Route path="categories/:id" element={<Category />} />
-                  <Route path="category/add" element={<AddCategory />} />
-                  {/* prodcuts */}
-                  <Route path="products" element={<Products />} />
-                  <Route path="products/:id" element={<Product />} />
-                  <Route path="product/add" element={<AddProduct />} />
-                </Route>
+            <Route element={<RequireAuth allowedRole={['1995', '1999']} />} >
+              {/* categories */}
+              <Route path="categories" element={<Categories />} />
+              <Route path="categories/:id" element={<Category />} />
+              <Route path="category/add" element={<AddCategory />} />
+              {/* prodcuts */}
+              <Route path="products" element={<Products />} />
+              <Route path="products/:id" element={<Product />} />
+              <Route path="product/add" element={<AddProduct />} />
+            </Route>
           </Route>
         </Route>
 
