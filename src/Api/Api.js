@@ -13,3 +13,4 @@ export const CATEGORIES = "categories";
 // product routes
 export const PRODUCTS ="products";
 export const PRODUCT ="product";
+export const LatestSale ="latest-sale";
