@@ -4,10 +4,13 @@ import { useEffect, useState } from "react";
 import { Axios } from "../../../Api/Axios";
 import { CATEGORIES } from "../../../Api/Api";
 import './navbar.css'
+import Skeleton from "react-loading-skeleton";
 export default function NavBar() {
     const [categories, setCategories] = useState([]);
+    const [loading, setLoading] = useState(true)
     useEffect(()=>{
     Axios.get(`${CATEGORIES}`).then((res)=>setCategories(res.data.slice(-8)))
+    .finally(()=>setLoading(false))
   },[])
     const categoriesShow = categories.map((cat,key)=>
     <p key={key} className="m-0">{cat.title.length > 15 ? cat.title.slice(1,15) + '...'  : cat.title}</p>)
@@ -51,9 +54,21 @@ export default function NavBar() {
                     </div>
                 </div>
                 <div className="mt-3">
-                    <div className="d-flex align-items-center justify-content-start gap-3 flex-wrap">
-                       {categoriesShow}
-                       <Link className="text-bloc category-title" to= "/categories">Show All</Link>
+                    <div className="d-flex align-items-center justify-content-start gap-3 flex-wrap ">
+                       {loading ? (
+                            Array.from({ length: 8 }).map((_, i) => (
+                                <div key={i} className="px-1">
+                                    <div className="mx-1">
+                                        <Skeleton height="30px" width={80} />
+                                    </div>
+                                </div>
+                            ))
+                        ) :
+
+                            (categoriesShow
+
+                            )}
+                       <Link className="text-block category-title  d-inline-block" to= "/categories">Show All</Link>
                     </div>
                 </div>
 
