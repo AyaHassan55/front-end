@@ -1,11 +1,14 @@
 
 import { useEffect, useState } from "react";
-import { LatestSale } from "../../Api/Api";
-import ProductSale from "./Product";
-import { Axios } from "../../Api/Axios";
+import { LatestSale } from "../../../Api/Api";
+
+
 import { Container } from "react-bootstrap";
-import Skeleton from "react-loading-skeleton";
-import SkeletonFunc from "../Website/Skelton/Skelton";
+
+
+import { Axios } from "../../../Api/Axios";
+import ProductSale from "../Product";
+import SkeletonFunc from "../../Website/Skelton/Skelton";
 
 
 export default function LatestSaleProducts() {

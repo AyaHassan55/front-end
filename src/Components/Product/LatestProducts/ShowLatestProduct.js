@@ -1,12 +1,14 @@
 
 
 import { useEffect, useState, useRef } from "react";
-import TopRated from "./TopRated";
-import { TopRatedApi } from "../../../Api/Api";
+
+import { Latest, TopRatedApi } from "../../../Api/Api";
 import { Axios } from "../../../Api/Axios";
 import SkeletonFunc from "../../Website/Skelton/Skelton";
+import LatestSaleProducts from "../SaleProducts/LatestSaleProduct";
+import LatestProducts from "./LatestProducts";
 
-export default function ShowTopRated() {
+export default function ShowLatestProduct() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -15,7 +17,7 @@ export default function ShowTopRated() {
   const [canScrollDown, setCanScrollDown] = useState(true);
 
   useEffect(() => {
-    Axios.get(`${TopRatedApi}`)
+    Axios.get(`${Latest}`)
       .then((res) => {
         setProducts(res.data);
         console.log(res.data)
@@ -55,10 +57,12 @@ export default function ShowTopRated() {
       {/* Section Title */}
       <div className="mb-4">
         <h2 className="fw-bold mb-2" style={{ fontSize: "24px", color: "#1a1a1a" }}>
-          Top Rated
+          Latest products
         </h2>
         <p style={{ fontSize: "14px", color: "#666" }}>
-          Customer favorites with excellent reviews
+          Fresh arrivals added today
+
+
         </p>
       </div>
 
@@ -71,7 +75,7 @@ export default function ShowTopRated() {
           className="btn btn-light rounded-circle p-2 position-absolute"
           style={{
             top: "10px",
-            left: "-50px",
+            right: "-50px",
             zIndex: 10,
             opacity: canScrollUp ? 1 : 0.5,
             cursor: canScrollUp ? "pointer" : "not-allowed",
@@ -89,12 +93,8 @@ export default function ShowTopRated() {
             overflowY: "auto",
             overflowX: "hidden",
             scrollBehavior: "smooth",
-            paddingLeft: "10px",
+            paddingRight: "10px",
             width: "100%",
-            direction: "rtl",
-            // marginRight:"20px",
-           
-
           }}
         >
           {loading ? (
@@ -102,7 +102,7 @@ export default function ShowTopRated() {
           ) : (
             products.map((product) => (
               <div key={product.id} className="flex-shrink-0" style={{ minHeight: "fit-content" }}>
-                <TopRated
+                <LatestProducts
                   title={product.title}
                   description={product.description}
                   img={product.images[0].image}
@@ -124,7 +124,7 @@ export default function ShowTopRated() {
           className="btn btn-light rounded-circle p-2 position-absolute"
           style={{
             bottom: "10px",
-            left: "-50px",
+            right: "-50px",
             zIndex: 10,
             opacity: canScrollDown ? 1 : 0.5,
             cursor: canScrollDown ? "pointer" : "not-allowed",

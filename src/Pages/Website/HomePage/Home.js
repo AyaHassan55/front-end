@@ -35,11 +35,14 @@ export default function HomePage() {
 
       <Landing />
       <LatestSaleProducts />
-      <Container>
-        <div className="d-flex align-items-start flex-wrap mt-5">
-          <ShowTopRated/>
-          <ShowLatestProduct />
+      <Container className="">
+        <div className="d-flex align-items-start flex-wrap mt-5 mb-4 ">
+          <ShowTopRated  style={{ width: "45%" }}/>
+          <ShowLatestProduct  style={{ width: "45%", marginRight:'12px'}} />
         </div>
+
+
+        
       </Container>
     </div>
 

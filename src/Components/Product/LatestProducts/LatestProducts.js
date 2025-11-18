@@ -3,11 +3,11 @@ import { faStar as solid } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
-export default function TopRated(props) {
+export default function LatestProducts(props) {
   const roundStars = Math.round(props.rating);
   const stars = Math.min(roundStars, 5);
   const showGoldStars = Array.from({ length: stars }).map((_, index) => (
-    <FontAwesomeIcon  key={index} icon={solid} />
+    <FontAwesomeIcon color="gold" key={index} icon={solid} />
   ));
   const showEmptyStars = Array.from({ length: 5 - stars }).map((_, index) => (
     <FontAwesomeIcon key={index} icon={regularStar} />
@@ -21,9 +21,6 @@ export default function TopRated(props) {
         borderRadius: '8px',
         transition: 'transform 0.3s, box-shadow 0.3s',
         cursor: 'pointer',
-        direction: "ltr",
-        marginRight:'15px'
-
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = 'translateY(-5px)'
@@ -42,7 +39,17 @@ export default function TopRated(props) {
           className="w-100 h-100"
           style={{ objectFit: 'cover' }}
         />
-      
+        {/* New Badge */}
+        {(
+          <span
+            className="position-absolute top-0 start-0 badge m-2"
+            style={{ 
+              // backgroundColor: vibrantColor  || 
+              backgroundColor:'#FF6B6B', fontSize: '11px', padding: '4px 8px' }}
+          >
+            New
+          </span>
+        )}
       </div>
 
       {/* Card Body */}
@@ -54,6 +61,7 @@ export default function TopRated(props) {
         {/* Rating */}
         <div className="d-flex align-items-center mb-2" style={{ fontSize: '12px' }}>
           <div className="text-warning" style={{ fontSize: '14px' }}>
+            {/* {'⭐'.repeat(Math.floor(props.rating))} */}
             {showGoldStars}
             {showEmptyStars}
           </div>
