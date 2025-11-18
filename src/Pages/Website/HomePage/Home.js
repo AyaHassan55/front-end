@@ -13,6 +13,7 @@ import Landing from "../Landing/Landing";
 import ShowTopRated from "../../../Components/Product/TopRated/ShowTopRated";
 import ShowLatestProduct from "../../../Components/Product/LatestProducts/ShowLatestProduct";
 import LatestSaleProducts from "../../../Components/Product/SaleProducts/LatestSaleProduct";
+import BeforeTopRated from "../../../Components/Website/BeforeTopRated/BeforeTopRated";
 
 // const cookies = Cookie();
 
@@ -35,6 +36,7 @@ export default function HomePage() {
 
       <Landing />
       <LatestSaleProducts />
+      <BeforeTopRated />
       <Container className="">
         <div className="d-flex align-items-start flex-wrap mt-5 mb-4 ">
           <ShowTopRated  style={{ width: "45%" }}/>
