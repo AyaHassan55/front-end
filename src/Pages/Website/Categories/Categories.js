@@ -3,6 +3,7 @@ import { Axios } from "../../../Api/Axios";
 import { CATEGORIES } from "../../../Api/Api";
 import { Container } from "react-bootstrap";
 import Skeleton from "react-loading-skeleton";
+import SkeletonFunc from "../../../Components/Website/Skelton/Skelton";
 
 
 export default function WebsiteCategories() {
@@ -29,13 +30,8 @@ export default function WebsiteCategories() {
                 <Container>
                     <div className="d-flex align-items-center justify-content-center flex-wrap row-gap-2">
                         {loading ? (
-                            Array.from({ length: categories.length || 30 }).map((_, i) => (
-                                <div key={i} className="col-lg-2 col-md-6 col-12">
-                                    <div className="mx-1">
-                                        <Skeleton height="100px" />
-                                    </div>
-                                </div>
-                            ))
+                            <SkeletonFunc length='30' height='100px' baseColor='#c0bdbdff' classes='col-lg-3 col-md-6 col-12 ' />
+
                         ) :
 
                             (showCategories

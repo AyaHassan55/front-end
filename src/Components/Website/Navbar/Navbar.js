@@ -5,15 +5,16 @@ import { Axios } from "../../../Api/Axios";
 import { CATEGORIES } from "../../../Api/Api";
 import './navbar.css'
 import Skeleton from "react-loading-skeleton";
+import SkeletonFunc from "../Skelton/Skelton";
 export default function NavBar() {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true)
-    useEffect(()=>{
-    Axios.get(`${CATEGORIES}`).then((res)=>setCategories(res.data.slice(-8)))
-    .finally(()=>setLoading(false))
-  },[])
-    const categoriesShow = categories.map((cat,key)=>
-    <p key={key} className="m-0">{cat.title.length > 15 ? cat.title.slice(1,15) + '...'  : cat.title}</p>)
+    useEffect(() => {
+        Axios.get(`${CATEGORIES}`).then((res) => setCategories(res.data.slice(-8)))
+            .finally(() => setLoading(false))
+    }, [])
+    const categoriesShow = categories.map((cat, key) =>
+        <p key={key} className="m-0">{cat.title.length > 15 ? cat.title.slice(1, 15) + '...' : cat.title}</p>)
     return (
         <nav className="py-3">
             <Container>
@@ -55,20 +56,15 @@ export default function NavBar() {
                 </div>
                 <div className="mt-3">
                     <div className="d-flex align-items-center justify-content-start gap-3 flex-wrap ">
-                       {loading ? (
-                            Array.from({ length: 8 }).map((_, i) => (
-                                <div key={i} className="px-1">
-                                    <div className="mx-1">
-                                        <Skeleton height="30px" width={80} />
-                                    </div>
-                                </div>
-                            ))
+                        {loading ? (
+                            <SkeletonFunc width={'80px'} height={'30px'} length={8} baseColor='#c0bdbdff' classes='px-1' />
+
                         ) :
 
                             (categoriesShow
 
                             )}
-                       <Link className="text-block category-title  d-inline-block" to= "/categories">Show All</Link>
+                        <Link className="text-block category-title  d-inline-block" to="/categories">Show All</Link>
                     </div>
                 </div>
 
