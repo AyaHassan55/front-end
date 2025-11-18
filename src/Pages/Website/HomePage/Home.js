@@ -6,8 +6,13 @@ import { Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./home.css"
 import Landing from "../Landing/Landing";
-import ProductSale from "../../../Components/Product/Product";
-import LatestSaleProducts from "../../../Components/Product/LatestSaleProduct";
+
+
+
+
+import ShowTopRated from "../../../Components/Product/TopRated/ShowTopRated";
+import ShowLatestProduct from "../../../Components/Product/LatestProducts/ShowLatestProduct";
+import LatestSaleProducts from "../../../Components/Product/SaleProducts/LatestSaleProduct";
 
 // const cookies = Cookie();
 
@@ -30,6 +35,12 @@ export default function HomePage() {
 
       <Landing />
       <LatestSaleProducts />
+      <Container>
+        <div className="d-flex align-items-start flex-wrap mt-5">
+          <ShowTopRated/>
+          <ShowLatestProduct />
+        </div>
+      </Container>
     </div>
 
 

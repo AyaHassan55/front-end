@@ -14,7 +14,7 @@ export default function NavBar() {
             .finally(() => setLoading(false))
     }, [])
     const categoriesShow = categories.map((cat, key) =>
-        <p key={key} className="m-0">{cat.title.length > 15 ? cat.title.slice(1, 15) + '...' : cat.title}</p>)
+        <p key={key} className="m-0">{cat.title.length > 15 ? cat.title.slice(0, 15) + '...' : cat.title}</p>)
     return (
         <nav className="py-3">
             <Container>

@@ -14,3 +14,6 @@ export const CATEGORIES = "categories";
 export const PRODUCTS ="products";
 export const PRODUCT ="product";
 export const LatestSale ="latest-sale";
+
+export const Latest = "latest";
+export const TopRatedApi = "top-rated";
