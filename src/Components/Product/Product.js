@@ -18,8 +18,8 @@ export default function ProductSale(props) {
             <div className="col-lg-3 col-md-6 col-12">
                 <div className="m-1 border rounded p-3 h-100">
                     <div className="border-bottom pb-3">
-                        <p className="text-truncate" style={{ color: 'grey' }}>{props.title.slice(1,35)+'...'}</p>
-                        <p className="text-truncate">{props.description.slice(1,35)}</p>
+                        <p className="text-truncate" style={{ color: 'grey' }}>{props.title.slice(0,35)+'...'}</p>
+                        <p className="text-truncate">{props.description.slice(0,35)}</p>
                         <div className="px-5 py-4 position-relative">
                            {props.sale && (<p className="position-absolute top-0 start-0 text-white text-uppercase bg-primary  rounded-circle d-flex justify-content-center align-items-center"
                                 style={{ width: '50px', height: '50px' }}>sale</p>)}
