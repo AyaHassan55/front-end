@@ -12,7 +12,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import MenuContext from "./Context/MenuContext";
 import WindowContext from "./Context/WindowContext";
 import './custom.css'
-
+import 'react-loading-skeleton/dist/skeleton.css'
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
