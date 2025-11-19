@@ -1,6 +1,7 @@
 import { faStar as solid } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { NavLink } from "react-router-dom";
 
 
 export default function ProductSale(props) {
@@ -15,7 +16,7 @@ export default function ProductSale(props) {
     ));
     return (
         <>
-            <div className="col-lg-3 col-md-6 col-12">
+            <NavLink to={`/product/${props.id}`} className="col-lg-3 col-md-6 col-12">
                 <div className="m-1 border rounded p-3 h-100">
                     <div className="border-bottom pb-3">
                         <p className="text-truncate" style={{ color: 'grey' }}>{props.title.slice(0,35)+'...'}</p>
@@ -42,11 +43,11 @@ export default function ProductSale(props) {
                             </div>
                         </div>
                         <div className="border p-2 rounded">
-                            <img src={require('../../Assets/Icons/Cart.png')} alt="cart" width='20px' />
+                            <img src={require('../../../Assets/Icons/Cart.png')} alt="cart" width='20px' />
                         </div>
                     </div>
                 </div>
-            </div>
+            </NavLink>
 
 
         </>

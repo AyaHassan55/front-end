@@ -1,6 +1,7 @@
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import { faStar as solid } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { NavLink } from "react-router-dom";
 
 
 export default function LatestProducts(props) {
@@ -14,7 +15,7 @@ export default function LatestProducts(props) {
   ));
   return (
 
-    <div
+    <NavLink to={`/product/${props.id}`}
       className="card h-100 shadow-sm"
       style={{
         border: 'none',
@@ -81,7 +82,7 @@ export default function LatestProducts(props) {
           </button>
         </div>
       </div>
-    </div>
+    </NavLink>
   
 
 

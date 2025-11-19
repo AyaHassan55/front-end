@@ -7,7 +7,7 @@ import { Container } from "react-bootstrap";
 
 
 import { Axios } from "../../../Api/Axios";
-import ProductSale from "../Product";
+import ProductSale from "./Product";
 import SkeletonFunc from "../../Website/Skelton/Skelton";
 
 
@@ -27,6 +27,7 @@ export default function LatestSaleProducts() {
         discount={product.discount}
         price={product.price}
         rating={product.rating}
+        id={product.id}
     />)
     return (
         <Container>
