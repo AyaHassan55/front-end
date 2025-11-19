@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { Axios } from "../../../Api/Axios";
 import { CATEGORIES } from "../../../Api/Api";
 import './navbar.css'
-import Skeleton from "react-loading-skeleton";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import SkeletonFunc from "../Skelton/Skelton";
 export default function NavBar() {
     const [categories, setCategories] = useState([]);
@@ -27,16 +28,26 @@ export default function NavBar() {
                             alt="logo"
                         />
                     </Link>
-                    <div className="col-12 col-md-6 order-md-2 order-3 mt-md-0 mt-3 position-relative ">
-                        <Form.Control
-                            type="Search"
-                            className="form-control custom-search py-3 rounded-0"
-                            placeholder="Search Product"
-                        />
-                        <h3 className="btn btn-primary position-absolute top-0 end-0 h-100 line-height m-0 px-4 rounded-0 d-flex align-items-center justify-content-center">
-                            Search
-                        </h3>
+                    <div className="d-none d-md-flex flex-grow-1 mx-3" style={{ maxWidth: "400px" }}>
+                        <div className="position-relative w-100">
+                            <input
+                                type="text"
+                                placeholder="Search for products"
+                                className="form-control ps-3 pe-5 py-2 rounded"
+                            />
+                             <FontAwesomeIcon
+                                icon={faSearch}
+                                className="position-absolute"
+                                style={{
+                                    right: "12px",
+                                    top: "50%",
+                                    transform: "translateY(-50%)",
+                                    color: "#6c757d",
+                                }}
+                            />
+                        </div>
                     </div>
+                   
                     <div className="col-3 d-flex align-items-center justify-content-end gap-4 order-md-3 order-1">
                         <div>
                             <img
