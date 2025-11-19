@@ -19,7 +19,7 @@ export default function LatestSaleProducts() {
             .finally(() => setLoading(false))
     }, [])
     console.log(products)
-    const productsShow = products.map((product, key) => <ProductSale key={key}
+    const productsShow = products.slice(0,3).map((product, key) => <ProductSale key={key}
         title={product.title}
         description={product.description}
         img={product.images[0].image}
@@ -28,10 +28,14 @@ export default function LatestSaleProducts() {
         price={product.price}
         rating={product.rating}
         id={product.id}
+      
     />)
     return (
         <Container>
-            <h1 className="mt-5">Latest Sale Products</h1>
+            <div className="mb-3 mb-md-0 mt-5">
+                <h2 className="fw-bold mb-2">Flash Sale</h2>
+                <p className="text-muted">Limited time offers on selected items</p>
+            </div>
             <div className="d-flex align-items-stretch justify-content-center flex-wrap mt-5 row-gap-2 mb-5">
                 {loading ? (
                     <SkeletonFunc height='300px' length='8' baseColor='#c0bdbdff' classes="col-lg-3 col-md-6 col-12 " />
