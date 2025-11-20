@@ -1,12 +1,26 @@
 import { useState } from 'react';
-
+import { faCartShopping, faStar  } from "@fortawesome/free-solid-svg-icons";
+import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import SkeletonFunc from '../../../Components/Website/Skelton/Skelton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 
 export default function ProductDetails({ product, loading }) {
     const [quantity, setQuantity] = useState(1);
 
     const [isWishlisted, setIsWishlisted] = useState(false);
-    console.log(product)
+    const priceAfterDiscount = Math.ceil(product.price - (product.price * product.discount / 100));
+    console.log(priceAfterDiscount)
+
+     const roundStars = Math.round(product.rating);
+        const stars = Math.min(roundStars, 5);
+    
+        const showGoldStars = Array.from({ length: stars }).map((_, index) => (
+            <FontAwesomeIcon color='Gold' key={index} icon={faStar} />
+        ));
+        const showEmptyStars = Array.from({ length: 5 - stars }).map((_, index) => (
+            <FontAwesomeIcon key={index} icon={regularStar} />
+        ));
     return (
 
         <div className="d-flex align-items-center justify-content-center mt-5">
@@ -27,11 +41,10 @@ export default function ProductDetails({ product, loading }) {
                 {/* Rating */}
                 <div className="d-flex align-items-center gap-2 mt-2">
                     <div className="d-flex gap-1">
-                        {[...Array(5)].map((_, i) => (
-                            <span key={i} style={{ fontSize: "20px" }}>★</span>
-                        ))}
+                        {showGoldStars}
+                        {showEmptyStars}
                     </div>
-                    <span className="text-muted small">(42 reviews)</span>
+                    {/* <span className="text-muted small">(42 reviews)</span> */}
                 </div>
                 {/* price */}
                 <div className="mb-1">
@@ -40,7 +53,7 @@ export default function ProductDetails({ product, loading }) {
                             {loading ? (
                             <SkeletonFunc baseColor='grey' width='50px' height='20px' />
                         ):(
-                            product.price
+                            priceAfterDiscount
                         ) }
                             
                             </span>
@@ -48,13 +61,13 @@ export default function ProductDetails({ product, loading }) {
                             ${loading ? (
                             <SkeletonFunc baseColor='grey' width='50px' height='20px' />
                         ):(
-                            product.discount
+                            product.price
                         ) }
                         </span>
 
                     </div>
                     <p className="text-danger small fw-semibold">
-                        Save $165 (25% off)
+                        Save ${ (product.price - priceAfterDiscount).toFixed(2) } ({product.discount}% off)
                     </p>
 
                 </div>
@@ -104,27 +117,7 @@ export default function ProductDetails({ product, loading }) {
                         })}
                     </div>
                 </div>
-                {/* size */}
-                <div className="mb-4">
-                    <label className="fw-semibold mb-2">SIZE</label>
-                    <div className="row g-2">
-                        {["Small", "Medium", "Large"].map((size) => {
-                            const isSelected = size === "Medium";
-                            return (
-                                <div className="col-4" key={size}>
-                                    <button
-                                        className={`btn w-100 py-2 ${isSelected
-                                            ? "btn-dark text-light"
-                                            : "btn-light border text-dark"
-                                            }`}
-                                    >
-                                        {size}
-                                    </button>
-                                </div>
-                            );
-                        })}
-                    </div>
-                </div>
+               
 
                 {/* Quantity & CTA */}
                 <div className="d-flex gap-3 mb-4">
@@ -152,10 +145,11 @@ export default function ProductDetails({ product, loading }) {
                         onClick={() => setIsWishlisted(!isWishlisted)}
                         className="btn border"
                     >
-                        {/* <Heart
+                        <FontAwesomeIcon
+                                icon={faHeart}
                                 size={20}
                                 className={isWishlisted ? "text-danger fill-current" : ""}
-                            /> */}
+                            />
                     </button>
                 </div>
                 {/* Shipping & Returns */}
