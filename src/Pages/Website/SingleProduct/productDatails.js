@@ -30,11 +30,9 @@ export default function ProductDetails({ product, loading }) {
                 <div className="mb-4">
                     <p className="text-muted text-uppercase small mb-1">Collection: Premuim</p>
                     <h1 className="display-5 fw-semibold">
-                        {loading ? (
-                            <SkeletonFunc baseColor='grey' width='100px' height='40px' />
-                        ):(
+                        {
                             product.title
-                        ) }
+                         }
                         </h1>
                         
                 </div>
@@ -50,19 +48,17 @@ export default function ProductDetails({ product, loading }) {
                 <div className="mb-1">
                     <div className="d-flex align-items-baseline">
                         <span className="fs-3 fw-bold">$
-                            {loading ? (
-                            <SkeletonFunc baseColor='grey' width='50px' height='20px' />
-                        ):(
+                            {
+                           
+                        
                             priceAfterDiscount
-                        ) }
+                         }
                             
                             </span>
                         <span className="text-muted fs-5 text-decoration-line-through">
-                            ${loading ? (
-                            <SkeletonFunc baseColor='grey' width='50px' height='20px' />
-                        ):(
+                            ${
                             product.price
-                        ) }
+                         }
                         </span>
 
                     </div>
@@ -74,12 +70,10 @@ export default function ProductDetails({ product, loading }) {
                 {/* Description */}
                 <div className="border-top border-bottom py-4 mb-4">
                     <p className="text-dark">
-                        {loading ? (
-                            <SkeletonFunc baseColor='grey' width='50px' height='20px' />
-                        ):(
+                        {
                             product.description
 
-                        ) }
+                         }
                     </p>
                     <ul className="text-muted small decoration-none">
                         {loading ?<SkeletonFunc baseColor='grey' width='150px' height='150px' />  :  product.About.split("✓").filter(item => item.trim() !== "").map((item, i) => (
