@@ -16,3 +16,8 @@
     border: rgba(0,0,0,0.1) !important;
     outline: rgba(0,0,0,0.1) !important;
 }
+.navv:hover{
+   background-color: rgb(190, 188, 188) !important;
+   transition: 0.3s;
+   cursor: pointer;
+}

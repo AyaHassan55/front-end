@@ -36,7 +36,7 @@ export default function HomePage() {
 
       <Landing />
       <LatestSaleProducts />
-      <BeforeTopRated />
+      {/* <BeforeTopRated /> */}
       <Container className="">
         <div className="d-flex align-items-start flex-wrap mt-5 mb-4 ">
           <ShowTopRated  style={{ width: "45%" }}/>

@@ -15,16 +15,20 @@ export default function NavBar() {
             .finally(() => setLoading(false))
     }, [])
     const categoriesShow = categories.map((cat, key) =>
-        <p key={key} className="m-0">{cat.title.length > 15 ? cat.title.slice(0, 15) + '...' : cat.title}</p>)
+        <p key={key} className="navv mt-3 mx-1" 
+        style={{
+            backgroundColor:'#f6e8e8',
+            borderRadius:'16px', fontSize:'12px', fontWeight:'500',padding:'8px'
+        }}>{cat.title.length > 15 ? cat.title.slice(0, 15) + '...' : cat.title}</p>)
     return (
         <nav className="py-3">
             <Container>
                 <div className="d-flex align-items-center justify-content-between flex-wrap">
                     <Link className="col-3" to="/">
                         <img
-                            width="116px"
-                            height='67px'
-                            src={require("../../../Assets/images/Logo.png")}
+                            width="140px"
+                            height='37px'
+                            src={require("../../../Assets/images/logoo.png")}
                             alt="logo"
                         />
                     </Link>
