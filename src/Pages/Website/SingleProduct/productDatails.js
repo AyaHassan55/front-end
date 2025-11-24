@@ -12,7 +12,7 @@ export default function ProductDetails({ product, loading }) {
     const priceAfterDiscount = Math.ceil(product.price - (product.price * product.discount / 100));
     console.log(priceAfterDiscount)
 
-     const roundStars = Math.round(product.rating);
+    const roundStars = Math.round(product.rating);
         const stars = Math.min(roundStars, 5);
     
         const showGoldStars = Array.from({ length: stars }).map((_, index) => (
@@ -21,6 +21,34 @@ export default function ProductDetails({ product, loading }) {
         const showEmptyStars = Array.from({ length: 5 - stars }).map((_, index) => (
             <FontAwesomeIcon key={index} icon={regularStar} />
         ));
+    // Add to cart 
+    
+  const handleSave = () => {
+   
+    const stored = localStorage.getItem("product");
+ console.log(stored)
+    let items;
+
+    // لو مفيش داتا محفوظة
+    if (!stored) {
+        items = [];
+    } 
+    else {
+        try {
+            const parsed = JSON.parse(stored);
+            items = Array.isArray(parsed) ? parsed : [];
+        } catch {
+            items = [];
+        }
+    }
+
+    items.push(product);
+
+    localStorage.setItem("product", JSON.stringify(items));
+};
+
+
+
     return (
 
         <div className="d-flex align-items-center justify-content-center mt-5">
@@ -131,7 +159,9 @@ export default function ProductDetails({ product, loading }) {
                         </button>
                     </div>
 
-                    <button className="btn btn-dark flex-grow-1">
+                    <button 
+                        onClick={handleSave}
+                        className="btn btn-dark flex-grow-1">
                         Add to Cart
                     </button>
 

@@ -21,3 +21,6 @@
    transition: 0.3s;
    cursor: pointer;
 }
+.modal {
+    z-index: 1050 !important;
+}
