@@ -1,10 +1,20 @@
 .hand{
-    background-image: url("../../../Assets/images/slider-1.jpg");
+    /* background-image: url("../../../Assets/images/slider-1.jpg");
     background-position: center;
-    background-size: cover;
-    height: 100vh;
+    background-size: cover; */
+    background-color: rgb(253, 245, 233);
+    /* background-color: blue; */
+    height: 70vh;
 }
 .custom-search{
     color:rgba(0, 0, 0, 0.5) !important;
 
+}
+.hand .content{
+    left: 130px;
+}
+.landing-img {
+   top: -82px;
+   right: 80px;
+   
 }
