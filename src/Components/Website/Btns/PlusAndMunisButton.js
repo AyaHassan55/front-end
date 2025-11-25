@@ -6,7 +6,7 @@ export default function PlusMinusBtn(props) {
   const [btn, setBtn] = useState(1);
 
   useEffect(() => {
-    props.setQuantity(btn);
+    props.setCount(btn);
 
     if (props.changeCount) {
       props.changeCount(props.id, btn);

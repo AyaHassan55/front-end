@@ -39,75 +39,128 @@ export default function NavBar() {
         setProducts(getProducts);
     }, [isChange]);
 
-    const priceAfterDiscount = 0;
+
     const handleDelete = (id) => {
         const filterProduct = products.filter((product) => product.id !== id);
         setProducts(filterProduct);
         localStorage.setItem("product", JSON.stringify(filterProduct));
     }
+    const updateQty = (id, newQty) => {
+        const updated = products.map((p) =>
+            p.id === id ? { ...p, count: newQty > 1 ? newQty : 1 } : p
+        );
+        setProducts(updated);
+        localStorage.setItem("product", JSON.stringify(updated));
+    };
+
     return (
         <>
-            <Modal className="modal" show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Shopping Cart</Modal.Title>
+
+            <Modal
+                dialogClassName="cart-modern-modal"
+                show={show}
+                onHide={handleClose}
+                centered
+            >
+                <Modal.Header closeButton className="border-0">
+                    <Modal.Title className="fw-bold fs-3 text-dark">
+                        🛍️ Your Shopping Cart
+                    </Modal.Title>
                 </Modal.Header>
+
                 <Modal.Body>
                     {products.length === 0 ? (
-                        <p>Your cart is empty</p>
+                        <div className="empty-state text-center">
+                            <img
+                                src="https://cdn-icons-png.flaticon.com/512/2037/2037453.png"
+                                width="120"
+                                alt="empty"
+                            />
+                            <h4 className="mt-3 fw-bold">Your cart is empty</h4>
+                            <p className="text-muted">Add items to start shopping.</p>
+                        </div>
                     ) : (
-                        products.map((item, index) => {
-                            const priceAfterDiscount = Math.ceil(
-                                item.price - (item.price * item.discount / 100)
-                            );
+                        <div className="cart-list">
+                            {products.map((item, index) => {
+                                const priceAfterDiscount = Math.ceil(
+                                    item.price - item.price * (item.discount / 100)
+                                );
 
-                            return (
-                                <div key={index} className="position-relative cart-modal d-flex justify-content-between align-items-center border rounded">
-                                    <div
-                                        onClick={() => handleDelete(item.id)}
-                                        className="position-absolute top-0 end-0 rounded d-flex align-items-center
-                                    justify-content-center  bg-danger text-white" style={{ cursor: 'pointer', width: '20px', height: '20px' }}>
-                                        <FontAwesomeIcon icon={faXmark} />
+                                return (
+                                    <div className="cart-card" key={index}>
+                                        {/* Remove button */}
+                                        <button
+                                            className="remove-btn"
+                                            onClick={() => handleDelete(item.id)}
+                                        >
+                                            ×
+                                        </button>
 
+                                        {/* Image */}
+                                        <div className="cart-img-box">
+                                            <img src={item.images?.[0]?.image} alt={item.title} />
+                                        </div>
+
+                                        {/* Info */}
+                                        <div className="cart-info">
+                                            <h6 className="title">{item.title}</h6>
+
+                                            <p className="price">
+                                                <span className="new">${priceAfterDiscount}</span>
+                                                <span className="old">${item.price}</span>
+                                            </p>
+
+                                            {/* Quantity Counter */}
+                                            <div className="qty-box">
+                                                <button
+                                                    onClick={() => updateQty(item.id, item.count - 1)}
+                                                >
+                                                    -
+                                                </button>
+
+                                                <span>{item.count}</span>
+
+                                                <button
+                                                    onClick={() => updateQty(item.id, item.count + 1)}
+                                                >
+                                                    +
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <img
-                                            style={{ borderRadius: '12px', margin: '12px' }}
-                                            src={item.images && item.images.length > 0 ? item.images[0].image : ""}
-                                            alt={item.title}
-                                            width="50"
-                                            height="50"
-                                        />
-                                    </div>
-
-                                    <div>
-                                        <h6>{item.title}</h6>
-                                        <p className="mb-0">
-                                            <span className="ms-2 fw-bold">
-                                                ${priceAfterDiscount}
-                                            </span>
-                                            <span style={{ textDecoration: 'line-through', color: '#888' }}>
-                                                ${item.price}
-                                            </span>
-
-                                        </p>
-                                    </div>
-
-                                </div>
-                            );
-                        })
-
-
+                                );
+                            })}
+                        </div>
                     )}
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        Checkout
-                    </Button>
-                </Modal.Footer>
+
+                {/* Footer */}
+                {products.length > 0 && (
+                    <Modal.Footer className="border-0 flex-column">
+                        <div className="total-box w-100 d-flex justify-content-between mb-3">
+                            <span className="fw-bold fs-5">Total:</span>
+                            <span className="fw-bold fs-5 text-success">
+                                $
+                                {products
+                                    .reduce((sum, item) => {
+                                        const priceAfterDiscount = Math.ceil(
+                                            item.price - item.price * (item.discount / 100)
+                                        );
+                                        return sum + priceAfterDiscount * item.count;
+                                    }, 0)
+                                    .toFixed(2)}
+                            </span>
+                        </div>
+
+                        <button className="checkout-btn w-100">Proceed to Checkout</button>
+                        <button className="continue-btn w-100 mt-2" onClick={handleClose}>
+                            Continue Shopping
+                        </button>
+                    </Modal.Footer>
+                )}
             </Modal>
+
+
 
 
             <nav className="py-3">

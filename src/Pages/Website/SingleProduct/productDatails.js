@@ -7,7 +7,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import PlusMinusBtn from '../../../Components/Website/Btns/PlusAndMunisButton';
 
 export default function ProductDetails({ product, loading,id }) {
-    const [quantity, setQuantity] = useState(1);
+   const [count, setCount] = useState(1);
 
     const [isWishlisted, setIsWishlisted] = useState(false);
     const priceAfterDiscount = Math.ceil(product.price - (product.price * product.discount / 100));
@@ -31,7 +31,7 @@ export default function ProductDetails({ product, loading,id }) {
         console.log(productExist)
         if(productExist !== -1){
             if(getItems[productExist].count){
-                getItems[productExist].count +=1;
+                getItems[productExist].count +=count;
             }else{
                 getItems[productExist].count=2;
             }
@@ -65,7 +65,7 @@ export default function ProductDetails({ product, loading,id }) {
                         {showGoldStars}
                         {showEmptyStars}
                     </div>
-                    {/* <span className="text-muted small">(42 reviews)</span> */}
+                   
                 </div>
                 {/* price */}
                 <div className="mb-1">
@@ -138,23 +138,7 @@ export default function ProductDetails({ product, loading,id }) {
 
                 {/* Quantity & CTA */}
                 <div className="d-flex gap-3 mb-4">
-                    <PlusMinusBtn setQuantity={(data) => setQuantity(data)} />
-                    {/* <div className="d-flex align-items-center border rounded">
-                        <button
-                            onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                            className="btn px-3"
-                        >
-                            −
-                        </button>
-                        <span className="px-3 fw-medium">{quantity}</span>
-                        <button
-                            onClick={() => setQuantity(quantity + 1)}
-                            className="btn px-3"
-                        >
-                            +
-                        </button>
-                    </div> */}
-
+                    <PlusMinusBtn setCount={(data) => setCount(data)} />
                     <button
                         onClick={handleSave}
                         className="btn btn-dark flex-grow-1">
