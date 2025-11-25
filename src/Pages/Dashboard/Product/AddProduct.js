@@ -15,6 +15,7 @@ export default function AddProduct() {
         price: '',
         discount: '',
         About: '',
+        
     });
     const dummyForm = {
         category: null,
@@ -23,6 +24,7 @@ export default function AddProduct() {
         price: 222,
         discount: 0,
         About: 'About',
+        Stock:0,
     }
     const [images, setImages] = useState([]);
     const [categories, setCategories] = useState([]);
@@ -64,17 +66,6 @@ export default function AddProduct() {
 
 
         try {
-            // const dataForm = new FormData();
-            // dataForm.append('category', form.category);
-            // dataForm.append('description', form.description);
-            // dataForm.append('About', form.About);
-            // dataForm.append('discount', form.discount);
-            // dataForm.append('price', form.price);
-            // dataForm.append('title', form.title);
-            // for (let i = 0; i < images.length; i++) {
-            //     dataForm.append('images[]', images[i])
-            // }
-
             const res = await Axios.post(`${PRODUCT}/edit/${id}`, form);
 
             nav('/dashboard/products/');
@@ -211,6 +202,11 @@ export default function AddProduct() {
                 <Form.Group className="mb-3" controlId="About">
                     <Form.Label style={{ fontWeight: 'bold' }}>About</Form.Label>
                     <Form.Control name="About" value={form.About} disabled={!send} required onChange={handleChange} type="text" placeholder="About..." />
+                </Form.Group>
+                {/* ---------------------------------------- */}
+                <Form.Group className="mb-3" controlId="Stock">
+                    <Form.Label style={{ fontWeight: 'bold' }}>Stock</Form.Label>
+                    <Form.Control name="Stock" value={form.Stock} disabled={!send} required onChange={handleChange} type="number" placeholder="Stock..." />
                 </Form.Group>
                 {/* ---------------------------------------- */}
                 <Form.Group className="mb-3" controlId="images">
