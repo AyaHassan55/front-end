@@ -35,26 +35,51 @@ export default function NavBar() {
         setCartItems(items);
         setShow(true);
     }
+    const priceAfterDiscount = 0;
     return (
         <>
             <Modal className="modal" show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Cart</Modal.Title>
+                    <Modal.Title>Shopping Cart</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     {cartItems.length === 0 ? (
                         <p>Your cart is empty</p>
                     ) : (
-                        cartItems.map((item, index) =>
-                            <div key={index} className="d-flex justify-content-between align-items-center border p-2 rounded">
-                                <div>
-                                    <h6>{item.title}</h6>
-                                    <p className="mb-0">${item.price}</p>
+                        cartItems.map((item, index) => {
+                            const priceAfterDiscount = Math.ceil(
+                                item.price - (item.price * item.discount / 100)
+                            );
+
+                            return (
+                                <div key={index} className="cart-modal d-flex justify-content-between align-items-center border rounded">
+                                    <div>
+                                        <img
+                                            style={{ borderRadius: '12px', margin: '12px' }}
+                                            src={item.images && item.images.length > 0 ? item.images[0].image : ""}
+                                            alt={item.title}
+                                            width="50"
+                                            height="50"
+                                        />
+                                    </div>
+
+                                    <div>
+                                        <h6>{item.title}</h6>
+                                        <p className="mb-0">
+                                            <span className="ms-2 fw-bold">
+                                                ${priceAfterDiscount}
+                                            </span>
+                                            <span style={{ textDecoration: 'line-through', color: '#888' }}>
+                                                ${item.price}
+                                            </span>
+
+                                        </p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <img src={item.images && item.images.length > 0 ? item.images[0].image : ""} alt={item.title} width="50" height="50" />
-                                </div>
-                            </div>)
+                            );
+                        })
+
+
                     )}
                 </Modal.Body>
                 <Modal.Footer>
@@ -62,7 +87,7 @@ export default function NavBar() {
                         Close
                     </Button>
                     <Button variant="primary" onClick={handleClose}>
-                        Save Changes
+                       Checkout
                     </Button>
                 </Modal.Footer>
             </Modal>
@@ -100,7 +125,7 @@ export default function NavBar() {
                         </div>
 
                         <div className="col-3 d-flex align-items-center justify-content-end gap-4 order-md-3 order-1">
-                            <div onClick={ handleShow }
+                            <div onClick={handleShow}
                                 style={{ cursor: 'pointer' }}
                             >
                                 <img
