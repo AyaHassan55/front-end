@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import {  useState } from 'react';
 import { faCartShopping, faStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import SkeletonFunc from '../../../Components/Website/Skelton/Skelton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import PlusMinusBtn from '../../../Components/Website/Btns/PlusAndMunisButton';
+import { Cart } from '../../../Context/CartChangerContext';
+import { useContext } from 'react';
 
 export default function ProductDetails({ product, loading,id }) {
    const [count, setCount] = useState(1);
@@ -23,7 +25,7 @@ export default function ProductDetails({ product, loading,id }) {
         <FontAwesomeIcon key={index} icon={regularStar} />
     ));
     // Add to cart 
-
+    const { setIsChange } = useContext(Cart);
     const handleSave = () => {
 
         const getItems = JSON.parse(localStorage.getItem('product')) || [];
@@ -39,7 +41,7 @@ export default function ProductDetails({ product, loading,id }) {
             getItems.push(product);
         }
         localStorage.setItem('product',JSON.stringify(getItems));
-        
+        setIsChange(prev => !prev);
     };
 
 
