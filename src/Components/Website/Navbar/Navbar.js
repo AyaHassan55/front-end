@@ -2,16 +2,19 @@ import { Container, Form } from "react-bootstrap";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Axios } from "../../../Api/Axios";
 import { CATEGORIES } from "../../../Api/Api";
+import { Cart } from "../../../Context/CartChangerContext";
 import './navbar.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faXmark, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
 import SkeletonFunc from "../Skelton/Skelton";
 export default function NavBar() {
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(true)
+    const [products, setProducts] = useState([]);
+    const { isChange } = useContext(Cart)
 
     useEffect(() => {
         Axios.get(`${CATEGORIES}`).then((res) => setCategories(res.data.slice(-8)))
@@ -28,14 +31,20 @@ export default function NavBar() {
     const [show, setShow] = useState(false);
     const [cartItems, setCartItems] = useState([]);
 
+
     const handleClose = () => setShow(false);
-    const handleShow = () => {
-        const stored = localStorage.getItem("product");
-        const items = stored ? JSON.parse(stored) : [];
-        setCartItems(items);
-        setShow(true);
-    }
+    const handleShow = () => setShow(true);
+    useEffect(() => {
+        const getProducts = JSON.parse(localStorage.getItem("product")) || [];
+        setProducts(getProducts);
+    }, [isChange]);
+
     const priceAfterDiscount = 0;
+    const handleDelete = (id) => {
+        const filterProduct = products.filter((product) => product.id !== id);
+        setProducts(filterProduct);
+        localStorage.setItem("product", JSON.stringify(filterProduct));
+    }
     return (
         <>
             <Modal className="modal" show={show} onHide={handleClose}>
@@ -43,16 +52,23 @@ export default function NavBar() {
                     <Modal.Title>Shopping Cart</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {cartItems.length === 0 ? (
+                    {products.length === 0 ? (
                         <p>Your cart is empty</p>
                     ) : (
-                        cartItems.map((item, index) => {
+                        products.map((item, index) => {
                             const priceAfterDiscount = Math.ceil(
                                 item.price - (item.price * item.discount / 100)
                             );
 
                             return (
-                                <div key={index} className="cart-modal d-flex justify-content-between align-items-center border rounded">
+                                <div key={index} className="position-relative cart-modal d-flex justify-content-between align-items-center border rounded">
+                                    <div
+                                        onClick={() => handleDelete(item.id)}
+                                        className="position-absolute top-0 end-0 rounded d-flex align-items-center
+                                    justify-content-center  bg-danger text-white" style={{ cursor: 'pointer', width: '20px', height: '20px' }}>
+                                        <FontAwesomeIcon icon={faXmark} />
+
+                                    </div>
                                     <div>
                                         <img
                                             style={{ borderRadius: '12px', margin: '12px' }}
@@ -75,6 +91,7 @@ export default function NavBar() {
 
                                         </p>
                                     </div>
+
                                 </div>
                             );
                         })
@@ -87,7 +104,7 @@ export default function NavBar() {
                         Close
                     </Button>
                     <Button variant="primary" onClick={handleClose}>
-                       Checkout
+                        Checkout
                     </Button>
                 </Modal.Footer>
             </Modal>

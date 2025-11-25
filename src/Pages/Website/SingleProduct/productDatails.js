@@ -1,51 +1,46 @@
 import { useState } from 'react';
-import { faCartShopping, faStar  } from "@fortawesome/free-solid-svg-icons";
+import { faCartShopping, faStar } from "@fortawesome/free-solid-svg-icons";
 import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
 import SkeletonFunc from '../../../Components/Website/Skelton/Skelton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import PlusMinusBtn from '../../../Components/Website/Btns/PlusAndMunisButton';
 
-export default function ProductDetails({ product, loading }) {
+export default function ProductDetails({ product, loading,id }) {
     const [quantity, setQuantity] = useState(1);
 
     const [isWishlisted, setIsWishlisted] = useState(false);
     const priceAfterDiscount = Math.ceil(product.price - (product.price * product.discount / 100));
-    console.log(priceAfterDiscount)
+    
 
     const roundStars = Math.round(product.rating);
-        const stars = Math.min(roundStars, 5);
-    
-        const showGoldStars = Array.from({ length: stars }).map((_, index) => (
-            <FontAwesomeIcon color='Gold' key={index} icon={faStar} />
-        ));
-        const showEmptyStars = Array.from({ length: 5 - stars }).map((_, index) => (
-            <FontAwesomeIcon key={index} icon={regularStar} />
-        ));
+    const stars = Math.min(roundStars, 5);
+
+    const showGoldStars = Array.from({ length: stars }).map((_, index) => (
+        <FontAwesomeIcon color='Gold' key={index} icon={faStar} />
+    ));
+    const showEmptyStars = Array.from({ length: 5 - stars }).map((_, index) => (
+        <FontAwesomeIcon key={index} icon={regularStar} />
+    ));
     // Add to cart 
-    
-  const handleSave = () => {
-   
-    const stored = localStorage.getItem("product");
- console.log(stored)
-    let items;
 
-    // لو مفيش داتا محفوظة
-    if (!stored) {
-        items = [];
-    } 
-    else {
-        try {
-            const parsed = JSON.parse(stored);
-            items = Array.isArray(parsed) ? parsed : [];
-        } catch {
-            items = [];
+    const handleSave = () => {
+
+        const getItems = JSON.parse(localStorage.getItem('product')) || [];
+        const productExist = getItems.findIndex((pro)=>pro.id == id);
+        console.log(productExist)
+        if(productExist !== -1){
+            if(getItems[productExist].count){
+                getItems[productExist].count +=1;
+            }else{
+                getItems[productExist].count=2;
+            }
+        }else{
+            getItems.push(product);
         }
-    }
-
-    items.push(product);
-
-    localStorage.setItem("product", JSON.stringify(items));
-};
+        localStorage.setItem('product',JSON.stringify(getItems));
+        
+    };
 
 
 
@@ -60,9 +55,9 @@ export default function ProductDetails({ product, loading }) {
                     <h1 className="display-5 fw-semibold">
                         {
                             product.title
-                         }
-                        </h1>
-                        
+                        }
+                    </h1>
+
                 </div>
                 {/* Rating */}
                 <div className="d-flex align-items-center gap-2 mt-2">
@@ -77,21 +72,21 @@ export default function ProductDetails({ product, loading }) {
                     <div className="d-flex align-items-baseline">
                         <span className="fs-3 fw-bold">$
                             {
-                           
-                        
-                            priceAfterDiscount
-                         }
-                            
-                            </span>
+
+
+                                priceAfterDiscount
+                            }
+
+                        </span>
                         <span className="text-muted fs-5 text-decoration-line-through">
                             ${
-                            product.price
-                         }
+                                product.price
+                            }
                         </span>
 
                     </div>
                     <p className="text-danger small fw-semibold">
-                        Save ${ (product.price - priceAfterDiscount).toFixed(2) } ({product.discount}% off)
+                        Save ${(product.price - priceAfterDiscount).toFixed(2)} ({product.discount}% off)
                     </p>
 
                 </div>
@@ -101,13 +96,13 @@ export default function ProductDetails({ product, loading }) {
                         {
                             product.description
 
-                         }
+                        }
                     </p>
-                    <ul className="text-muted small decoration-none">
-                        {loading ?<SkeletonFunc baseColor='grey' width='150px' height='150px' />  :  product.About.split("✓").filter(item => item.trim() !== "").map((item, i) => (
-                            <li key={i}>✓ {item.trim()}</li>
+                    <div className="text-muted small decoration-none">
+                        {loading ? <SkeletonFunc baseColor='grey' width='150px' height='150px' /> : product.About.split("✓").filter(item => item.trim() !== "").map((item, i) => (
+                            <p key={i}>✓ {item.trim()}</p>
                         ))}
-                    </ul>
+                    </div>
                 </div>
                 {/* Color Options */}
                 <div className="mb-4">
@@ -139,11 +134,12 @@ export default function ProductDetails({ product, loading }) {
                         })}
                     </div>
                 </div>
-               
+
 
                 {/* Quantity & CTA */}
                 <div className="d-flex gap-3 mb-4">
-                    <div className="d-flex align-items-center border rounded">
+                    <PlusMinusBtn setQuantity={(data) => setQuantity(data)} />
+                    {/* <div className="d-flex align-items-center border rounded">
                         <button
                             onClick={() => setQuantity(Math.max(1, quantity - 1))}
                             className="btn px-3"
@@ -157,9 +153,9 @@ export default function ProductDetails({ product, loading }) {
                         >
                             +
                         </button>
-                    </div>
+                    </div> */}
 
-                    <button 
+                    <button
                         onClick={handleSave}
                         className="btn btn-dark flex-grow-1">
                         Add to Cart
@@ -170,10 +166,10 @@ export default function ProductDetails({ product, loading }) {
                         className="btn border"
                     >
                         <FontAwesomeIcon
-                                icon={faHeart}
-                                size={20}
-                                className={isWishlisted ? "text-danger fill-current" : ""}
-                            />
+                            icon={faHeart}
+                            size={20}
+                            className={isWishlisted ? "text-danger fill-current" : ""}
+                        />
                     </button>
                 </div>
                 {/* Shipping & Returns */}

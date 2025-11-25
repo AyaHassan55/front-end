@@ -13,7 +13,7 @@ export default function SingleProduct() {
     const [loading, setLoading] = useState(true);
 
     const { id } = useParams()
-    console.log(product)
+    
     useEffect(() => {
         Axios.get(`${PRODUCT}/${id}`)
             .then((res) => {
@@ -60,7 +60,7 @@ export default function SingleProduct() {
                             </div>
 
                             <div className="col-12 col-lg-6">
-                                <ProductDetails product={product} />
+                                <ProductDetails product={product} id={id} />
                             </div>
                         </>
                     )
