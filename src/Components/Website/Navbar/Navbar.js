@@ -36,7 +36,13 @@ export default function NavBar() {
     const handleShow = () => setShow(true);
     useEffect(() => {
         const getProducts = JSON.parse(localStorage.getItem("product")) || [];
-        setProducts(getProducts);
+        const fixedProducts = getProducts.map(p => ({
+    ...p,
+    count: p.count ? Number(p.count) : 1,
+    discount: p.discount ? Number(p.discount) : 0,
+    price: Number(p.price) || 0,
+  }));
+  setProducts(fixedProducts);
     }, [isChange]);
 
 
