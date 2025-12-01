@@ -1,7 +1,110 @@
-.before-top-rated {
-  background-image: url(../../../Assets/images/sky.jpg);
-  background-size: cover;
-  background-position: center;
-  width: 100%;
-  min-height: 300px;
+/* FlashSaleDivider.css - simple, responsive, accessible styles */
+
+.fsd-root { position: relative; overflow: visible; font-family: Inter, "Helvetica Neue", Arial, sans-serif; }
+
+/* Top gradient area */
+.fsd-top {
+  padding: 56px 24px 80px; /* leaves space for overlap */
+  text-align: center;
+  transition: opacity .6s ease, transform .6s ease;
+  animation: fsd-fade .7s ease both;
+}
+@keyframes fsd-fade { from { opacity: 0; transform: translateY(6px); } to { opacity:1; transform:none; } }
+
+.fsd-inner { max-width: 1100px; margin: 0 auto; }
+.fsd-heading {
+  font-size: 44px;
+  margin: 0;
+  color: #111827; /* dark */
+  letter-spacing: 2px;
+  font-weight: 800;
+}
+.fsd-sub {
+  margin-top: 12px;
+  color: #2f3a3a;
+  font-size: 18px;
+  font-weight: 500;
+  opacity: .9;
+}
+
+/* SVG wave */
+.fsd-wave { line-height: 0; margin-top: -2px; }
+.fsd-wave svg { display:block; width:100%; height:92px; }
+.fsd-wave path { fill: #ffffff; }
+
+/* Promo card overlapping */
+.fsd-promo-wrap {
+  position: relative;
+  margin-top: -48px; /* pull card up and overlap */
+  display: flex;
+  justify-content: center;
+  pointer-events: none; /* card's children will re-enable pointer events */
+}
+.fsd-promo-card {
+  pointer-events: auto;
+  width: min(900px, calc(100% - 48px));
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 18px 40px rgba(16,24,40,0.12);
+  padding: 16px 20px;
+  display:flex;
+  align-items:center;
+  gap: 18px;
+  transform: translateY(0);
+  transition: transform .35s ease;
+  animation: fsd-float 4s ease-in-out infinite;
+}
+@keyframes fsd-float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+.fsd-promo-badge {
+  background: linear-gradient(90deg,#0f235c,#8d98ff);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight:700;
+  font-size:13px;
+  white-space:nowrap;
+  box-shadow: 0 6px 18px rgba(255,100,120,0.12);
+}
+
+/* Promo body */
+.fsd-promo-body { display:flex; gap:16px; align-items:center; justify-content:space-between; width:100%; }
+.fsd-promo-text { margin:0; color:#111827; font-weight:700; font-size:16px; }
+.fsd-btn {
+  background: rgb(13, 51, 156);
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight:700;
+  box-shadow: 0 8px 18px rgba(16,24,40,0.08);
+}
+.fsd-btn:focus { outline: 3px solid rgba(255,91,119,0.18); outline-offset: 2px; }
+
+/* Bottom area */
+.fsd-bottom { background: #fff; padding: 48px 24px 32px; }
+.fsd-latest { max-width: 1100px; margin: 0 auto; display:flex; align-items:center; gap:18px; justify-content:center; }
+.fsd-line { height:2px; width:140px; background: linear-gradient(90deg, transparent, #cfd6db, transparent); display:block; border-radius:2px; opacity:.95; }
+.fsd-latest-title { margin:0; font-size:20px; font-weight:800; color:#111827; letter-spacing:2px; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .fsd-heading { font-size:34px; }
+  .fsd-sub { font-size:15px; }
+  .fsd-promo-card { gap:12px; padding:14px; }
+  .fsd-promo-text { font-size:14px; }
+}
+
+@media (max-width: 520px) {
+  .fsd-top { padding: 40px 16px 70px; }
+  .fsd-heading { font-size:26px; }
+  .fsd-promo-card { flex-direction: column; align-items:center; text-align:center; padding:12px; }
+  .fsd-promo-body { flex-direction: column; gap:10px; }
+  .fsd-line { width: 60px; }
+  .fsd-latest-title { font-size:16px; }
 }

@@ -1,35 +1,63 @@
-import { Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
+
+
+
+import React from "react";
 import "./Before.css";
-
-export default function BeforeTopRated() {
+export default function FlashSaleDivider({
+  heading = "BEST PRICES",
+  subtitle = "Best Prices, Best Picks",
+  promoLabel = "Limited time",
+  promoText = "Up to 50% off selected items",
+  promoCta = "Shop Now",
+  onCtaClick = () => {},
+  colors = { from: "#65acc2ff", to: "#ffeef0" },
+}) {
   return (
-    <div className="before-top-rated">
-      <Container>
-        <div className="d-flex align-items-center justify-content-between py-5 flex-wrap row-gap-4">
-          <div className="col-lg-5 col-md-8 col-12 text-md-start text-center">
-            <h1 className=" fw-bold">Shampoo Nice</h1>
-            <h5 style={{ color: "gray" }} className="fw-normal">
-              Another Nice Thing Which is used by someone i don't know (just
-              random text)
-            </h5>
+    <section className="fsd-root" aria-label="Flash sale banner divider">
+      <div
+        className="fsd-top"
+        style={{
+          background: `linear-gradient(180deg, ${colors.from} 0%, ${colors.to} 70%)`,
+        }}
+      >
+        <div className="fsd-inner">
+          <h1 className="fsd-heading">{heading}</h1>
+          <p className="fsd-sub">{subtitle}</p>
+        </div>
+      </div>
 
-            <Link
-              to="/shop"
-              className="btn btn-primary mt-3 py-3 px-4 fw-bold text-light"
+      {/* SVG wave */}
+      <div className="fsd-wave" aria-hidden="true">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path d="M0,0 C300,80 900,0 1200,60 L1200,120 L0,120 Z"></path>
+        </svg>
+      </div>
+
+      {/* Promo card overlapping the wave */}
+      <div className="fsd-promo-wrap">
+        <div className="fsd-promo-card" role="region" aria-label="Promo">
+          <span className="fsd-promo-badge">{promoLabel}</span>
+          <div className="fsd-promo-body">
+            <p className="fsd-promo-text">{promoText}</p>
+            <button
+              className="fsd-btn"
+              onClick={onCtaClick}
+              aria-label={promoCta}
             >
-              Shop Now
-            </Link>
-          </div>
-          <div className="col-lg-6 col-md-3 col-12 d-flex align-items-center justify-content-md-end justify-content-center">
-            <img
-              src={require("../../../Assets/images/shampoo.png")}
-              alt="shampoo"
-              width="75px"
-            />
+              {promoCta}
+            </button>
           </div>
         </div>
-      </Container>
-    </div>
+      </div>
+
+      {/* Bottom title
+      <div className="fsd-bottom">
+        <div className="fsd-latest">
+          <span className="fsd-line" aria-hidden="true"></span>
+          <h2 className="fsd-latest-title">LATEST PRODUCTS</h2>
+          <span className="fsd-line" aria-hidden="true"></span>
+        </div>
+      </div> */}
+    </section>
   );
 }

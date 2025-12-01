@@ -32,7 +32,7 @@ export default function LatestSaleProducts() {
     />)
     return (
         <Container>
-            <div className="mb-3 mb-md-0 mt-5">
+            <div className="mb-3 mb-md-0 mt-5 ">
                 <h2 className="fw-bold mb-2">Flash Sale</h2>
                 <p className="text-muted">Limited time offers on selected items</p>
             </div>
