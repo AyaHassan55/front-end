@@ -1,0 +1,45 @@
+.qty-container {
+  background: #f6f6f6;
+  border-radius: 12px;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+}
+
+.qty-btn {
+  border: none;
+  outline: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.qty-btn.minus {
+  background: #ffe5e5;
+  color: #dc3545;
+}
+
+.qty-btn.plus {
+  background: #e7f9ef;
+  color: #198754;
+}
+
+.qty-btn:hover {
+  transform: scale(1.05);
+}
+
+.qty-input {
+  border: none;
+  background: white;
+  width: 40px;
+  height: 36px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 600;
+  outline: none;
+}
