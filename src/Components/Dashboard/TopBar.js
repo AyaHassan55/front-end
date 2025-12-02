@@ -18,7 +18,7 @@ export default function TopBar() {
 // fetch user data
   useEffect(()=>{
     Axios.get(`${USER}`)
-    .then((data)=> setName(data.data.name))
+    .then((data)=>setName(data.data.name))
     .catch((err)=>Navigate('/login',{ replace: true}))
   },[])
 // logout function
@@ -37,14 +37,15 @@ export default function TopBar() {
       <div className='d-flex align-items-center justify-content-between h-100'>
         <div className='menu d-flex align-items-center gap-5'>
         
-          <h3>E-commerce</h3>
+          <h3>Dashboard</h3>
           <FontAwesomeIcon onClick={() => setIsOpen((prev) => !prev)} cursor={'pointer'} icon={faBars} />
         </div>
         <div >
-          <DropdownButton id="dropdown-basic-button" title={name}>
+
+          {/* <DropdownButton id="dropdown-basic-button" title={name}>
             <Dropdown.Item onClick={handleLogOut}>Logout</Dropdown.Item>
             
-          </DropdownButton>
+          </DropdownButton> */}
          
         </div>
 
