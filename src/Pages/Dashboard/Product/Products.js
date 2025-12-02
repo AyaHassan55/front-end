@@ -83,6 +83,7 @@ console.log(products)
           <ToastMessage show={showToast} message={toastMessage} onClose={() => setShowToast(false)} />
     
       <TableShow
+        tableName='products'
         header={header}
         data={products}
         delete={handleDelete}

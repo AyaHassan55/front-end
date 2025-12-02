@@ -77,13 +77,18 @@ export default function Categories() {
   
   return (
     <div className="bg-white p-2 w-100 rounded-3">
-      <div className="d-flex align-items-center justify-content-between">
-        <h3>Categories</h3>
+      <div className="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
+        <div>
+          <h1 className="h3 fw-bold">Categories Management</h1>
+          <p className="text-muted mb-0">Create and manage product categories.</p>
+        </div>
         <Link to={"/dashboard/category/add"} className="btn btn-primary mb-3">Add Category</Link>
       </div>
       <ToastMessage show={showToast} message={toastMessage} onClose={() => setShowToast(false)} />
     
       <TableShow
+
+        tableName='categories'
         header={header}
         data={categories}
         delete={handleDelete}

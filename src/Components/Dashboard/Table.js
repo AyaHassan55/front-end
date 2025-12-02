@@ -184,7 +184,13 @@ export default function TableShow(props) {
                 />
             </div>
             <div className=" border rounded mt-4 mb-4">
-                {props.tableName ==='users' ?<h4 className="p-3">Users List</h4> :''}
+                {props.tableName ==='users' ?
+                 <h4 className="p-3">Users List</h4> :
+                 props.tableName==='categories'? 
+                 <h4 className="p-3">Categories List</h4>:
+                 props.tableName==='products'? 
+                 <h4 className="p-3">Products List</h4>:
+                  ''}
 
                 <Table responsive
                     className="custom-table table-border mt-4">
