@@ -36,20 +36,57 @@ export default function SideBar() {
           width: isOpen ? '250px' : 'fit-content',
           position: windowSize < '768' ? 'fixed' : 'sticky',
         }}>
-       
-        {links.map((link, key) => 
-        link.role.includes(user.role) && (
-          <NavLink key={key} to={link.path} className="d-flex align-items-center gap-2 side-bar-link">
-            <FontAwesomeIcon style={{ padding: isOpen ? "10px 8px 10px 15px" : "10px 4px" }} icon={link.icon} />
-            <p className='m-0' style={{ display: isOpen ? "block" : "none" }}>{link.name}</p>
-          </NavLink>
-        ))}
-        
-          
 
-          
-       
-        
+        {links.map((link, key) => {
+          if (link.items) {
+            return (
+              <div key={key}>
+                {link.label && <p className=" fw-semibold text-primary text-uppercase px-4 mb-3 mt-3" style={{fontSize:'14px'}}>{isOpen ?link.label : ''}</p>}
+                {
+                  link.items.map((item, i) => {
+                    const roles = Array.isArray(item.role) ? item.role : [item.role];
+                    if (!roles.includes(user.role)) return null;
+                    return (
+                      <NavLink key={i} to={item.path} className="d-flex align-items-center gap-2 side-bar-link">
+                        <FontAwesomeIcon style={{ padding: isOpen ? "10px 8px 10px 15px" : "10px 4px",  }} size='14px' icon={item.icon} />
+                        <p className='m-0' style={{ display: isOpen ? "block" : "none" ,fontSize:'14px' }}>{item.name}</p>
+                      </NavLink>
+                    );
+
+                  })
+                }
+              </div>
+            );
+          } else {
+            const roles = Array.isArray(link.role) ? link.role : [link.role];
+            if (!roles.includes(user.role)) return null;
+
+            return (
+              <NavLink
+                key={key}
+                to={link.path || "/dashboard"}
+                end
+                className="d-flex align-items-center gap-2 side-bar-link"
+              >
+                <FontAwesomeIcon
+                  style={{ padding: isOpen ? "10px 8px 10px 15px" : "10px 4px" }}
+                  icon={link.icon}
+                />
+                <p className='m-0' style={{ display: isOpen ? "block" : "none"  ,fontSize:'14px'}}>{link.name}</p>
+              </NavLink>);
+          }
+        }
+
+
+
+
+        )}
+
+
+
+
+
+
 
       </div>
     </>
