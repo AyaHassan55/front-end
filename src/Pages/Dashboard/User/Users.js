@@ -77,14 +77,25 @@ export default function Users() {
   }
 
   return (
-    <div className="bg-white p-2 w-100 rounded-3">
-      <div className="d-flex align-items-center justify-content-between">
-        <h3>Users</h3>
-        <Link to={"/dashboard/user/add"} className="btn btn-primary mb-3">Add User</Link>
+    <div className="bg-white p-4 w-100 rounded-3">
+       {/* Header */}
+      <div className="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
+        <div>
+          <h1 className="h3 fw-bold">Users Management</h1>
+          <p className="text-muted mb-0">Manage and monitor all system users.</p>
+        </div>
+        <Link href="/users/add" className="d-inline-block">
+          <button className="btn btn-primary d-flex align-items-center gap-2">
+             
+            Add User
+          </button>
+        </Link>
       </div>
+    
       <ToastMessage show={showToast} message={toastMessage} onClose={() => setShowToast(false)} />
-
+      <h4 className="p-3">Users List</h4>
       <TableShow
+        tableName='users'
         header={header}
         data={users}
         delete={handleDelete}
