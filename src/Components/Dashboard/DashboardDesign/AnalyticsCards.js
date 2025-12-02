@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUsers, faBox, faFolderOpen, faCartShopping } from "@fortawesome/free-solid-svg-icons"
 import { FaArrowTrendUp, FaArrowTrendDown } from "react-icons/fa6";
 
-import './dashboard.css'
+import './dashboardDesign.css'
 const analyticsData = [
   {
     title: "Total Users",

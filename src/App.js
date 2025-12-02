@@ -23,6 +23,7 @@ import HomePage from "./Pages/Website/HomePage/Home";
 import WebsiteCategories from "./Pages/Website/Categories/Categories";
 import Website from "./Pages/Website/Website";
 import SingleProduct from "./Pages/Website/SingleProduct/SingleProduct";
+import DashboardPage from "./Components/Dashboard/DashboardDesign/Dashboard";
 // import './Components/Loading/loading.css'
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         {/* Protected Routes */}
         <Route element={<RequireAuth allowedRole={['1996', '1995', '1999']} />}>
           <Route path="/dashboard" element={<Dashboard />} >
+            <Route path="" element={<DashboardPage />} />
             <Route element={<RequireAuth allowedRole={['1995']} />} >
               <Route path="users" element={<Users />} />
               <Route path="users/:id" element={<User />} />

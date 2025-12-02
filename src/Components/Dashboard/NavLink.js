@@ -1,7 +1,14 @@
 
 import { faBox, faCartPlus, faFolderPlus, faLayerGroup, faPlus, faUserPlus, faUsers } from '@fortawesome/free-solid-svg-icons';
 
+
 export const links =[
+    {
+        name:'Dashboard',
+        icon:faLayerGroup ,
+        path:'',
+        role:'1995'
+    },
     {
         name:"Users",
         icon:faUsers,

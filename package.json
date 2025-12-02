@@ -15,6 +15,7 @@
     "axios": "^1.12.2",
     "babel-plugin-macros": "^3.1.0",
     "bootstrap": "^5.3.8",
+    "bootstrap-icons": "^1.13.1",
     "cookie-universal": "^2.2.2",
     "react": "^19.2.0",
     "react-bootstrap": "^2.10.10",

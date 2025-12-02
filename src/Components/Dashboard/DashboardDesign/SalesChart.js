@@ -27,7 +27,7 @@ export default function SalesChart() {
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={data}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-            <XAxis dataKey="category" stroke="#6c757d" />
+            <XAxis dataKey="category" stroke="#313436ff" />
             <YAxis stroke="#6c757d" />
 
             <Tooltip
