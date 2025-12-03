@@ -1,15 +1,7 @@
-// import { LOGOUT } from "../../Api/Api";
-// import { Axios } from "../../Api/Axios";
-// import Cookie from "cookie-universal";
 
 import { Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import "./home.css"
 import Landing from "../Landing/Landing";
-
-
-
-
 import ShowTopRated from "../../../Components/Product/TopRated/ShowTopRated";
 import ShowLatestProduct from "../../../Components/Product/LatestProducts/ShowLatestProduct";
 import LatestSaleProducts from "../../../Components/Product/SaleProducts/LatestSaleProduct";

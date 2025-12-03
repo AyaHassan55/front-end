@@ -1,20 +1,54 @@
-.hand{
-    /* background-image: url("../../../Assets/images/slider-1.jpg");
-    background-position: center;
-    background-size: cover; */
-    background-color: rgb(253, 245, 233);
-    /* background-color: blue; */
-    height: 70vh;
+/* Container section */
+.hand {
+  background-color: rgb(253, 245, 233);
+  height: 70vh;
+  position: relative;
+  overflow: hidden; 
 }
-.custom-search{
-    color:rgba(0, 0, 0, 0.5) !important;
 
+
+.hand .content {
+  left: 130px; 
+  opacity: 0; 
+  transform: translateX(-50px); 
+  animation: slideInText 1s forwards;
+  animation-delay: 0.5s;
 }
-.hand .content{
-    left: 130px;
+
+
+@keyframes slideInText {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
+
+
 .landing-img {
-   top: -82px;
-   right: 80px;
-   
+  top: -200px; 
+  right: 80px; 
+  position: absolute;
+  opacity: 0; 
+  animation: dropImage 1s forwards;
+  animation-delay: 1s;
+}
+
+@keyframes dropImage {
+  to {
+    top: -82px;
+    opacity: 1;
+  }
+}
+
+
+.hand .content .btn {
+  border-radius: 30px;
+  height: 40px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hand .content .btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(0,0,0,0.2);
 }
