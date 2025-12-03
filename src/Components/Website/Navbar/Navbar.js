@@ -174,9 +174,9 @@ export default function NavBar() {
                     <div className="d-flex align-items-center justify-content-between flex-wrap">
                         <Link className="col-3" to="/">
                             <img
-                                width="140px"
-                                height='37px'
-                                src={require("../../../Assets/images/logoo.png")}
+                                width="190px"
+                                height='77px'
+                                src={require("../../../Assets/images/logo.png")}
                                 alt="logo"
                             />
                         </Link>
