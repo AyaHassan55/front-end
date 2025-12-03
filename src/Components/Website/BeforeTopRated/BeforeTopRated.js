@@ -10,7 +10,7 @@ export default function FlashSaleDivider({
   promoText = "Up to 50% off selected items",
   promoCta = "Shop Now",
   onCtaClick = () => {},
-  colors = { from: "#65acc2ff", to: "#ffeef0" },
+  colors = { from: "#65acc2b6", to: "#ffeef0" },
 }) {
   return (
     <section className="fsd-root" aria-label="Flash sale banner divider">

@@ -1,10 +1,9 @@
-/* FlashSaleDivider.css - simple, responsive, accessible styles */
+
 
 .fsd-root { position: relative; overflow: visible; font-family: Inter, "Helvetica Neue", Arial, sans-serif; }
 
-/* Top gradient area */
 .fsd-top {
-  padding: 56px 24px 80px; /* leaves space for overlap */
+  padding: 56px 24px 80px; 
   text-align: center;
   transition: opacity .6s ease, transform .6s ease;
   animation: fsd-fade .7s ease both;
