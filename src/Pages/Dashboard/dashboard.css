@@ -1,12 +1,13 @@
 .dashboard{
     min-height: 100vh;
     background-color: #f7f8fa;
+    margin-top: 70px;
 }
 /* Container for each uploaded image */
 .border.p-2.w-100 {
   border: 1px solid #ddd;
-  padding: 12px; /* already p-2 */
-  width: 100%;   /* already w-100 */
+  padding: 12px; 
+  width: 100%;   
   border-radius: 8px;
   background-color: #fafafa;
   margin-bottom: 15px;
@@ -15,10 +16,10 @@
 
 /* Flex container for image + info */
 .d-flex.align-items-center.justify-content-start.gap-2 {
-  display: flex; /* already d-flex */
-  align-items: center; /* already align-items-center */
-  justify-content: flex-start; /* already justify-content-start */
-  gap: 12px; /* already gap-2 */
+  display: flex; 
+  align-items: center; 
+  justify-content: flex-start; 
+  gap: 12px; 
 }
 
 /* Image styling */
@@ -85,3 +86,6 @@
   border-style: solid;
   border-color: #22639b transparent transparent transparent;
 }
+
+
+

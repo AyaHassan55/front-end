@@ -82,7 +82,13 @@ export default function Categories() {
           <h1 className="h3 fw-bold">Categories Management</h1>
           <p className="text-muted mb-0">Create and manage product categories.</p>
         </div>
-        <Link to={"/dashboard/category/add"} className="btn btn-primary mb-3">Add Category</Link>
+        <Link to={"/dashboard/category/add"} className="d-inline-block">
+          <button className="btn btn-primary d-flex align-items-center gap-2">
+             
+            Add Category
+          </button>
+        </Link>
+        {/* <Link to={"/dashboard/category/add"} className="btn btn-primary mb-3">Add Category</Link> */}
       </div>
       <ToastMessage show={showToast} message={toastMessage} onClose={() => setShowToast(false)} />
     

@@ -43,7 +43,7 @@ export default function LoginPage() {
       const token = res.data.token;
       const role = res.data.user.role;
       console.log("Role:", role);
-      const go = role === '1995' ? 'users' : 'writer';
+      const go = role === '1995' ? 'users' : '';
       cookie.set("e-commerce", token);
       window.location.pathname = `/dashboard/${go}`;
       // navigate('/dashboard/users', { replace: true });  // replace to prevent going back to login page

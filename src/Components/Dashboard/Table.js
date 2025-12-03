@@ -101,7 +101,12 @@ export default function TableShow(props) {
                             {item[item2.key]}
                         </span>
                     ) :
-                        item2.key === 'image' ? <img width={'50px'} className="rounded" src={item[item2.key]} alt="" /> :
+                        item2.key === 'image' ? <img style={{
+                            width: "50px",
+                            maxWidth: "100%",
+                            height: "50px",
+                            objectFit: "cover"
+                        }} className="rounded" src={item[item2.key]} alt="" /> :
                             item2.key === 'images' ? <div className="d-flex align-items-center justify-content-center gap-3 flex-wrap">
                                 {
                                     item[item2.key].map((img) => <img width={"50px"} src={img.image} />)
@@ -163,7 +168,7 @@ export default function TableShow(props) {
 
     return (
         <>
-            <div className="d-flex align-items-center gap-3">
+            <div className="d-flex align-items-center gap-3 search-date-wrapper">
                 <Form.Control className="my-2" value={search}
                     onChange={(e) => {
                         setSearch(e.target.value);
@@ -183,28 +188,29 @@ export default function TableShow(props) {
                     placeholder="date"
                 />
             </div>
-            <div className=" border rounded mt-4 mb-4">
-                {props.tableName ==='users' ?
-                 <h4 className="p-3">Users List</h4> :
-                 props.tableName==='categories'? 
-                 <h4 className="p-3">Categories List</h4>:
-                 props.tableName==='products'? 
-                 <h4 className="p-3">Products List</h4>:
-                  ''}
-
-                <Table responsive
-                    className="custom-table table-border mt-4">
-                    <thead className="table-secondary " >
-                        <tr>
-                            <th>Id</th>
-                            {headerShow}
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {dataShow}
-                    </tbody>
-                </Table>
+            <div className="table-wrapper border rounded mt-4 mb-4" >
+                {props.tableName === 'users' ?
+                    <h4 className="p-3">Users List</h4> :
+                    props.tableName === 'categories' ?
+                        <h4 className="p-3">Categories List</h4> :
+                        props.tableName === 'products' ?
+                            <h4 className="p-3">Products List</h4> :
+                            ''}
+                <div style={{ width: '100%'}}>
+                    <Table responsive
+                        className="custom-table table-border mt-4">
+                        <thead className="table-secondary " >
+                            <tr>
+                                <th>Id</th>
+                                {headerShow}
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {dataShow}
+                        </tbody>
+                    </Table>
+                    </div>
             </div>
             <div className="d-flex align-items-center justify-content-end flex-wrap">
                 <div className="col-1">

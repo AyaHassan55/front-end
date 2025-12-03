@@ -27,21 +27,21 @@ export default function SideBar() {
     <>
       <div style={{
         position: 'fixed', top: '70px', left: '0', width: '100%', height: '100vh', backgroundColor: 'rgba(0, 0, 0, 0.2)',
-        display: windowSize < '768' && isOpen ? 'block' : 'none'
+        display: windowSize < 768 && isOpen ? 'block' : 'none'
+        ,zIndex:'9999'
       }}>
       </div >
-      <div className='side-bar pt-3'
-        style={{
-          left: windowSize < '768' ? (isOpen ? 0 : '-100%') : 0,
-          width: isOpen ? '250px' : 'fit-content',
-          position: windowSize < '768' ? 'fixed' : 'sticky',
-        }}>
+      <div className={`side-bar pt-3 ${isOpen ? 'open' : 'closed'}`}
+     style={{
+       position: windowSize < 768 ? "fixed" : "sticky",
+     }}>
 
         {links.map((link, key) => {
           if (link.items) {
             return (
               <div key={key}>
-                {link.label && <p className=" fw-semibold text-primary text-uppercase px-4 mb-3 mt-3" style={{ fontSize: '14px' }}>{isOpen ? link.label : ''}</p>}
+                {link.label && <p className=" fw-semibold text-primary text-uppercase px-4 mb-3 mt-3"
+                 style={{ fontSize: '14px' }}>{isOpen ? link.label : ''}</p>}
                 {
                   link.items.map((item, i) => {
                     const roles = Array.isArray(item.role) ? item.role : [item.role];

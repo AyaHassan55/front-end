@@ -1,3 +1,4 @@
+
 .top-bar {
     position: fixed;
     background-color: white;
@@ -6,22 +7,39 @@
     width: 100%;
     height: 70px;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
-    z-index: 2;
-    padding: 0 20px;
+     z-index: 9999;
+    padding: 0 20px; 
 }
 
 /* SideBar  */
 .side-bar {
-   
     background-color: white;
     top: 70px;
     left: 0;
-    z-index: 1;
-
     height: 100vh;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
 
+    transition: all 0.4s ease-in-out;
+    position: fixed !important;  
+    z-index: 999999 !important; 
+   
 
+}
+
+.side-bar.open {
+    transform: translateX(0);
+    opacity: 1;
+    width: 250px;
+}
+
+
+.side-bar p {
+    transition: all 0.2s ease-in-out;
+}
+
+
+.side-bar svg {
+    transition: 0.3s ease;
 }
 
 .side-bar-link {
@@ -49,5 +67,75 @@
 
 a {
     text-decoration: none !important;
+
+}
+.main-content {
+  flex: 1;
+  padding: 20px;
+  transition: all 0.4s ease-in-out;
+}
+
+/* على الشاشات الكبيرة فقط */
+@media (min-width: 769px) {
+  .main-content.shifted {
+    margin-left: 240px; /* نفس عرض السايد بار */
+  }
+  .main-content.normal{
+    margin-left: 40px;
+  }
+}
+
+/* موبايل: السايد بار يفضل أوفرلاي */
+@media (max-width: 768px) {
+    .main-content{
+        padding: 8px;
+    }
+  .main-content.shifted {
+    margin-left: 0;
+  }
+  .main-content.normal{
+    margin-left: 0;
+  }
+}
+ 
+
+/* top bar */
+@media (max-width: 768px) {
+
+  .top-bar .logo {
+    font-size: 16px;
+  }
+
+  .top-bar .menu {
+    gap: 10px !important;
+  }
+
+  .menu-icon {
+    font-size: 20px;
+  }
+
+  .top-bar p {
+    display: none; 
+  }
+
+  .dropdown-toggle {
+    padding: 4px 6px !important;
+  }
+}
+
+/* side bar mobile */
+@media (max-width: 768px) {
+
+  .side-bar.closed {
+      transform: translateX(-100%);
+      opacity: 0;
+      visibility: hidden;
+  }
+
+  .side-bar.open {
+      transform: translateX(0);
+      opacity: 1;
+      visibility: visible;
+  }
 
 }

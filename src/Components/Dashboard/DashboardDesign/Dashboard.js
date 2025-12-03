@@ -8,12 +8,12 @@ export default function DashboardPage(){
                         <h1 className="fs-2 fw-bold text-dark">Dashboard</h1>
                         <p className="text-muted">Welcome back! Here's your business overview.</p>
                         <AnalyticsCards />
-                        <div className="d-flex gap-4">
-                            <div style={{ width: "55%" }}>
+                        <div className="row gy-4">
+                            <div className="col-12 col-lg-7">
                                 <UserGrowthChart />
                             </div>
 
-                            <div style={{ width: "45%" }}>
+                            <div className="col-12 col-lg-5">
                                 <SalesChart />
                             </div>
                         </div>

@@ -15,23 +15,23 @@ export default function Products() {
 
   // pagination
   // const limit=5;
-  const [limit,setLimit] = useState(4)
-  const [page,setPage] = useState(4);
-  const [total,setTotal]=useState(0);
+  const [limit, setLimit] = useState(4)
+  const [page, setPage] = useState(4);
+  const [total, setTotal] = useState(0);
 
   // search
-  const pageName='products';
+  const pageName = 'products';
 
 
   const header = [
-     {key:'images',name:'images'},
-    {key:'title',name:'Title'},
-    {key:'description',name:'Description'},
-    {key:'price',name:'Price'},
-    {key:'rating',name:'Rating'},
+    { key: 'images', name: 'images' },
+    { key: 'title', name: 'Title' },
+    // { key: 'description', name: 'Description' },
+    { key: 'price', name: 'Price' },
+    { key: 'rating', name: 'Rating' },
     { key: 'created_at', name: 'Created' },
     { key: 'updated_at', name: 'Updated' },
-];
+  ];
   // display products
   useEffect(() => {
     setLoading(true);
@@ -41,18 +41,18 @@ export default function Products() {
       .then((data) => {
         setProducts(data.data.data);
         setTotal(data.data.total)
-        
+
         setLoading(false);
-        
+
       })
 
       .catch((err) => {
         console.log(err);
         setLoading(false);
       });
-  }, [limit,page]);
+  }, [limit, page]);
 
-// delete Category
+  // delete Category
   async function handleDelete(id) {
 
     try {
@@ -71,17 +71,26 @@ export default function Products() {
     }
 
   }
-console.log(products)
- 
+  console.log(products)
+
 
   return (
     <div className="bg-white p-2 w-100 rounded-3">
-          <div className="d-flex align-items-center justify-content-between">
-            <h3>Products</h3>
-            <Link to={"/dashboard/product/add"} className="btn btn-primary mb-3">Add Product</Link>
-          </div>
-          <ToastMessage show={showToast} message={toastMessage} onClose={() => setShowToast(false)} />
-    
+      <div className="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
+        <div>
+          <h1 className="h3 fw-bold">Products Management</h1>
+          <p className="text-muted mb-0">Manage all products in your inventory.</p>
+        </div>
+        <Link to={"/dashboard/product/add"} className="d-inline-block">
+          <button className="btn btn-primary d-flex align-items-center gap-2">
+             
+            Add product
+          </button>
+        </Link>
+      </div>
+      
+      <ToastMessage show={showToast} message={toastMessage} onClose={() => setShowToast(false)} />
+
       <TableShow
         tableName='products'
         header={header}
@@ -101,12 +110,12 @@ console.log(products)
         setPage={setPage}
 
         pageName={pageName}
-         searchLink={PRODUCT}
+        searchLink={PRODUCT}
       />
-            
-    
-    
-        </div>
-    
-);
+
+
+
+    </div>
+
+  );
 }

@@ -36,7 +36,7 @@ const analyticsData = [
 
 export default function AnalyticsCards() {
   return (
-    <div className="row g-4">
+    <div className="row g-4 analytics-wrapper" >
       {analyticsData.map((item, idx) => (
         <div className="col-12 col-md-6 col-lg-3" key={idx}>
           <div className="card border-0 shadow-sm h-100 analytics-card ">
