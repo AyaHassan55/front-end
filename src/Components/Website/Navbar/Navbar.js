@@ -77,11 +77,11 @@ export default function NavBar() {
                 <Modal.Body>
                     {products.length === 0 ? (
                         <div className="empty-state text-center">
-                            <img
+                            {/* <img
                                 src="https://cdn-icons-png.flaticon.com/512/2037/2037453.png"
                                 width="120"
                                 alt="empty"
-                            />
+                            /> */}
                             <h4 className="mt-3 fw-bold">Your cart is empty</h4>
                             <p className="text-muted">Add items to start shopping.</p>
                         </div>
@@ -145,7 +145,7 @@ export default function NavBar() {
                     <Modal.Footer className="border-0 flex-column">
                         <div className="total-box w-100 d-flex justify-content-between mb-3">
                             <span className="fw-bold fs-5">Total:</span>
-                            <span className="fw-bold fs-5 text-success">
+                            <span className="fw-bold fs-5  text-primary">
                                 $
                                 {products
                                     .reduce((sum, item) => {
