@@ -49,7 +49,11 @@ The project is designed to simulate a real online store and admin system for lea
 Add your screenshots here:
 
 ```md
-![Home Page](screenshots/home.png)
+![Home Page](screenshot/img1.png)
+![Home Page](screenshot/img2.png)
+![Home Page](screenshot/img3.png)
+![Home Page](screenshot/img4.png)
+![Home Page](screenshot/img5.png)
 ![Dashboard](screenshots/dashboard.png)
 ![Shop](screenshots/shop.png)
 ![Checkout](screenshots/checkout.png)
