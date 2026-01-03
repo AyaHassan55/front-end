@@ -165,17 +165,19 @@ export default function NavBar() {
                     </Modal.Footer>
                 )}
             </Modal>
-            <nav className="py-3 bg-red">
-                <Container>
-                    <div className="d-flex align-items-center justify-content-between flex-wrap" style={{marginBottom:'-31px'}}>
+            <nav className="py-3 nav-bar ">
+                <Container className="nav-content "  > 
+                    
+                        {/* logo */}
                         <Link className="col-3" to="/">
                             <img
                                 width="190px"
-                                height='87px'
-                                src={require("../../../Assets/images/logo.png")}
+                                height='97px'
+                                src={require("../../../Assets/images/llogo.png")}
                                 alt="logo"
                             />
                         </Link>
+                        {/* search */}
                         <div className="d-none d-md-flex flex-grow-1 mx-3" style={{ maxWidth: "400px" }}>
                             <div className="position-relative w-100">
                                 <input
@@ -217,21 +219,9 @@ export default function NavBar() {
                                     alt="Cart"
                                 />
                             </Link>
-                        </div>
+                   
                     </div>
-                    <div className="mt-3">
-                        {/* <div className="d-flex align-items-center justify-content-start gap-3 flex-wrap ">
-                            {loading ? (
-                                <SkeletonFunc width={'80px'} height={'30px'} length={8} baseColor='#c0bdbdff' classes='px-1' />
-
-                            ) :
-
-                                (categoriesShow
-
-                                )}
-                            <Link className="text-block category-title  d-inline-block" to="/categories">Show All</Link>
-                        </div> */}
-                    </div>
+                    
 
                 </Container>
             </nav>

@@ -21,6 +21,22 @@
    transition: 0.3s;
    cursor: pointer;
 }
+.nav-bar{
+    background-color: #eef5ff !important;
+}
+.nav-content{
+    background-color: white !important;
+    border-radius: 32px !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    height: 80px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between !important;
+}
+
 .modal {
     z-index: 1050 !important;
 }
