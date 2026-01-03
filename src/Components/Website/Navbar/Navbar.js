@@ -224,7 +224,7 @@ export default function NavBar() {
                         </div>
                     </div>
                     <div className="mt-3">
-                        <div className="d-flex align-items-center justify-content-start gap-3 flex-wrap ">
+                        {/* <div className="d-flex align-items-center justify-content-start gap-3 flex-wrap ">
                             {loading ? (
                                 <SkeletonFunc width={'80px'} height={'30px'} length={8} baseColor='#c0bdbdff' classes='px-1' />
 
@@ -234,7 +234,7 @@ export default function NavBar() {
 
                                 )}
                             <Link className="text-block category-title  d-inline-block" to="/categories">Show All</Link>
-                        </div>
+                        </div> */}
                     </div>
 
                 </Container>

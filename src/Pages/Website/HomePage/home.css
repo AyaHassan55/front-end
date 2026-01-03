@@ -1,19 +1,148 @@
 /* Container section */
 .hand {
-  background-color: rgb(253, 245, 233);
-  height: 70vh;
+  background-color: #eef5ff;
+  height: 75vh;
   position: relative;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 
 .hand .content {
-  left: 130px; 
-  opacity: 0; 
-  transform: translateX(-50px); 
+  position: absolute;
+  left: 130px;
+  opacity: 0;
+  transform: translateX(-50px);
   animation: slideInText 1s forwards;
   animation-delay: 0.5s;
+  z-index: 20;
 }
+
+/* Mobile */
+@media (max-width: 576px) {
+   .hand {
+      min-height: auto;
+      padding: 200px 0;
+  }
+
+  /* content */
+  .hand .content {
+    position: relative;
+    left: 0;
+    top: 0;
+    transform: none;
+    opacity: 1;
+    animation: none;
+
+    text-align: center;
+    margin: 0 auto;
+    padding: 80px 15px;
+  }
+
+  .hand .content h1 {
+    font-size: 26px;
+    line-height: 1.3;
+  }
+
+  .hand .content p {
+    display: none;
+  }
+
+  /* image */
+  .landing-img {
+    position: absolute;
+    top: -150px !important;
+    right: 10px !important;
+    opacity: 1;
+    animation: none;
+    margin-top: 30px;
+    text-align: center;
+  }
+
+  /* circles */
+  .circle-container {
+    width: 260px;
+    height: 260px;
+    margin: auto;
+  }
+
+  .circle-1 {
+    width: 180px;
+    height: 180px;
+  }
+
+  .circle-2 {
+    width: 220px;
+    height: 220px;
+  }
+
+  .circle-3 {
+     width: 260px;
+    height: 260px;
+  }
+  
+}
+
+/* Tablet */
+@media (min-width: 577px) and (max-width: 991px) {
+
+  .hand {
+    height: auto !important;
+    padding: 60px 0 !important; 
+  }
+
+  .hand .content {
+    position: relative !important;
+    left: -25px !important;
+    top: 0 !important;
+    /* transform: none !important; */
+    opacity: 1 !important;
+    animation: none !important;
+    /* transform: translateY(50%) !important; */
+    margin: 0 auto;
+    text-align: center;
+    padding: 30px 20px !important;
+  }
+
+  .hand .content h1 {
+    font-size: 34px;
+  }
+
+  .hand .content p {
+    font-size: 16px;
+  }
+
+  .landing-img {
+    position: relative !important;
+    top: -350px !important; 
+    right: 0 !important;
+    opacity: 1 !important;
+    animation: none;
+    margin-top: 40px !important;
+    text-align: center;
+  }
+
+  .circle-container {
+    width: 320px !important;
+    height: 320px !important;
+    margin: auto !important;
+  }
+
+  .circle-1 {
+    width: 220px;
+    height: 220px;
+  }
+
+  .circle-2 {
+    width: 280px;
+    height: 280px;
+  }
+
+  .circle-3 {
+    width: 320px;
+    height: 320px;
+  }
+}
+
 
 
 @keyframes slideInText {
@@ -25,12 +154,16 @@
 
 
 .landing-img {
-  top: -200px; 
-  right: 80px; 
+  top: -200px;
+  right: 80px;
   position: absolute;
-  opacity: 0; 
+  opacity: 0;
   animation: dropImage 1s forwards;
   animation-delay: 1s;
+}
+
+.landing-img img {
+  z-index: 14;
 }
 
 @keyframes dropImage {
@@ -50,5 +183,73 @@
 
 .hand .content .btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* hero image */
+.hero-wrapper {
+  min-height: 100vh;
+  background-color: #eef5ff;
+}
+
+.circle-container {
+  width: 380px;
+  height: 380px;
+  position: relative;
+}
+
+.hero-img {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+}
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  /* border: 2px solid rgba(255, 255, 255, 0.7); */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse 6s infinite;
+
+}
+
+.circle-1 {
+  width: 260px;
+  height: 260px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  background-color: #9fb4d373;
+  z-index: 10;
+}
+
+.circle-2 {
+  width: 320px;
+  height: 320px;
+  /* background-color: #cdd7e6; */
+  background-color: #cadffdcf;
+  z-index: 8;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+.circle-3 {
+  width: 380px;
+  height: 400px;
+  /* background-color: #c8ced6; */
+  background-color: #68a3fb17;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  50% {
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
