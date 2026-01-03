@@ -1,11 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGlobe, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import './Bars.css';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { useContext, useEffect, useState } from 'react';
 import { Menu } from '../../Context/MenuContext';
 import { Axios } from '../../Api/Axios';
 import { LOGOUT, USER } from '../../Api/Api';
-import { Navigate } from 'react-router-dom';
+import { Navigate, replace, useNavigate } from 'react-router-dom';
 import { DropdownButton, Dropdown } from 'react-bootstrap';
 // import { Dropdown } from 'bootstrap/dist/js/bootstrap.bundle.min';
 import Cookie from 'cookie-universal'
@@ -31,6 +32,12 @@ export default function TopBar() {
       console.log(err);
     }
 
+  }
+  // go to website
+
+  const navigate = useNavigate();
+  function handleGoToWebsite() {
+    navigate('/') ;
   }
   return (
     <div className="top-bar ">
@@ -82,9 +89,17 @@ export default function TopBar() {
             size="sm"
           >
             <Dropdown.Item
+              onClick={handleGoToWebsite}
+              className="text-primary fw-semibold"
+            > 
+             <FontAwesomeIcon style={{marginRight:'6px'}} icon={faGlobe} />
+              Website
+            </Dropdown.Item>
+            <Dropdown.Item
               onClick={handleLogOut}
               className="text-danger fw-semibold"
             >
+              <FontAwesomeIcon style={{marginRight:'6px'}} icon={faRightFromBracket} />
               Logout
             </Dropdown.Item>
           </DropdownButton>
