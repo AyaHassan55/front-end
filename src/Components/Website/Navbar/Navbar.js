@@ -37,12 +37,12 @@ export default function NavBar() {
     useEffect(() => {
         const getProducts = JSON.parse(localStorage.getItem("product")) || [];
         const fixedProducts = getProducts.map(p => ({
-    ...p,
-    count: p.count ? Number(p.count) : 1,
-    discount: p.discount ? Number(p.discount) : 0,
-    price: Number(p.price) || 0,
-  }));
-  setProducts(fixedProducts);
+            ...p,
+            count: p.count ? Number(p.count) : 1,
+            discount: p.discount ? Number(p.discount) : 0,
+            price: Number(p.price) || 0,
+        }));
+        setProducts(fixedProducts);
     }, [isChange]);
 
 
@@ -165,17 +165,13 @@ export default function NavBar() {
                     </Modal.Footer>
                 )}
             </Modal>
-
-
-
-
-            <nav className="py-3">
+            <nav className="py-3 bg-red">
                 <Container>
-                    <div className="d-flex align-items-center justify-content-between flex-wrap">
+                    <div className="d-flex align-items-center justify-content-between flex-wrap" style={{marginBottom:'-31px'}}>
                         <Link className="col-3" to="/">
                             <img
                                 width="190px"
-                                height='77px'
+                                height='87px'
                                 src={require("../../../Assets/images/logo.png")}
                                 alt="logo"
                             />
