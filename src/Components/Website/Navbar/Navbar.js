@@ -8,7 +8,9 @@ import { CATEGORIES } from "../../../Api/Api";
 import { Cart } from "../../../Context/CartChangerContext";
 import './navbar.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faXmark, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
+import {  } from "@fortawesome/free-solid-svg-icons";
+import { faGaugeHigh,faSearch,faCartShopping, faUser } from "@fortawesome/free-solid-svg-icons";
+// import {  faXmark, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
 import SkeletonFunc from "../Skelton/Skelton";
 export default function NavBar() {
     const [categories, setCategories] = useState([]);
@@ -166,62 +168,67 @@ export default function NavBar() {
                 )}
             </Modal>
             <nav className="py-3 nav-bar ">
-                <Container className="nav-content "  > 
-                    
-                        {/* logo */}
-                        <Link className="col-3" to="/">
-                            <img
-                                width="190px"
-                                height='97px'
-                                src={require("../../../Assets/images/llogo.png")}
-                                alt="logo"
+                <Container className="nav-content "  >
+
+                    {/* logo */}
+                    <Link className="col-3" to="/">
+                        <img
+                            width="190px"
+                            height='97px'
+                            src={require("../../../Assets/images/llogo.png")}
+                            alt="logo"
+                        />
+                    </Link>
+                    {/* search */}
+                    <div className="d-none d-md-flex flex-grow-1 mx-3" style={{ maxWidth: "400px" }}>
+                        <div className="position-relative w-100">
+                            <input
+                                type="text"
+                                placeholder="Search for products"
+                                className="form-control ps-3 pe-5 py-2 rounded"
                             />
-                        </Link>
-                        {/* search */}
-                        <div className="d-none d-md-flex flex-grow-1 mx-3" style={{ maxWidth: "400px" }}>
-                            <div className="position-relative w-100">
-                                <input
-                                    type="text"
-                                    placeholder="Search for products"
-                                    className="form-control ps-3 pe-5 py-2 rounded"
-                                />
-                                <FontAwesomeIcon
-                                    icon={faSearch}
-                                    className="position-absolute"
-                                    style={{
-                                        right: "12px",
-                                        top: "50%",
-                                        transform: "translateY(-50%)",
-                                        color: "#6c757d",
-                                    }}
-                                />
+                            <FontAwesomeIcon
+                                icon={faSearch}
+                                className="position-absolute"
+                                style={{
+                                    right: "12px",
+                                    top: "50%",
+                                    transform: "translateY(-50%)",
+                                    color: "#6c757d",
+                                }}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="col-3 d-flex align-items-center justify-content-end gap-4 order-md-3 order-1">
+                        <div onClick={handleShow}
+                            style={{ cursor: 'pointer' }}
+                        >
+                           <div
+                                onClick={handleShow}
+                                style={{ cursor: 'pointer',fontSize:'20px' ,color:'#172956'}}
+                                className="nav-icon"
+                            >
+                                <FontAwesomeIcon icon={faCartShopping} />
                             </div>
+
+
                         </div>
 
-                        <div className="col-3 d-flex align-items-center justify-content-end gap-4 order-md-3 order-1">
-                            <div onClick={handleShow}
-                                style={{ cursor: 'pointer' }}
-                            >
-                                <img
+                        <Link to="/profile" className="nav-icon" style={{fontSize:'20px'}}>
+                            <FontAwesomeIcon icon={faUser} />
+                        </Link>
 
-                                    width="30px"
-                                    src={require("../../../Assets/Icons/Cart.png")}
-                                    alt="Cart"
+                        <Link
+                            to="/dashboard"
+                            style={{fontSize:'20px'}}
+                            className="dashboard-icon d-flex align-items-center justify-content-center"
+                        >
+                            <FontAwesomeIcon icon={faGaugeHigh} />
+                        </Link>
 
-                                />
-
-                            </div>
-
-                            <Link to="/profile">
-                                <img
-                                    width="35px"
-                                    src={require("../../../Assets/Icons/Profile.png")}
-                                    alt="Cart"
-                                />
-                            </Link>
-                   
                     </div>
-                    
+
 
                 </Container>
             </nav>

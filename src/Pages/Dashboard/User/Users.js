@@ -84,7 +84,7 @@ export default function Users() {
           <h1 className="h3 fw-bold">Users Management</h1>
           <p className="text-muted mb-0">Manage and monitor all system users.</p>
         </div>
-        <Link to={"/dashboard/users/add"} className="d-inline-block">
+        <Link to={"/dashboard/user/add"} className="d-inline-block">
           <button className="btn btn-primary d-flex align-items-center gap-2">
              
             Add User

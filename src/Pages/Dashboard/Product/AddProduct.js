@@ -36,14 +36,21 @@ export default function AddProduct() {
 
     // useRef-----------------------
     const openImg = useRef(null);
+
+
+
     const progress = useRef([]);
     const ids = useRef([]); // use in delete img
-    console.log(`ids======== ${ids}`);
+    console.log(`======== ${ids}`);
     // -----
     const focus = useRef("");
     useEffect(() => {
         focus.current.focus();
     }, [])
+
+     function handleOpenImage() {
+      openImg.current.click();
+  }
     //  handel change -----------------------------
     function handleChange(e) {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -83,10 +90,14 @@ export default function AddProduct() {
             const res = await Axios.post(`${PRODUCT}/add`, dummyForm);
 
             setId(res.data.id);
+            console.log(`new product id : ${res.data.id}`);
+            // nav('/dashboard/products/');
+             
         } catch (err) {
 
             console.log(err);
         }
+        
     }
     // categories show
     const categoriesShow = categories.map((item, key) => (
@@ -139,6 +150,7 @@ export default function AddProduct() {
         }
 
     }
+    
     // mapping imgs
     const imgShow = images.map((img, key) =>
         <div key={key} className="uploaded-image border p-2 w-100">
