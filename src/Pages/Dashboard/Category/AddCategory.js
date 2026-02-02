@@ -3,8 +3,9 @@ import { Form } from "react-bootstrap";
 
 
 import LoadingSubmit from "../../../Components/Loading/Loading";
-import { Axios } from "../../../Api/Axios";
+// import { Axios } from "../../../Api";
 import { CATEGORY } from "../../../Api/Api";
+import { Axios } from "../../../Api/Axios";
 
 
 export default function AddCategory() {

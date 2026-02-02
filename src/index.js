@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./Css/components/alert.css";
 import "./Css/components/loading.css";
+import './i18n';
 
 import { BrowserRouter as Router } from "react-router-dom";
 import MenuContext from "./Context/MenuContext";

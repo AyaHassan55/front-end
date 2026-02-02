@@ -7,7 +7,11 @@ import { WindowSize } from '../../Context/WindowContext';
 import { USER } from '../../Api/Api';
 import { Axios } from '../../Api/Axios';
 import { links } from './NavLink';
+import { useTranslation } from 'react-i18next';
 export default function SideBar() {
+  // translate
+  const { t } = useTranslation();
+  // -------------------------------------------------------
   const menu = useContext(Menu);
   const WindowContext = useContext(WindowSize);
   const windowSize = WindowContext.windowSize;
@@ -15,7 +19,8 @@ export default function SideBar() {
   const isOpen = menu.isOpen;
   const [user, setUser] = useState("");
   const Navigate = useNavigate();
-
+  
+  
   useEffect(() => {
     Axios.get(`/${USER}`, {
 
