@@ -4,16 +4,19 @@ import { faBox, faCartPlus, faFolderPlus, faLayerGroup, faPlus, faTachometerAlt,
 
 export const links = [
     {
-        name: 'Dashboard',
+        name: 'dashboard',
+       
         icon: faTachometerAlt,
         path: '',
         role: '1995'
     },
     {
         label: "Management",
+         labelKey: "management",
         items: [
             {
                 name: "Users",
+                nameKey: "users",
                 icon: faUsers,
                 path: "users",
                 role: '1995'
@@ -23,6 +26,7 @@ export const links = [
 
             {
                 name: "Categories",
+                nameKey: "categories",
                 icon: faLayerGroup,
                 path: "/dashboard/categories",
                 role: ['1995', '1999']
@@ -32,6 +36,7 @@ export const links = [
 
             {
                 name: "Products",
+                nameKey:'products',
                 icon: faBox,
                 path: "/dashboard/products",
                 role: ['1995', '1999']
@@ -44,9 +49,11 @@ export const links = [
 
     {
         label: 'Quick Actions',
+         labelKey: "quickActions",
         items: [
             {
                 name: "Add user",
+                 nameKey:'addUser',
                 icon: faUserPlus,
                 path: "/dashboard/user/add",
                 role: '1995'
@@ -55,6 +62,7 @@ export const links = [
             },
             {
                 name: "Add Category",
+                 nameKey:'addCategory',
                 icon: faFolderPlus,
                 path: "/dashboard/category/add",
                 role: ['1995', '1999']
@@ -63,6 +71,7 @@ export const links = [
             },
             {
                 name: "Add Product",
+                 nameKey:'addProduct',
                 icon: faCartPlus,
                 path: "/dashboard/product/add",
                 role: ['1995', '1999']

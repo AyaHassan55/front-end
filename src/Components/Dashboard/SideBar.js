@@ -46,7 +46,7 @@ export default function SideBar() {
             return (
               <div key={key}>
                 {link.label && <p className=" fw-semibold text-primary text-uppercase px-4 mb-3 mt-3"
-                 style={{ fontSize: '14px' }}>{isOpen ? link.label : ''}</p>}
+                 style={{ fontSize: '14px' }}>{isOpen ?  t(link.labelKey)  : ''}</p>}
                 {
                   link.items.map((item, i) => {
                     const roles = Array.isArray(item.role) ? item.role : [item.role];
@@ -54,7 +54,7 @@ export default function SideBar() {
                     return (
                       <NavLink key={i} to={item.path} className="d-flex align-items-center gap-2 side-bar-link">
                         <FontAwesomeIcon style={{ padding: isOpen ? "10px 8px 10px 15px" : "10px 4px", }} size='14px' icon={item.icon} />
-                        <p className='m-0' style={{ display: isOpen ? "block" : "none", fontSize: '14px' }}>{item.name}</p>
+                        <p className='m-0' style={{ display: isOpen ? "block" : "none", fontSize: '14px' }}>{t(item.nameKey)}</p>
                       </NavLink>
                     );
 
@@ -77,7 +77,7 @@ export default function SideBar() {
                   style={{ padding: isOpen ? "10px 8px 10px 15px" : "10px 4px" }}
                   icon={link.icon}
                 />
-                <p className='m-0' style={{ display: isOpen ? "block" : "none", fontSize: '14px' }}>{link.name}</p>
+                <p className='m-0' style={{ display: isOpen ? "block" : "none", fontSize: '14px' }}>  {t(link.name)}</p>
               </NavLink>);
           }
         }
@@ -93,7 +93,7 @@ export default function SideBar() {
         {/* footer */}
         <div className="p-3 border-top border-muted mt-5">
          {isOpen? <p className="small text-center mb-0 text-primary">
-            © 2025 Admin Dashboard. All rights reserved.
+            {t('footerText')}
           </p> :<p></p>}
         </div>
 

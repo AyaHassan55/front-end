@@ -25,12 +25,15 @@ import Website from "./Pages/Website/Website";
 import SingleProduct from "./Pages/Website/SingleProduct/SingleProduct";
 import DashboardPage from "./Components/Dashboard/DashboardDesign/Dashboard";
 import i18n from 'i18next';
+import { useEffect } from "react";
 // import './Components/Loading/loading.css'
 function App() {
-    useEffect(() => {
-    document.documentElement.dir =
-      i18n.language === 'ar' ? 'rtl' : 'ltr';
-  }, []);
+  useEffect(() => {
+  document.documentElement.dir =
+    i18n.language === 'ar' ? 'rtl' : 'ltr';
+}, [i18n.language]);
+
+   
   return (
     <div className="App">
       <Routes>

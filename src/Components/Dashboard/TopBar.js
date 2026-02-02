@@ -8,6 +8,10 @@ import { Axios } from '../../Api/Axios';
 import { LOGOUT, USER } from '../../Api/Api';
 import { Navigate, replace, useNavigate } from 'react-router-dom';
 import { DropdownButton, Dropdown } from 'react-bootstrap';
+import i18n from 'i18next';
+import { useTranslation } from 'react-i18next';
+
+
 // import { Dropdown } from 'bootstrap/dist/js/bootstrap.bundle.min';
 import Cookie from 'cookie-universal'
 export default function TopBar() {
@@ -39,6 +43,8 @@ export default function TopBar() {
   function handleGoToWebsite() {
     navigate('/') ;
   }
+
+  const { t } = useTranslation();
   return (
     <div className="top-bar ">
       <div className='d-flex align-items-center justify-content-between h-100'>
@@ -52,7 +58,7 @@ export default function TopBar() {
             icon={faBars}
           />
 
-          <h3 className='logo m-0'>Dashboard</h3>
+          <h3 className='logo m-0'>{t('dashboard')}</h3>
 
         </div>
         <div className="d-flex justify-content-between align-items-center py-2">
@@ -93,14 +99,34 @@ export default function TopBar() {
               className="text-primary fw-semibold"
             > 
              <FontAwesomeIcon style={{marginRight:'6px'}} icon={faGlobe} />
-              Website
+              {t('website')}
             </Dropdown.Item>
+            <Dropdown.Divider />
+            {/* ------dtart switcher----------- */}
+            <Dropdown.Item
+              active={i18n.language === 'en'}
+              onClick={() => i18n.changeLanguage('en')}
+              className="fw-semibold"
+            >
+              🇺🇸 English
+            </Dropdown.Item>
+
+            <Dropdown.Item
+              active={i18n.language === 'ar'}
+              onClick={() => i18n.changeLanguage('ar')}
+              className="fw-semibold"
+            >
+              🇪🇬 العربية
+            </Dropdown.Item>
+
+            <Dropdown.Divider />
+           {/* ----end switcher */}
             <Dropdown.Item
               onClick={handleLogOut}
               className="text-danger fw-semibold"
             >
               <FontAwesomeIcon style={{marginRight:'6px'}} icon={faRightFromBracket} />
-              Logout
+              {t('logout')}
             </Dropdown.Item>
           </DropdownButton>
 
